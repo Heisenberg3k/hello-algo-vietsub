@@ -4,7 +4,7 @@ Trong các thuật toán, việc thực hiện lặp đi lặp lại một tác 
 
 ## Lặp lại
 
-<u>Iteration</u> is a control structure for repeatedly executing a task. In iteration, a program repeatedly executes a segment of code under certain conditions until those conditions are no longer satisfied.
+<u>Iteration</u> là một cơ chế điều khiển cho phép chương trình thực hiện một công việc nhiều lần. Chương trình sẽ lặp lại việc thực thi một đoạn mã khi điều kiện lặp còn đúng, và sẽ dừng lại khi điều kiện đó không còn đúng nữa.
 
 ### Vòng lặp For
 
