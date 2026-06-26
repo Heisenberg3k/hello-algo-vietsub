@@ -60,7 +60,7 @@ Chúng ta có thể tiếp tục thêm các vòng lặp lồng nhau, trong đó 
 
 ##Đệ quy
 
-<u>Recursion</u> is an algorithmic strategy that solves problems by having a function call itself. It mainly consists of two phases.
+<u>Recursion</u> là một chiến lược thuật toán giải quyết vấn đề bằng cách để một hàm tự gọi lại chính nó. Đệ quy chủ yếu bao gồm hai giai đoạn.
 
 1. **Giảm dần**: Chương trình liên tục tự gọi mình sâu hơn, thường chuyển các tham số nhỏ hơn hoặc đơn giản hơn cho đến khi đạt đến "điều kiện kết thúc".
 2. **Ascend**: Sau khi kích hoạt "điều kiện kết thúc", chương trình trả về từng lớp từ hàm đệ quy sâu nhất, tổng hợp kết quả của từng lớp.
