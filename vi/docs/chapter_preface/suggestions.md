@@ -1,6 +1,6 @@
 # Cách sử dụng cuốn sách này
 
-!!! mẹo
+!!! Mẹo
 
 Để có trải nghiệm đọc tốt nhất, bạn nên đọc qua phần này.
 
@@ -13,7 +13,7 @@
 - Khi thuật ngữ khác nhau giữa các ngôn ngữ lập trình, cuốn sách này tuân theo các quy ước Python; ví dụ: nó sử dụng `None` để biểu thị "null".
 - Cuốn sách này phần nào nới lỏng các kiểu nhận xét bằng ngôn ngữ lập trình thông thường để có bố cục nhỏ gọn hơn. Bình luận chủ yếu được chia thành ba loại: bình luận tiêu đề, bình luận nội dung và bình luận nhiều dòng.
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     """Title comment, used to label functions, classes, test cases, etc."""
@@ -65,7 +65,7 @@
      */
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Title comment, used to label functions, classes, test cases, etc. */
@@ -78,7 +78,7 @@
      */
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Title comment, used to label functions, classes, test cases, etc. */
@@ -117,7 +117,7 @@
      */
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Title comment, used to label functions, classes, test cases, etc. */
@@ -130,7 +130,7 @@
      */
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     /* Title comment, used to label functions, classes, test cases, etc. */
