@@ -37,7 +37,7 @@ Tra cứu từ điển, một kỹ năng cần thiết của học sinh tiểu h
 
 Phương pháp tổ chức bài trên thực chất là thuật toán “Sắp xếp chèn”, rất hiệu quả đối với các tập dữ liệu nhỏ. Việc triển khai sắp xếp tích hợp của nhiều ngôn ngữ lập trình sử dụng tính năng sắp xếp chèn bên trong.
 
-**Ví dụ 3: Thực hiện thay đổi**. Giả sử thực hiện mua hàng trị giá $69$ tại siêu thị. Nếu bạn đưa cho nhân viên thu ngân 100$, họ sẽ phải đưa lại cho bạn 31$ tiền lẻ. Quá trình này có thể được hiểu rõ ràng như minh họa trong hình dưới đây.
+**Ví dụ 3: Thực hiện thay đổi**. Giả sử thực hiện mua hàng trị giá $69$ tại siêu thị. Nếu bạn đưa cho nhân viên thu ngân 100usg, họ sẽ phải đưa lại cho bạn 31usd tiền lẻ. Quá trình này có thể được hiểu rõ ràng như minh họa trong hình dưới đây.
 
 1. Các mệnh giá hiện có nhỏ hơn $31$ là $1$, $5$, $10$ và $20$.
 2. Lấy ra $20$ lớn nhất từ ​​các tùy chọn, để lại $31 - 20 = 11$.
