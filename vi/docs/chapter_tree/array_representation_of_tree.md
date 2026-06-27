@@ -141,9 +141,885 @@ Như thể hiện trong hình bên dưới, với một cây nhị phân không 
 - Cho một nút, lấy giá trị của nút đó, nút con trái (phải) và nút cha.
 - Nhận được các trình tự duyệt thứ tự trước, thứ tự thứ tự, thứ tự sau và thứ tự cấp.
 
-```src
-[file]{array_binary_tree}-[class]{array_binary_tree}-[func]{}
-```
+=== "Python"
+    ```python title="array_binary_tree.py"
+    class ArrayBinaryTree:
+        """Binary tree class represented by array"""
+    
+        def __init__(self, arr: list[int | None]):
+            """Constructor"""
+            self._tree = list(arr)
+    
+        def size(self):
+            """List capacity"""
+            return len(self._tree)
+    
+        def val(self, i: int) -> int | None:
+            """Get value of node at index i"""
+            # If index is out of bounds, return None, representing empty position
+            if i < 0 or i >= self.size():
+                return None
+            return self._tree[i]
+    
+        def left(self, i: int) -> int | None:
+            """Get index of left child node of node at index i"""
+            return 2 * i + 1
+    
+        def right(self, i: int) -> int | None:
+            """Get index of right child node of node at index i"""
+            return 2 * i + 2
+    
+        def parent(self, i: int) -> int | None:
+            """Get index of parent node of node at index i"""
+            return (i - 1) // 2
+    
+        def level_order(self) -> list[int]:
+            """Level-order traversal"""
+            self.res = []
+            # Traverse array directly
+            for i in range(self.size()):
+                if self.val(i) is not None:
+                    self.res.append(self.val(i))
+            return self.res
+    
+        def dfs(self, i: int, order: str):
+            """Depth-first traversal"""
+            if self.val(i) is None:
+                return
+            # Preorder traversal
+            if order == "pre":
+                self.res.append(self.val(i))
+            self.dfs(self.left(i), order)
+            # Inorder traversal
+            if order == "in":
+                self.res.append(self.val(i))
+            self.dfs(self.right(i), order)
+            # Postorder traversal
+            if order == "post":
+                self.res.append(self.val(i))
+    
+        def pre_order(self) -> list[int]:
+            """Preorder traversal"""
+            self.res = []
+            self.dfs(0, order="pre")
+            return self.res
+    
+        def in_order(self) -> list[int]:
+            """Inorder traversal"""
+            self.res = []
+            self.dfs(0, order="in")
+            return self.res
+    
+        def post_order(self) -> list[int]:
+            """Postorder traversal"""
+            self.res = []
+            self.dfs(0, order="post")
+            return self.res
+    ```
+=== "C++"
+    ```cpp title="array_binary_tree.cpp"
+    class ArrayBinaryTree {
+      public:
+        /* Constructor */
+        ArrayBinaryTree(vector<int> arr) {
+            tree = arr;
+        }
+    
+        /* List capacity */
+        int size() {
+            return tree.size();
+        }
+    
+        /* Get value of node at index i */
+        int val(int i) {
+            // Return INT_MAX if index out of bounds, representing empty position
+            if (i < 0 || i >= size())
+                return INT_MAX;
+            return tree[i];
+        }
+    
+        /* Get index of left child node of node at index i */
+        int left(int i) {
+            return 2 * i + 1;
+        }
+    
+        /* Get index of right child node of node at index i */
+        int right(int i) {
+            return 2 * i + 2;
+        }
+    
+        /* Get index of parent node of node at index i */
+        int parent(int i) {
+            return (i - 1) / 2;
+        }
+    
+        /* Level-order traversal */
+        vector<int> levelOrder() {
+            vector<int> res;
+            // Traverse array directly
+            for (int i = 0; i < size(); i++) {
+                if (val(i) != INT_MAX)
+                    res.push_back(val(i));
+            }
+            return res;
+        }
+    
+        /* Preorder traversal */
+        vector<int> preOrder() {
+            vector<int> res;
+            dfs(0, "pre", res);
+            return res;
+        }
+    
+        /* Inorder traversal */
+        vector<int> inOrder() {
+            vector<int> res;
+            dfs(0, "in", res);
+            return res;
+        }
+    
+        /* Postorder traversal */
+        vector<int> postOrder() {
+            vector<int> res;
+            dfs(0, "post", res);
+            return res;
+        }
+    
+      private:
+        vector<int> tree;
+    
+        /* Depth-first traversal */
+        void dfs(int i, string order, vector<int> &res) {
+            // If empty position, return
+            if (val(i) == INT_MAX)
+                return;
+            // Preorder traversal
+            if (order == "pre")
+                res.push_back(val(i));
+            dfs(left(i), order, res);
+            // Inorder traversal
+            if (order == "in")
+                res.push_back(val(i));
+            dfs(right(i), order, res);
+            // Postorder traversal
+            if (order == "post")
+                res.push_back(val(i));
+        }
+    };
+    ```
+=== "Java"
+    ```java title="array_binary_tree.java"
+    class ArrayBinaryTree {
+        private List<Integer> tree;
+    
+        /* Constructor */
+        public ArrayBinaryTree(List<Integer> arr) {
+            tree = new ArrayList<>(arr);
+        }
+    
+        /* List capacity */
+        public int size() {
+            return tree.size();
+        }
+    
+        /* Get value of node at index i */
+        public Integer val(int i) {
+            // If index out of bounds, return null to represent empty position
+            if (i < 0 || i >= size())
+                return null;
+            return tree.get(i);
+        }
+    
+        /* Get index of left child node of node at index i */
+        public Integer left(int i) {
+            return 2 * i + 1;
+        }
+    
+        /* Get index of right child node of node at index i */
+        public Integer right(int i) {
+            return 2 * i + 2;
+        }
+    
+        /* Get index of parent node of node at index i */
+        public Integer parent(int i) {
+            return (i - 1) / 2;
+        }
+    
+        /* Level-order traversal */
+        public List<Integer> levelOrder() {
+            List<Integer> res = new ArrayList<>();
+            // Traverse array directly
+            for (int i = 0; i < size(); i++) {
+                if (val(i) != null)
+                    res.add(val(i));
+            }
+            return res;
+        }
+    
+        /* Depth-first traversal */
+        private void dfs(Integer i, String order, List<Integer> res) {
+            // If empty position, return
+            if (val(i) == null)
+                return;
+            // Preorder traversal
+            if ("pre".equals(order))
+                res.add(val(i));
+            dfs(left(i), order, res);
+            // Inorder traversal
+            if ("in".equals(order))
+                res.add(val(i));
+            dfs(right(i), order, res);
+            // Postorder traversal
+            if ("post".equals(order))
+                res.add(val(i));
+        }
+    
+        /* Preorder traversal */
+        public List<Integer> preOrder() {
+            List<Integer> res = new ArrayList<>();
+            dfs(0, "pre", res);
+            return res;
+        }
+    
+        /* Inorder traversal */
+        public List<Integer> inOrder() {
+            List<Integer> res = new ArrayList<>();
+            dfs(0, "in", res);
+            return res;
+        }
+    
+        /* Postorder traversal */
+        public List<Integer> postOrder() {
+            List<Integer> res = new ArrayList<>();
+            dfs(0, "post", res);
+            return res;
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="array_binary_tree.cs"
+    public class ArrayBinaryTree(List<int?> arr) {
+        List<int?> tree = new(arr);
+    
+        /* List capacity */
+        public int Size() {
+            return tree.Count;
+        }
+    
+        /* Get value of node at index i */
+        public int? Val(int i) {
+            // If index out of bounds, return null to represent empty position
+            if (i < 0 || i >= Size())
+                return null;
+            return tree[i];
+        }
+    
+        /* Get index of left child node of node at index i */
+        public int Left(int i) {
+            return 2 * i + 1;
+        }
+    
+        /* Get index of right child node of node at index i */
+        public int Right(int i) {
+            return 2 * i + 2;
+        }
+    
+        /* Get index of parent node of node at index i */
+        public int Parent(int i) {
+            return (i - 1) / 2;
+        }
+    
+        /* Level-order traversal */
+        public List<int> LevelOrder() {
+            List<int> res = [];
+            // Traverse array directly
+            for (int i = 0; i < Size(); i++) {
+                if (Val(i).HasValue)
+                    res.Add(Val(i)!.Value);
+            }
+            return res;
+        }
+    
+        /* Depth-first traversal */
+        void DFS(int i, string order, List<int> res) {
+            // If empty position, return
+            if (!Val(i).HasValue)
+                return;
+            // Preorder traversal
+            if (order == "pre")
+                res.Add(Val(i)!.Value);
+            DFS(Left(i), order, res);
+            // Inorder traversal
+            if (order == "in")
+                res.Add(Val(i)!.Value);
+            DFS(Right(i), order, res);
+            // Postorder traversal
+            if (order == "post")
+                res.Add(Val(i)!.Value);
+        }
+    
+        /* Preorder traversal */
+        public List<int> PreOrder() {
+            List<int> res = [];
+            DFS(0, "pre", res);
+            return res;
+        }
+    
+        /* Inorder traversal */
+        public List<int> InOrder() {
+            List<int> res = [];
+            DFS(0, "in", res);
+            return res;
+        }
+    
+        /* Postorder traversal */
+        public List<int> PostOrder() {
+            List<int> res = [];
+            DFS(0, "post", res);
+            return res;
+        }
+    }
+    ```
+=== "Go"
+    ```go title="array_binary_tree.go"
+    type arrayBinaryTree struct {
+    	tree []any
+    }
+    ```
+=== "Swift"
+    ```swift title="array_binary_tree.swift"
+    class ArrayBinaryTree {
+        private var tree: [Int?]
+    
+        /* Constructor */
+        init(arr: [Int?]) {
+            tree = arr
+        }
+    
+        /* List capacity */
+        func size() -> Int {
+            tree.count
+        }
+    
+        /* Get value of node at index i */
+        func val(i: Int) -> Int? {
+            // If index out of bounds, return null to represent empty position
+            if i < 0 || i >= size() {
+                return nil
+            }
+            return tree[i]
+        }
+    
+        /* Get index of left child node of node at index i */
+        func left(i: Int) -> Int {
+            2 * i + 1
+        }
+    
+        /* Get index of right child node of node at index i */
+        func right(i: Int) -> Int {
+            2 * i + 2
+        }
+    
+        /* Get index of parent node of node at index i */
+        func parent(i: Int) -> Int {
+            (i - 1) / 2
+        }
+    
+        /* Level-order traversal */
+        func levelOrder() -> [Int] {
+            var res: [Int] = []
+            // Traverse array directly
+            for i in 0 ..< size() {
+                if let val = val(i: i) {
+                    res.append(val)
+                }
+            }
+            return res
+        }
+    
+        /* Depth-first traversal */
+        private func dfs(i: Int, order: String, res: inout [Int]) {
+            // If empty position, return
+            guard let val = val(i: i) else {
+                return
+            }
+            // Preorder traversal
+            if order == "pre" {
+                res.append(val)
+            }
+            dfs(i: left(i: i), order: order, res: &res)
+            // Inorder traversal
+            if order == "in" {
+                res.append(val)
+            }
+            dfs(i: right(i: i), order: order, res: &res)
+            // Postorder traversal
+            if order == "post" {
+                res.append(val)
+            }
+        }
+    
+        /* Preorder traversal */
+        func preOrder() -> [Int] {
+            var res: [Int] = []
+            dfs(i: 0, order: "pre", res: &res)
+            return res
+        }
+    
+        /* Inorder traversal */
+        func inOrder() -> [Int] {
+            var res: [Int] = []
+            dfs(i: 0, order: "in", res: &res)
+            return res
+        }
+    
+        /* Postorder traversal */
+        func postOrder() -> [Int] {
+            var res: [Int] = []
+            dfs(i: 0, order: "post", res: &res)
+            return res
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="array_binary_tree.js"
+    class ArrayBinaryTree {
+        #tree;
+    
+        /* Constructor */
+        constructor(arr) {
+            this.#tree = arr;
+        }
+    
+        /* List capacity */
+        size() {
+            return this.#tree.length;
+        }
+    
+        /* Get value of node at index i */
+        val(i) {
+            // If index out of bounds, return null to represent empty position
+            if (i < 0 || i >= this.size()) return null;
+            return this.#tree[i];
+        }
+    
+        /* Get index of left child node of node at index i */
+        left(i) {
+            return 2 * i + 1;
+        }
+    
+        /* Get index of right child node of node at index i */
+        right(i) {
+            return 2 * i + 2;
+        }
+    
+        /* Get index of parent node of node at index i */
+        parent(i) {
+            return Math.floor((i - 1) / 2); // Floor division
+        }
+    
+        /* Level-order traversal */
+        levelOrder() {
+            let res = [];
+            // Traverse array directly
+            for (let i = 0; i < this.size(); i++) {
+                if (this.val(i) !== null) res.push(this.val(i));
+            }
+            return res;
+        }
+    
+        /* Depth-first traversal */
+        #dfs(i, order, res) {
+            // If empty position, return
+            if (this.val(i) === null) return;
+            // Preorder traversal
+            if (order === 'pre') res.push(this.val(i));
+            this.#dfs(this.left(i), order, res);
+            // Inorder traversal
+            if (order === 'in') res.push(this.val(i));
+            this.#dfs(this.right(i), order, res);
+            // Postorder traversal
+            if (order === 'post') res.push(this.val(i));
+        }
+    
+        /* Preorder traversal */
+        preOrder() {
+            const res = [];
+            this.#dfs(0, 'pre', res);
+            return res;
+        }
+    
+        /* Inorder traversal */
+        inOrder() {
+            const res = [];
+            this.#dfs(0, 'in', res);
+            return res;
+        }
+    
+        /* Postorder traversal */
+        postOrder() {
+            const res = [];
+            this.#dfs(0, 'post', res);
+            return res;
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="array_binary_tree.ts"
+    class ArrayBinaryTree {
+        #tree: (number | null)[];
+    
+        /* Constructor */
+        constructor(arr: (number | null)[]) {
+            this.#tree = arr;
+        }
+    
+        /* List capacity */
+        size(): number {
+            return this.#tree.length;
+        }
+    
+        /* Get value of node at index i */
+        val(i: number): number | null {
+            // If index out of bounds, return null to represent empty position
+            if (i < 0 || i >= this.size()) return null;
+            return this.#tree[i];
+        }
+    
+        /* Get index of left child node of node at index i */
+        left(i: number): number {
+            return 2 * i + 1;
+        }
+    
+        /* Get index of right child node of node at index i */
+        right(i: number): number {
+            return 2 * i + 2;
+        }
+    
+        /* Get index of parent node of node at index i */
+        parent(i: number): number {
+            return Math.floor((i - 1) / 2); // Floor division
+        }
+    
+        /* Level-order traversal */
+        levelOrder(): number[] {
+            let res = [];
+            // Traverse array directly
+            for (let i = 0; i < this.size(); i++) {
+                if (this.val(i) !== null) res.push(this.val(i));
+            }
+            return res;
+        }
+    
+        /* Depth-first traversal */
+        #dfs(i: number, order: Order, res: (number | null)[]): void {
+            // If empty position, return
+            if (this.val(i) === null) return;
+            // Preorder traversal
+            if (order === 'pre') res.push(this.val(i));
+            this.#dfs(this.left(i), order, res);
+            // Inorder traversal
+            if (order === 'in') res.push(this.val(i));
+            this.#dfs(this.right(i), order, res);
+            // Postorder traversal
+            if (order === 'post') res.push(this.val(i));
+        }
+    
+        /* Preorder traversal */
+        preOrder(): (number | null)[] {
+            const res = [];
+            this.#dfs(0, 'pre', res);
+            return res;
+        }
+    
+        /* Inorder traversal */
+        inOrder(): (number | null)[] {
+            const res = [];
+            this.#dfs(0, 'in', res);
+            return res;
+        }
+    
+        /* Postorder traversal */
+        postOrder(): (number | null)[] {
+            const res = [];
+            this.#dfs(0, 'post', res);
+            return res;
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="array_binary_tree.dart"
+    class ArrayBinaryTree {
+      late List<int?> _tree;
+    
+      /* Constructor */
+      ArrayBinaryTree(this._tree);
+    
+      /* List capacity */
+      int size() {
+        return _tree.length;
+      }
+    
+      /* Get value of node at index i */
+      int? val(int i) {
+        // If index out of bounds, return null to represent empty position
+        if (i < 0 || i >= size()) {
+          return null;
+        }
+        return _tree[i];
+      }
+    
+      /* Get index of left child node of node at index i */
+      int? left(int i) {
+        return 2 * i + 1;
+      }
+    
+      /* Get index of right child node of node at index i */
+      int? right(int i) {
+        return 2 * i + 2;
+      }
+    
+      /* Get index of parent node of node at index i */
+      int? parent(int i) {
+        return (i - 1) ~/ 2;
+      }
+    
+      /* Level-order traversal */
+      List<int> levelOrder() {
+        List<int> res = [];
+        for (int i = 0; i < size(); i++) {
+          if (val(i) != null) {
+            res.add(val(i)!);
+          }
+        }
+        return res;
+      }
+    
+      /* Depth-first traversal */
+      void dfs(int i, String order, List<int?> res) {
+        // If empty position, return
+        if (val(i) == null) {
+          return;
+        }
+        // Preorder traversal
+        if (order == 'pre') {
+          res.add(val(i));
+        }
+        dfs(left(i)!, order, res);
+        // Inorder traversal
+        if (order == 'in') {
+          res.add(val(i));
+        }
+        dfs(right(i)!, order, res);
+        // Postorder traversal
+        if (order == 'post') {
+          res.add(val(i));
+        }
+      }
+    
+      /* Preorder traversal */
+      List<int?> preOrder() {
+        List<int?> res = [];
+        dfs(0, 'pre', res);
+        return res;
+      }
+    
+      /* Inorder traversal */
+      List<int?> inOrder() {
+        List<int?> res = [];
+        dfs(0, 'in', res);
+        return res;
+      }
+    
+      /* Postorder traversal */
+      List<int?> postOrder() {
+        List<int?> res = [];
+        dfs(0, 'post', res);
+        return res;
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="array_binary_tree.rs"
+    struct ArrayBinaryTree {
+        tree: Vec<Option<i32>>,
+    }
+    ```
+=== "C"
+    ```c title="array_binary_tree.c"
+    ArrayBinaryTree *newArrayBinaryTree(int *arr, int arrSize) {
+        ArrayBinaryTree *abt = (ArrayBinaryTree *)malloc(sizeof(ArrayBinaryTree));
+        abt->tree = malloc(sizeof(int) * arrSize);
+        memcpy(abt->tree, arr, sizeof(int) * arrSize);
+        abt->size = arrSize;
+        return abt;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="array_binary_tree.kt"
+    class ArrayBinaryTree(private val tree: MutableList<Int?>) {
+        /* List capacity */
+        fun size(): Int {
+            return tree.size
+        }
+    
+        /* Get value of node at index i */
+        fun _val(i: Int): Int? {
+            // If index out of bounds, return null to represent empty position
+            if (i < 0 || i >= size()) return null
+            return tree[i]
+        }
+    
+        /* Get index of left child node of node at index i */
+        fun left(i: Int): Int {
+            return 2 * i + 1
+        }
+    
+        /* Get index of right child node of node at index i */
+        fun right(i: Int): Int {
+            return 2 * i + 2
+        }
+    
+        /* Get index of parent node of node at index i */
+        fun parent(i: Int): Int {
+            return (i - 1) / 2
+        }
+    
+        /* Level-order traversal */
+        fun levelOrder(): MutableList<Int?> {
+            val res = mutableListOf<Int?>()
+            // Traverse array directly
+            for (i in 0..<size()) {
+                if (_val(i) != null)
+                    res.add(_val(i))
+            }
+            return res
+        }
+    
+        /* Depth-first traversal */
+        fun dfs(i: Int, order: String, res: MutableList<Int?>) {
+            // If empty position, return
+            if (_val(i) == null)
+                return
+            // Preorder traversal
+            if ("pre" == order)
+                res.add(_val(i))
+            dfs(left(i), order, res)
+            // Inorder traversal
+            if ("in" == order)
+                res.add(_val(i))
+            dfs(right(i), order, res)
+            // Postorder traversal
+            if ("post" == order)
+                res.add(_val(i))
+        }
+    
+        /* Preorder traversal */
+        fun preOrder(): MutableList<Int?> {
+            val res = mutableListOf<Int?>()
+            dfs(0, "pre", res)
+            return res
+        }
+    
+        /* Inorder traversal */
+        fun inOrder(): MutableList<Int?> {
+            val res = mutableListOf<Int?>()
+            dfs(0, "in", res)
+            return res
+        }
+    
+        /* Postorder traversal */
+        fun postOrder(): MutableList<Int?> {
+            val res = mutableListOf<Int?>()
+            dfs(0, "post", res)
+            return res
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="array_binary_tree.rb"
+    ### Array representation of binary tree class ###
+    class ArrayBinaryTree
+      ### Constructor ###
+      def initialize(arr)
+        @tree = arr.to_a
+      end
+    
+      ### List capacity ###
+      def size
+        @tree.length
+      end
+    
+      ### Get value of node at index i ###
+      def val(i)
+        # Return nil if index out of bounds, representing empty position
+        return if i < 0 || i >= size
+    
+        @tree[i]
+      end
+    
+      ### Get left child index of node at index i ###
+      def left(i)
+        2 * i + 1
+      end
+    
+      ### Get right child index of node at index i ###
+      def right(i)
+        2 * i + 2
+      end
+    
+      ### Get parent node index of node at index i ###
+      def parent(i)
+        (i - 1) / 2
+      end
+    
+      ### Level-order traversal ###
+      def level_order
+        @res = []
+    
+        # Traverse array directly
+        for i in 0...size
+          @res << val(i) unless val(i).nil?
+        end
+    
+        @res
+      end
+    
+      ### Depth-first traversal ###
+      def dfs(i, order)
+        return if val(i).nil?
+        # Preorder traversal
+        @res << val(i) if order == :pre
+        dfs(left(i), order)
+        # Inorder traversal
+        @res << val(i) if order == :in
+        dfs(right(i), order)
+        # Postorder traversal
+        @res << val(i) if order == :post
+      end
+    
+      ### Pre-order traversal ###
+      def pre_order
+        @res = []
+        dfs(0, :pre)
+        @res
+      end
+    
+      ### In-order traversal ###
+      def in_order
+        @res = []
+        dfs(0, :in)
+        @res
+      end
+    
+      ### Post-order traversal ###
+      def post_order
+        @res = []
+        dfs(0, :post)
+        @res
+      end
+    ```
+
 
 ## Ưu điểm và hạn chế
 

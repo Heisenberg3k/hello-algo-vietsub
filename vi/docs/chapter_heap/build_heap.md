@@ -23,9 +23,17 @@ Lý do chọn truyền tải theo thứ tự ngược là vì nó đảm bảo c
 
 Cần lưu ý rằng **vì các nút lá không có nút con nên chúng là các vùng nhớ con hợp lệ một cách tự nhiên và không yêu cầu tạo đống**. Như được hiển thị trong đoạn mã bên dưới, nút không phải lá cuối cùng là nút cha của nút cuối cùng; chúng tôi bắt đầu từ nút đó và tăng cường trong khi duyệt theo thứ tự ngược lại:
 
-```src
-[file]{my_heap}-[class]{max_heap}-[func]{__init__}
-```
+=== "Python"
+    ```python title="my_heap.py"
+    def __init__(self, nums: list[int]):
+            """Constructor, build heap based on input list"""
+            # Add list elements to heap as is
+            self.max_heap = nums
+            # Heapify all nodes except leaf nodes
+            for i in range(self.parent(self.size() - 1), -1, -1):
+                self.sift_down(i)
+    ```
+
 
 ## Phân tích độ phức tạp
 

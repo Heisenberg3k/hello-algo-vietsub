@@ -21,9 +21,229 @@ Luồng sắp xếp chèn tổng thể được hiển thị trong hình bên d�
 
 Mã ví dụ như sau:
 
-```src
-[file]{insertion_sort}-[class]{}-[func]{insertion_sort}
-```
+=== "Python"
+    ```python title="insertion_sort.py"
+    def insertion_sort(nums: list[int]):
+        """Insertion sort"""
+        # Outer loop: sorted interval is [0, i-1]
+        for i in range(1, len(nums)):
+            base = nums[i]
+            j = i - 1
+            # Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while j >= 0 and nums[j] > base:
+                nums[j + 1] = nums[j]  # Move nums[j] to the right by one position
+                j -= 1
+            nums[j + 1] = base  # Assign base to the correct position
+    ```
+=== "C++"
+    ```cpp title="insertion_sort.cpp"
+    void insertionSort(vector<int> &nums) {
+        // Outer loop: sorted interval is [0, i-1]
+        for (int i = 1; i < nums.size(); i++) {
+            int base = nums[i], j = i - 1;
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while (j >= 0 && nums[j] > base) {
+                nums[j + 1] = nums[j]; // Move nums[j] to the right by one position
+                j--;
+            }
+            nums[j + 1] = base; // Assign base to the correct position
+        }
+    }
+    ```
+=== "Java"
+    ```java title="insertion_sort.java"
+    public class insertion_sort {
+        /* Insertion sort */
+        static void insertionSort(int[] nums) {
+            // Outer loop: sorted interval is [0, i-1]
+            for (int i = 1; i < nums.length; i++) {
+                int base = nums[i], j = i - 1;
+                // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+                while (j >= 0 && nums[j] > base) {
+                    nums[j + 1] = nums[j]; // Move nums[j] to the right by one position
+                    j--;
+                }
+                nums[j + 1] = base;        // Assign base to the correct position
+            }
+        }
+    
+        public static void main(String[] args) {
+            int[] nums = { 4, 1, 3, 1, 5, 2 };
+            insertionSort(nums);
+            System.out.println("After insertion sort completes, nums = " + Arrays.toString(nums));
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="insertion_sort.cs"
+    public class insertion_sort {
+        /* Insertion sort */
+        void InsertionSort(int[] nums) {
+            // Outer loop: sorted interval is [0, i-1]
+            for (int i = 1; i < nums.Length; i++) {
+                int bas = nums[i], j = i - 1;
+                // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+                while (j >= 0 && nums[j] > bas) {
+                    nums[j + 1] = nums[j]; // Move nums[j] to the right by one position
+                    j--;
+                }
+                nums[j + 1] = bas;         // Assign base to the correct position
+            }
+        }
+    
+        [Test]
+        public void Test() {
+            int[] nums = [4, 1, 3, 1, 5, 2];
+            InsertionSort(nums);
+            Console.WriteLine("After insertion sort completes, nums = " + string.Join(",", nums));
+        }
+    }
+    ```
+=== "Go"
+    ```go title="insertion_sort.go"
+    func insertionSort(nums []int) {
+    	// Outer loop: sorted interval is [0, i-1]
+    	for i := 1; i < len(nums); i++ {
+    		base := nums[i]
+    		j := i - 1
+    		// Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+    		for j >= 0 && nums[j] > base {
+    			nums[j+1] = nums[j] // Move nums[j] to the right by one position
+    			j--
+    		}
+    		nums[j+1] = base // Assign base to the correct position
+    	}
+    }
+    ```
+=== "Swift"
+    ```swift title="insertion_sort.swift"
+    func insertionSort(nums: inout [Int]) {
+        // Outer loop: sorted interval is [0, i-1]
+        for i in nums.indices.dropFirst() {
+            let base = nums[i]
+            var j = i - 1
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while j >= 0, nums[j] > base {
+                nums[j + 1] = nums[j] // Move nums[j] to the right by one position
+                j -= 1
+            }
+            nums[j + 1] = base // Assign base to the correct position
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="insertion_sort.js"
+    function insertionSort(nums) {
+        // Outer loop: sorted interval is [0, i-1]
+        for (let i = 1; i < nums.length; i++) {
+            let base = nums[i],
+                j = i - 1;
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while (j >= 0 && nums[j] > base) {
+                nums[j + 1] = nums[j]; // Move nums[j] to the right by one position
+                j--;
+            }
+            nums[j + 1] = base; // Assign base to the correct position
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="insertion_sort.ts"
+    function insertionSort(nums: number[]): void {
+        // Outer loop: sorted interval is [0, i-1]
+        for (let i = 1; i < nums.length; i++) {
+            const base = nums[i];
+            let j = i - 1;
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while (j >= 0 && nums[j] > base) {
+                nums[j + 1] = nums[j]; // Move nums[j] to the right by one position
+                j--;
+            }
+            nums[j + 1] = base; // Assign base to the correct position
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="insertion_sort.dart"
+    void insertionSort(List<int> nums) {
+      // Outer loop: sorted interval is [0, i-1]
+      for (int i = 1; i < nums.length; i++) {
+        int base = nums[i], j = i - 1;
+        // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+        while (j >= 0 && nums[j] > base) {
+          nums[j + 1] = nums[j]; // Move nums[j] to the right by one position
+          j--;
+        }
+        nums[j + 1] = base; // Assign base to the correct position
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="insertion_sort.rs"
+    fn insertion_sort(nums: &mut [i32]) {
+        // Outer loop: sorted interval is [0, i-1]
+        for i in 1..nums.len() {
+            let (base, mut j) = (nums[i], (i - 1) as i32);
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while j >= 0 && nums[j as usize] > base {
+                nums[(j + 1) as usize] = nums[j as usize]; // Move nums[j] to the right by one position
+                j -= 1;
+            }
+            nums[(j + 1) as usize] = base; // Assign base to the correct position
+        }
+    }
+    ```
+=== "C"
+    ```c title="insertion_sort.c"
+    void insertionSort(int nums[], int size) {
+        // Outer loop: sorted interval is [0, i-1]
+        for (int i = 1; i < size; i++) {
+            int base = nums[i], j = i - 1;
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while (j >= 0 && nums[j] > base) {
+                // Move nums[j] to the right by one position
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            // Assign base to the correct position
+            nums[j + 1] = base;
+        }
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="insertion_sort.kt"
+    fun insertionSort(nums: IntArray) {
+        // Outer loop: sorted elements are 1, 2, ..., n
+        for (i in nums.indices) {
+            val base = nums[i]
+            var j = i - 1
+            // Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+            while (j >= 0 && nums[j] > base) {
+                nums[j + 1] = nums[j] // Move nums[j] to the right by one position
+                j--
+            }
+            nums[j + 1] = base        // Assign base to the correct position
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="insertion_sort.rb"
+    ### Insertion sort ###
+    def insertion_sort(nums)
+      n = nums.length
+      # Outer loop: sorted interval is [0, i-1]
+      for i in 1...n
+        base = nums[i]
+        j = i - 1
+        # Inner loop: insert base into the correct position within the sorted interval [0, i-1]
+        while j >= 0 && nums[j] > base
+          nums[j + 1] = nums[j] # Move nums[j] to the right by one position
+          j -= 1
+        end
+        nums[j + 1] = base # Assign base to the correct position
+      end
+    ```
+
 
 ## Đặc điểm thuật toán
 

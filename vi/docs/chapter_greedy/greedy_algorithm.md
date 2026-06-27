@@ -19,9 +19,331 @@ Chiến lược tham lam cho vấn đề này được thể hiện trong hình 
 
 Mã thực hiện như sau:
 
-```src
-[file]{coin_change_greedy}-[class]{}-[func]{coin_change_greedy}
-```
+=== "Python"
+    ```python title="coin_change_greedy.py"
+    def coin_change_greedy(coins: list[int], amt: int) -> int:
+        """Coin change: Greedy algorithm"""
+        # Assume coins list is sorted
+        i = len(coins) - 1
+        count = 0
+        # Loop to make greedy choices until no remaining amount
+        while amt > 0:
+            # Find the coin that is less than and closest to the remaining amount
+            while i > 0 and coins[i] > amt:
+                i -= 1
+            # Choose coins[i]
+            amt -= coins[i]
+            count += 1
+        # If no feasible solution is found, return -1
+        return count if amt == 0 else -1
+    ```
+=== "C++"
+    ```cpp title="coin_change_greedy.cpp"
+    int coinChangeGreedy(vector<int> &coins, int amt) {
+        // Assume coins list is sorted
+        int i = coins.size() - 1;
+        int count = 0;
+        // Loop to make greedy choices until no remaining amount
+        while (amt > 0) {
+            // Find the coin that is less than and closest to the remaining amount
+            while (i > 0 && coins[i] > amt) {
+                i--;
+            }
+            // Choose coins[i]
+            amt -= coins[i];
+            count++;
+        }
+        // If no feasible solution is found, return -1
+        return amt == 0 ? count : -1;
+    }
+    ```
+=== "Java"
+    ```java title="coin_change_greedy.java"
+    public class coin_change_greedy {
+        /* Coin change: Greedy algorithm */
+        static int coinChangeGreedy(int[] coins, int amt) {
+            // Assume coins list is sorted
+            int i = coins.length - 1;
+            int count = 0;
+            // Loop to make greedy choices until no remaining amount
+            while (amt > 0) {
+                // Find the coin that is less than and closest to the remaining amount
+                while (i > 0 && coins[i] > amt) {
+                    i--;
+                }
+                // Choose coins[i]
+                amt -= coins[i];
+                count++;
+            }
+            // If no feasible solution is found, return -1
+            return amt == 0 ? count : -1;
+        }
+    
+        public static void main(String[] args) {
+            // Greedy algorithm: Can guarantee finding the global optimal solution
+            int[] coins = { 1, 5, 10, 20, 50, 100 };
+            int amt = 186;
+            int res = coinChangeGreedy(coins, amt);
+            System.out.println("\ncoins = " + Arrays.toString(coins) + ", amt = " + amt);
+            System.out.println("Minimum number of coins needed to make " + amt + " is " + res);
+    
+            // Greedy algorithm: Cannot guarantee finding the global optimal solution
+            coins = new int[] { 1, 20, 50 };
+            amt = 60;
+            res = coinChangeGreedy(coins, amt);
+            System.out.println("\ncoins = " + Arrays.toString(coins) + ", amt = " + amt);
+            System.out.println("Minimum number of coins needed to make " + amt + " is " + res);
+            System.out.println("Actually the minimum number needed is 3, i.e., 20 + 20 + 20");
+    
+            // Greedy algorithm: Cannot guarantee finding the global optimal solution
+            coins = new int[] { 1, 49, 50 };
+            amt = 98;
+            res = coinChangeGreedy(coins, amt);
+            System.out.println("\ncoins = " + Arrays.toString(coins) + ", amt = " + amt);
+            System.out.println("Minimum number of coins needed to make " + amt + " is " + res);
+            System.out.println("Actually the minimum number needed is 2, i.e., 49 + 49");
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="coin_change_greedy.cs"
+    public class coin_change_greedy {
+        /* Coin change: Greedy algorithm */
+        int CoinChangeGreedy(int[] coins, int amt) {
+            // Assume coins list is sorted
+            int i = coins.Length - 1;
+            int count = 0;
+            // Loop to make greedy choices until no remaining amount
+            while (amt > 0) {
+                // Find the coin that is less than and closest to the remaining amount
+                while (i > 0 && coins[i] > amt) {
+                    i--;
+                }
+                // Choose coins[i]
+                amt -= coins[i];
+                count++;
+            }
+            // If no feasible solution is found, return -1
+            return amt == 0 ? count : -1;
+        }
+    
+        [Test]
+        public void Test() {
+            // Greedy algorithm: Can guarantee finding the global optimal solution
+            int[] coins = [1, 5, 10, 20, 50, 100];
+            int amt = 186;
+            int res = CoinChangeGreedy(coins, amt);
+            Console.WriteLine("\ncoins = " + coins.PrintList() + ", amt = " + amt);
+            Console.WriteLine("To make " + amt + ", minimum number of coins needed is " + res);
+    
+            // Greedy algorithm: Cannot guarantee finding the global optimal solution
+            coins = [1, 20, 50];
+            amt = 60;
+            res = CoinChangeGreedy(coins, amt);
+            Console.WriteLine("\ncoins = " + coins.PrintList() + ", amt = " + amt);
+            Console.WriteLine("To make " + amt + ", minimum number of coins needed is " + res);
+            Console.WriteLine("Actually the minimum number needed is 3, i.e., 20 + 20 + 20");
+    
+            // Greedy algorithm: Cannot guarantee finding the global optimal solution
+            coins = [1, 49, 50];
+            amt = 98;
+            res = CoinChangeGreedy(coins, amt);
+            Console.WriteLine("\ncoins = " + coins.PrintList() + ", amt = " + amt);
+            Console.WriteLine("To make " + amt + ", minimum number of coins needed is " + res);
+            Console.WriteLine("Actually the minimum number needed is 2, i.e., 49 + 49");
+        }
+    }
+    ```
+=== "Go"
+    ```go title="coin_change_greedy.go"
+    func coinChangeGreedy(coins []int, amt int) int {
+    	// Assume coins list is sorted
+    	i := len(coins) - 1
+    	count := 0
+    	// Loop to make greedy choices until no remaining amount
+    	for amt > 0 {
+    		// Find the coin that is less than and closest to the remaining amount
+    		for i > 0 && coins[i] > amt {
+    			i--
+    		}
+    		// Choose coins[i]
+    		amt -= coins[i]
+    		count++
+    	}
+    	// If no feasible solution is found, return -1
+    	if amt != 0 {
+    		return -1
+    	}
+    	return count
+    }
+    ```
+=== "Swift"
+    ```swift title="coin_change_greedy.swift"
+    func coinChangeGreedy(coins: [Int], amt: Int) -> Int {
+        // Assume coins list is sorted
+        var i = coins.count - 1
+        var count = 0
+        var amt = amt
+        // Loop to make greedy choices until no remaining amount
+        while amt > 0 {
+            // Find the coin that is less than and closest to the remaining amount
+            while i > 0 && coins[i] > amt {
+                i -= 1
+            }
+            // Choose coins[i]
+            amt -= coins[i]
+            count += 1
+        }
+        // If no feasible solution is found, return -1
+        return amt == 0 ? count : -1
+    }
+    ```
+=== "JS"
+    ```javascript title="coin_change_greedy.js"
+    function coinChangeGreedy(coins, amt) {
+        // Assume coins array is sorted
+        let i = coins.length - 1;
+        let count = 0;
+        // Loop to make greedy choices until no remaining amount
+        while (amt > 0) {
+            // Find the coin that is less than and closest to the remaining amount
+            while (i > 0 && coins[i] > amt) {
+                i--;
+            }
+            // Choose coins[i]
+            amt -= coins[i];
+            count++;
+        }
+        // If no feasible solution is found, return -1
+        return amt === 0 ? count : -1;
+    }
+    ```
+=== "TS"
+    ```typescript title="coin_change_greedy.ts"
+    function coinChangeGreedy(coins: number[], amt: number): number {
+        // Assume coins array is sorted
+        let i = coins.length - 1;
+        let count = 0;
+        // Loop to make greedy choices until no remaining amount
+        while (amt > 0) {
+            // Find the coin that is less than and closest to the remaining amount
+            while (i > 0 && coins[i] > amt) {
+                i--;
+            }
+            // Choose coins[i]
+            amt -= coins[i];
+            count++;
+        }
+        // If no feasible solution is found, return -1
+        return amt === 0 ? count : -1;
+    }
+    ```
+=== "Dart"
+    ```dart title="coin_change_greedy.dart"
+    int coinChangeGreedy(List<int> coins, int amt) {
+      // Assume coins list is sorted
+      int i = coins.length - 1;
+      int count = 0;
+      // Loop to make greedy choices until no remaining amount
+      while (amt > 0) {
+        // Find the coin that is less than and closest to the remaining amount
+        while (i > 0 && coins[i] > amt) {
+          i--;
+        }
+        // Choose coins[i]
+        amt -= coins[i];
+        count++;
+      }
+      // If no feasible solution is found, return -1
+      return amt == 0 ? count : -1;
+    }
+    ```
+=== "Rust"
+    ```rust title="coin_change_greedy.rs"
+    fn coin_change_greedy(coins: &[i32], mut amt: i32) -> i32 {
+        // Assume coins list is sorted
+        let mut i = coins.len() - 1;
+        let mut count = 0;
+        // Loop to make greedy choices until no remaining amount
+        while amt > 0 {
+            // Find the coin that is less than and closest to the remaining amount
+            while i > 0 && coins[i] > amt {
+                i -= 1;
+            }
+            // Choose coins[i]
+            amt -= coins[i];
+            count += 1;
+        }
+        // If no feasible solution is found, return -1
+        if amt == 0 {
+            count
+        } else {
+            -1
+        }
+    }
+    ```
+=== "C"
+    ```c title="coin_change_greedy.c"
+    int coinChangeGreedy(int *coins, int size, int amt) {
+        // Assume coins list is sorted
+        int i = size - 1;
+        int count = 0;
+        // Loop to make greedy choices until no remaining amount
+        while (amt > 0) {
+            // Find the coin that is less than and closest to the remaining amount
+            while (i > 0 && coins[i] > amt) {
+                i--;
+            }
+            // Choose coins[i]
+            amt -= coins[i];
+            count++;
+        }
+        // If no feasible solution is found, return -1
+        return amt == 0 ? count : -1;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="coin_change_greedy.kt"
+    fun coinChangeGreedy(coins: IntArray, amt: Int): Int {
+        // Assume coins list is sorted
+        var am = amt
+        var i = coins.size - 1
+        var count = 0
+        // Loop to make greedy choices until no remaining amount
+        while (am > 0) {
+            // Find the coin that is less than and closest to the remaining amount
+            while (i > 0 && coins[i] > am) {
+                i--
+            }
+            // Choose coins[i]
+            am -= coins[i]
+            count++
+        }
+        // If no feasible solution is found, return -1
+        return if (am == 0) count else -1
+    }
+    ```
+=== "Ruby"
+    ```ruby title="coin_change_greedy.rb"
+    ### Coin change: greedy ###
+    def coin_change_greedy(coins, amt)
+      # Assume coins list is sorted
+      i = coins.length - 1
+      count = 0
+      # Loop to make greedy choices until no remaining amount
+      while amt > 0
+        # Find the coin that is less than and closest to the remaining amount
+        while i > 0 && coins[i] > amt
+          i -= 1
+        end
+        # Choose coins[i]
+        amt -= coins[i]
+        count += 1
+      end
+      # Return -1 if no solution found
+      amt == 0 ? count : -1
+    ```
+
 
 Bạn có thể thấy mình kêu lên: "Sạch quá!" Thuật toán tham lam giải quyết vấn đề đổi xu chỉ trong khoảng mười dòng mã.
 

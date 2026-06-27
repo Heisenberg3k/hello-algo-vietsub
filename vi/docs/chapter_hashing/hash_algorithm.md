@@ -46,9 +46,156 @@ Việc thiết kế thuật toán băm là một vấn đề phức tạp đòi 
 - **Băm XOR**: Tích lũy giá trị băm bằng cách XOR từng phần tử của dữ liệu đầu vào.
 - **Băm xoay**: Tích lũy mã ASCII của từng ký tự thành một giá trị băm, thực hiện thao tác xoay trên giá trị băm trước mỗi lần tích lũy.
 
-```src
-[file]{simple_hash}-[class]{}-[func]{rot_hash}
-```
+=== "Python"
+    ```python title="simple_hash.py"
+    def rot_hash(key: str) -> int:
+        """Rotational hash"""
+        hash = 0
+        modulus = 1000000007
+        for c in key:
+            hash = (hash << 4) ^ (hash >> 28) ^ ord(c)
+        return hash % modulus
+    ```
+=== "C++"
+    ```cpp title="simple_hash.cpp"
+    int rotHash(string key) {
+        long long hash = 0;
+        const int MODULUS = 1000000007;
+        for (unsigned char c : key) {
+            hash = ((hash << 4) ^ (hash >> 28) ^ (int)c) % MODULUS;
+        }
+        return (int)hash;
+    }
+    ```
+=== "Java"
+    ```java title="simple_hash.java"
+    static int rotHash(String key) {
+            long hash = 0;
+            final int MODULUS = 1000000007;
+            for (char c : key.toCharArray()) {
+                hash = ((hash << 4) ^ (hash >> 28) ^ (int) c) % MODULUS;
+            }
+            return (int) hash;
+        }
+    ```
+=== "C#"
+    ```csharp title="simple_hash.cs"
+    int RotHash(string key) {
+            long hash = 0;
+            const int MODULUS = 1000000007;
+            foreach (char c in key) {
+                hash = ((hash << 4) ^ (hash >> 28) ^ c) % MODULUS;
+            }
+            return (int)hash;
+        }
+    ```
+=== "Go"
+    ```go title="simple_hash.go"
+    func rotHash(key string) int {
+    	var hash int64
+    	var modulus int64
+    
+    	modulus = 1000000007
+    	for _, b := range []byte(key) {
+    		hash = ((hash << 4) ^ (hash >> 28) ^ int64(b)) % modulus
+    	}
+    	return int(hash)
+    }
+    ```
+=== "Swift"
+    ```swift title="simple_hash.swift"
+    func rotHash(key: String) -> Int {
+        var hash = 0
+        let MODULUS = 1_000_000_007
+        for c in key {
+            for scalar in c.unicodeScalars {
+                hash = ((hash << 4) ^ (hash >> 28) ^ Int(scalar.value)) % MODULUS
+            }
+        }
+        return hash
+    }
+    ```
+=== "JS"
+    ```javascript title="simple_hash.js"
+    function rotHash(key) {
+        let hash = 0;
+        const MODULUS = 1000000007;
+        for (const c of key) {
+            hash = ((hash << 4) ^ (hash >> 28) ^ c.charCodeAt(0)) % MODULUS;
+        }
+        return hash;
+    }
+    ```
+=== "TS"
+    ```typescript title="simple_hash.ts"
+    function rotHash(key: string): number {
+        let hash = 0;
+        const MODULUS = 1000000007;
+        for (const c of key) {
+            hash = ((hash << 4) ^ (hash >> 28) ^ c.charCodeAt(0)) % MODULUS;
+        }
+        return hash;
+    }
+    ```
+=== "Dart"
+    ```dart title="simple_hash.dart"
+    int rotHash(String key) {
+      int hash = 0;
+      final int MODULUS = 1000000007;
+      for (int i = 0; i < key.length; i++) {
+        hash = ((hash << 4) ^ (hash >> 28) ^ key.codeUnitAt(i)) % MODULUS;
+      }
+      return hash;
+    }
+    ```
+=== "Rust"
+    ```rust title="simple_hash.rs"
+    fn rot_hash(key: &str) -> i32 {
+        let mut hash = 0_i64;
+        const MODULUS: i64 = 1000000007;
+    
+        for c in key.chars() {
+            hash = ((hash << 4) ^ (hash >> 28) ^ c as i64) % MODULUS;
+        }
+    
+        hash as i32
+    }
+    ```
+=== "C"
+    ```c title="simple_hash.c"
+    int rotHash(char *key) {
+        long long hash = 0;
+        const int MODULUS = 1000000007;
+        for (int i = 0; i < strlen(key); i++) {
+            hash = ((hash << 4) ^ (hash >> 28) ^ (unsigned char)key[i]) % MODULUS;
+        }
+    
+        return (int)hash;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="simple_hash.kt"
+    fun rotHash(key: String): Int {
+        var hash = 0L
+        val MODULUS = 1000000007
+        for (c in key.toCharArray()) {
+            hash = ((hash shl 4) xor (hash shr 28) xor c.code.toLong()) % MODULUS
+        }
+        return hash.toInt()
+    }
+    ```
+=== "Ruby"
+    ```ruby title="simple_hash.rb"
+    ### Rotational hash ###
+    def rot_hash(key)
+      hash = 0
+      modulus = 1_000_000_007
+    
+      key.each_char { |c| hash = (hash << 4) ^ (hash >> 28) ^ c.ord }
+    
+      hash % modulus
+    ```
+
 
 Chúng ta có thể quan sát rằng bước cuối cùng của mỗi thuật toán băm là lấy kết quả theo modulo số nguyên tố lớn $1000000007$, đảm bảo rằng giá trị băm nằm trong phạm vi phù hợp. Điều này đương nhiên đặt ra một câu hỏi: tại sao lại nhấn mạnh việc sử dụng mô đun nguyên tố và nhược điểm của việc sử dụng mô đun tổng hợp là gì?
 

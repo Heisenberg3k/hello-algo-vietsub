@@ -52,9 +52,264 @@ Thứ tự đệ quy của sắp xếp hợp nhất nhất quán với việc du
 
 Việc triển khai sắp xếp hợp nhất được hiển thị trong mã bên dưới. Lưu ý rằng khoảng được hợp nhất trong `nums` là `[left, right]`, trong khi khoảng tương ứng trong `tmp` là `[0, right - left]`.
 
-```src
-[file]{merge_sort}-[class]{}-[func]{merge_sort}
-```
+=== "Python"
+    ```python title="merge_sort.py"
+    def merge_sort(nums: list[int], left: int, right: int):
+        """Merge sort"""
+        # Termination condition
+        if left >= right:
+            return  # Terminate recursion when subarray length is 1
+        # Divide and conquer stage
+        mid = (left + right) // 2  # Calculate midpoint
+        merge_sort(nums, left, mid)  # Recursively process the left subarray
+        merge_sort(nums, mid + 1, right)  # Recursively process the right subarray
+        # Merge stage
+        merge(nums, left, mid, right)
+    ```
+=== "C++"
+    ```cpp title="merge_sort.cpp"
+    void mergeSort(vector<int> &nums, int left, int right) {
+        // Termination condition
+        if (left >= right)
+            return; // Terminate recursion when subarray length is 1
+        // Divide and conquer stage
+        int mid = left + (right - left) / 2;    // Calculate midpoint
+        mergeSort(nums, left, mid);      // Recursively process the left subarray
+        mergeSort(nums, mid + 1, right); // Recursively process the right subarray
+        // Merge stage
+        merge(nums, left, mid, right);
+    }
+    ```
+=== "Java"
+    ```java title="merge_sort.java"
+    public class merge_sort {
+        /* Merge left subarray and right subarray */
+        static void merge(int[] nums, int left, int mid, int right) {
+            // Left subarray interval is [left, mid], right subarray interval is [mid+1, right]
+            // Create a temporary array tmp to store the merged results
+            int[] tmp = new int[right - left + 1];
+            // Initialize the start indices of the left and right subarrays
+            int i = left, j = mid + 1, k = 0;
+            // While both subarrays still have elements, compare and copy the smaller element into the temporary array
+            while (i <= mid && j <= right) {
+                if (nums[i] <= nums[j])
+                    tmp[k++] = nums[i++];
+                else
+                    tmp[k++] = nums[j++];
+            }
+            // Copy the remaining elements of the left and right subarrays into the temporary array
+            while (i <= mid) {
+                tmp[k++] = nums[i++];
+            }
+            while (j <= right) {
+                tmp[k++] = nums[j++];
+            }
+            // Copy the elements from the temporary array tmp back to the original array nums at the corresponding interval
+            for (k = 0; k < tmp.length; k++) {
+                nums[left + k] = tmp[k];
+            }
+        }
+    
+        /* Merge sort */
+        static void mergeSort(int[] nums, int left, int right) {
+            // Termination condition
+            if (left >= right)
+                return; // Terminate recursion when subarray length is 1
+            // Divide and conquer stage
+            int mid = left + (right - left) / 2; // Calculate midpoint
+            mergeSort(nums, left, mid); // Recursively process the left subarray
+            mergeSort(nums, mid + 1, right); // Recursively process the right subarray
+            // Merge stage
+            merge(nums, left, mid, right);
+        }
+    
+        public static void main(String[] args) {
+            /* Merge sort */
+            int[] nums = { 7, 3, 2, 6, 0, 1, 5, 4 };
+            mergeSort(nums, 0, nums.length - 1);
+            System.out.println("After merge sort completes, nums = " + Arrays.toString(nums));
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="merge_sort.cs"
+    public class merge_sort {
+        /* Merge left subarray and right subarray */
+        void Merge(int[] nums, int left, int mid, int right) {
+            // Left subarray interval is [left, mid], right subarray interval is [mid+1, right]
+            // Create a temporary array tmp to store the merged results
+            int[] tmp = new int[right - left + 1];
+            // Initialize the start indices of the left and right subarrays
+            int i = left, j = mid + 1, k = 0;
+            // While both subarrays still have elements, compare and copy the smaller element into the temporary array
+            while (i <= mid && j <= right) {
+                if (nums[i] <= nums[j])
+                    tmp[k++] = nums[i++];
+                else
+                    tmp[k++] = nums[j++];
+            }
+            // Copy the remaining elements of the left and right subarrays into the temporary array
+            while (i <= mid) {
+                tmp[k++] = nums[i++];
+            }
+            while (j <= right) {
+                tmp[k++] = nums[j++];
+            }
+            // Copy the elements from the temporary array tmp back to the original array nums at the corresponding interval
+            for (k = 0; k < tmp.Length; ++k) {
+                nums[left + k] = tmp[k];
+            }
+        }
+    
+        /* Merge sort */
+        void MergeSort(int[] nums, int left, int right) {
+            // Termination condition
+            if (left >= right) return;       // Terminate recursion when subarray length is 1
+            // Divide and conquer stage
+            int mid = left + (right - left) / 2;    // Calculate midpoint
+            MergeSort(nums, left, mid);      // Recursively process the left subarray
+            MergeSort(nums, mid + 1, right); // Recursively process the right subarray
+            // Merge stage
+            Merge(nums, left, mid, right);
+        }
+    
+        [Test]
+        public void Test() {
+            /* Merge sort */
+            int[] nums = [7, 3, 2, 6, 0, 1, 5, 4];
+            MergeSort(nums, 0, nums.Length - 1);
+            Console.WriteLine("After merge sort completes, nums = " + string.Join(",", nums));
+        }
+    }
+    ```
+=== "Go"
+    ```go title="merge_sort.go"
+    func mergeSort(nums []int, left, right int) {
+    	// Termination condition
+    	if left >= right {
+    		return
+    	}
+    	// Divide and conquer stage
+    	mid := left + (right - left) / 2
+    	mergeSort(nums, left, mid)
+    	mergeSort(nums, mid+1, right)
+    	// Merge stage
+    	merge(nums, left, mid, right)
+    }
+    ```
+=== "Swift"
+    ```swift title="merge_sort.swift"
+    func mergeSort(nums: inout [Int], left: Int, right: Int) {
+        // Termination condition
+        if left >= right { // Terminate recursion when subarray length is 1
+            return
+        }
+        // Divide and conquer stage
+        let mid = left + (right - left) / 2 // Calculate midpoint
+        mergeSort(nums: &nums, left: left, right: mid) // Recursively process the left subarray
+        mergeSort(nums: &nums, left: mid + 1, right: right) // Recursively process the right subarray
+        // Merge stage
+        merge(nums: &nums, left: left, mid: mid, right: right)
+    }
+    ```
+=== "JS"
+    ```javascript title="merge_sort.js"
+    function mergeSort(nums, left, right) {
+        // Termination condition
+        if (left >= right) return; // Terminate recursion when subarray length is 1
+        // Divide and conquer stage
+        let mid = Math.floor(left + (right - left) / 2); // Calculate midpoint
+        mergeSort(nums, left, mid); // Recursively process the left subarray
+        mergeSort(nums, mid + 1, right); // Recursively process the right subarray
+        // Merge stage
+        merge(nums, left, mid, right);
+    }
+    ```
+=== "TS"
+    ```typescript title="merge_sort.ts"
+    function mergeSort(nums: number[], left: number, right: number): void {
+        // Termination condition
+        if (left >= right) return; // Terminate recursion when subarray length is 1
+        // Divide and conquer stage
+        let mid = Math.floor(left + (right - left) / 2); // Calculate midpoint
+        mergeSort(nums, left, mid); // Recursively process the left subarray
+        mergeSort(nums, mid + 1, right); // Recursively process the right subarray
+        // Merge stage
+        merge(nums, left, mid, right);
+    }
+    ```
+=== "Dart"
+    ```dart title="merge_sort.dart"
+    void mergeSort(List<int> nums, int left, int right) {
+      // Termination condition
+      if (left >= right) return; // Terminate recursion when subarray length is 1
+      // Divide and conquer stage
+      int mid = left + (right - left) ~/ 2; // Calculate midpoint
+      mergeSort(nums, left, mid); // Recursively process the left subarray
+      mergeSort(nums, mid + 1, right); // Recursively process the right subarray
+      // Merge stage
+      merge(nums, left, mid, right);
+    }
+    ```
+=== "Rust"
+    ```rust title="merge_sort.rs"
+    fn merge_sort(nums: &mut [i32], left: usize, right: usize) {
+        // Termination condition
+        if left >= right {
+            return; // Terminate recursion when subarray length is 1
+        }
+    
+        // Divide and conquer stage
+        let mid = left + (right - left) / 2; // Calculate midpoint
+        merge_sort(nums, left, mid); // Recursively process the left subarray
+        merge_sort(nums, mid + 1, right); // Recursively process the right subarray
+    
+        // Merge stage
+        merge(nums, left, mid, right);
+    }
+    ```
+=== "C"
+    ```c title="merge_sort.c"
+    void mergeSort(int *nums, int left, int right) {
+        // Termination condition
+        if (left >= right)
+            return; // Terminate recursion when subarray length is 1
+        // Divide and conquer stage
+        int mid = left + (right - left) / 2;    // Calculate midpoint
+        mergeSort(nums, left, mid);      // Recursively process the left subarray
+        mergeSort(nums, mid + 1, right); // Recursively process the right subarray
+        // Merge stage
+        merge(nums, left, mid, right);
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="merge_sort.kt"
+    fun mergeSort(nums: IntArray, left: Int, right: Int) {
+        // Termination condition
+        if (left >= right) return  // Terminate recursion when subarray length is 1
+        // Divide and conquer stage
+        val mid = left + (right - left) / 2 // Calculate midpoint
+        mergeSort(nums, left, mid) // Recursively process the left subarray
+        mergeSort(nums, mid + 1, right) // Recursively process the right subarray
+        // Merge stage
+        merge(nums, left, mid, right)
+    }
+    ```
+=== "Ruby"
+    ```ruby title="merge_sort.rb"
+    ### Merge sort ###
+    def merge_sort(nums, left, right)
+      # Termination condition
+      # Terminate recursion when subarray length is 1
+      return if left >= right
+      # Divide and conquer stage
+      mid = left + (right - left) / 2 # Calculate midpoint
+      merge_sort(nums, left, mid) # Recursively process the left subarray
+      merge_sort(nums, mid + 1, right) # Recursively process the right subarray
+      # Merge stage
+      merge(nums, left, mid, right)
+    ```
+
 
 ## Đặc điểm thuật toán
 

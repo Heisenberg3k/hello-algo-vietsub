@@ -56,9 +56,55 @@ Mã tìm kiếm bao gồm các phần tử sau.
 - **Điều kiện kết thúc**: khi không còn mục nào ($i = 0$) hoặc dung lượng ba lô còn lại là $0$, kết thúc đệ quy và trả về giá trị $0$.
 - **Cắt tỉa**: nếu trọng lượng của vật phẩm hiện tại vượt quá sức chứa còn lại của ba lô thì chỉ có tùy chọn không cho vật phẩm đó vào.
 
-```src
-[file]{knapsack}-[class]{}-[func]{knapsack_dfs}
-```
+=== "Python"
+    ```python title="knapsack.py"
+    def knapsack_dfs(wgt: list[int], val: list[int], i: int, c: int) -> int:
+        """0-1 knapsack: Brute-force search"""
+        # If all items have been selected or knapsack has no remaining capacity, return value 0
+        if i == 0 or c == 0:
+            return 0
+        # If exceeds knapsack capacity, can only choose not to put it in
+        if wgt[i - 1] > c:
+            return knapsack_dfs(wgt, val, i - 1, c)
+        # Calculate the maximum value of not putting in and putting in item i
+        no = knapsack_dfs(wgt, val, i - 1, c)
+        yes = knapsack_dfs(wgt, val, i - 1, c - wgt[i - 1]) + val[i - 1]
+        # Return the larger value of the two options
+        return max(no, yes)
+    ```
+=== "Rust"
+    ```rust title="knapsack.rs"
+    fn knapsack_dfs(wgt: &[i32], val: &[i32], i: usize, c: usize) -> i32 {
+        // If all items have been selected or knapsack has no remaining capacity, return value 0
+        if i == 0 || c == 0 {
+            return 0;
+        }
+        // If exceeds knapsack capacity, can only choose not to put it in
+        if wgt[i - 1] > c as i32 {
+            return knapsack_dfs(wgt, val, i - 1, c);
+        }
+        // Calculate the maximum value of not putting in and putting in item i
+        let no = knapsack_dfs(wgt, val, i - 1, c);
+        let yes = knapsack_dfs(wgt, val, i - 1, c - wgt[i - 1] as usize) + val[i - 1];
+        // Return the larger value of the two options
+        std::cmp::max(no, yes)
+    }
+    ```
+=== "Ruby"
+    ```ruby title="knapsack.rb"
+    ### 0-1 knapsack: brute force search ###
+    def knapsack_dfs(wgt, val, i, c)
+      # If all items have been selected or knapsack has no remaining capacity, return value 0
+      return 0 if i == 0 || c == 0
+      # If exceeds knapsack capacity, can only choose not to put it in
+      return knapsack_dfs(wgt, val, i - 1, c) if wgt[i - 1] > c
+      # Calculate the maximum value of not putting in and putting in item i
+      no = knapsack_dfs(wgt, val, i - 1, c)
+      yes = knapsack_dfs(wgt, val, i - 1, c - wgt[i - 1]) + val[i - 1]
+      # Return the larger value of the two options
+      [no, yes].max
+    ```
+
 
 Như được hiển thị trong hình bên dưới, vì mỗi mục tạo ra hai nhánh tìm kiếm, loại trừ nó và bao gồm cả nó, nên độ phức tạp về thời gian là $O(2^n)$.
 
@@ -72,9 +118,51 @@ Quan sát cây đệ quy, dễ dàng nhận thấy các bài toán con chồng c
 
 Sau khi giới thiệu tính năng ghi nhớ, **độ phức tạp về thời gian phụ thuộc vào số lượng bài toán con**, đó là $O(n \times cap)$. Mã thực hiện như sau:
 
-```src
-[file]{knapsack}-[class]{}-[func]{knapsack_dfs_mem}
-```
+=== "Python"
+    ```python title="knapsack.py"
+    def knapsack_dfs_mem(
+        wgt: list[int], val: list[int], mem: list[list[int]], i: int, c: int
+    ```
+=== "Rust"
+    ```rust title="knapsack.rs"
+    fn knapsack_dfs_mem(wgt: &[i32], val: &[i32], mem: &mut Vec<Vec<i32>>, i: usize, c: usize) -> i32 {
+        // If all items have been selected or knapsack has no remaining capacity, return value 0
+        if i == 0 || c == 0 {
+            return 0;
+        }
+        // If there's a record, return it directly
+        if mem[i][c] != -1 {
+            return mem[i][c];
+        }
+        // If exceeds knapsack capacity, can only choose not to put it in
+        if wgt[i - 1] > c as i32 {
+            return knapsack_dfs_mem(wgt, val, mem, i - 1, c);
+        }
+        // Calculate the maximum value of not putting in and putting in item i
+        let no = knapsack_dfs_mem(wgt, val, mem, i - 1, c);
+        let yes = knapsack_dfs_mem(wgt, val, mem, i - 1, c - wgt[i - 1] as usize) + val[i - 1];
+        // Record and return the larger value of the two options
+        mem[i][c] = std::cmp::max(no, yes);
+        mem[i][c]
+    }
+    ```
+=== "Ruby"
+    ```ruby title="knapsack.rb"
+    ### 0-1 knapsack: memoization search ###
+    def knapsack_dfs_mem(wgt, val, mem, i, c)
+      # If all items have been selected or knapsack has no remaining capacity, return value 0
+      return 0 if i == 0 || c == 0
+      # If there's a record, return it directly
+      return mem[i][c] if mem[i][c] != -1
+      # If exceeds knapsack capacity, can only choose not to put it in
+      return knapsack_dfs_mem(wgt, val, mem, i - 1, c) if wgt[i - 1] > c
+      # Calculate the maximum value of not putting in and putting in item i
+      no = knapsack_dfs_mem(wgt, val, mem, i - 1, c)
+      yes = knapsack_dfs_mem(wgt, val, mem, i - 1, c - wgt[i - 1]) + val[i - 1]
+      # Record and return the larger value of the two options
+      mem[i][c] = [no, yes].max
+    ```
+
 
 Hình dưới đây cho thấy các nhánh tìm kiếm được cắt bớt trong quá trình ghi nhớ.
 
@@ -84,9 +172,70 @@ Hình dưới đây cho thấy các nhánh tìm kiếm được cắt bớt tron
 
 Lập trình động về cơ bản là quá trình điền vào bảng $dp$ trong quá trình chuyển đổi trạng thái. Mã này như sau:
 
-```src
-[file]{knapsack}-[class]{}-[func]{knapsack_dp}
-```
+=== "Python"
+    ```python title="knapsack.py"
+    def knapsack_dp(wgt: list[int], val: list[int], cap: int) -> int:
+        """0-1 knapsack: Dynamic programming"""
+        n = len(wgt)
+        # Initialize dp table
+        dp = [[0] * (cap + 1) for _ in range(n + 1)]
+        # State transition
+        for i in range(1, n + 1):
+            for c in range(1, cap + 1):
+                if wgt[i - 1] > c:
+                    # If exceeds knapsack capacity, don't select item i
+                    dp[i][c] = dp[i - 1][c]
+                else:
+                    # The larger value between not selecting and selecting item i
+                    dp[i][c] = max(dp[i - 1][c], dp[i - 1][c - wgt[i - 1]] + val[i - 1])
+        return dp[n][cap]
+    ```
+=== "Rust"
+    ```rust title="knapsack.rs"
+    fn knapsack_dp(wgt: &[i32], val: &[i32], cap: usize) -> i32 {
+        let n = wgt.len();
+        // Initialize dp table
+        let mut dp = vec![vec![0; cap + 1]; n + 1];
+        // State transition
+        for i in 1..=n {
+            for c in 1..=cap {
+                if wgt[i - 1] > c as i32 {
+                    // If exceeds knapsack capacity, don't select item i
+                    dp[i][c] = dp[i - 1][c];
+                } else {
+                    // The larger value between not selecting and selecting item i
+                    dp[i][c] = std::cmp::max(
+                        dp[i - 1][c],
+                        dp[i - 1][c - wgt[i - 1] as usize] + val[i - 1],
+                    );
+                }
+            }
+        }
+        dp[n][cap]
+    }
+    ```
+=== "Ruby"
+    ```ruby title="knapsack.rb"
+    ### 0-1 knapsack: dynamic programming ###
+    def knapsack_dp(wgt, val, cap)
+      n = wgt.length
+      # Initialize dp table
+      dp = Array.new(n + 1) { Array.new(cap + 1, 0) }
+      # State transition
+      for i in 1...(n + 1)
+        for c in 1...(cap + 1)
+          if wgt[i - 1] > c
+            # If exceeds knapsack capacity, don't select item i
+            dp[i][c] = dp[i - 1][c]
+          else
+            # The larger value between not selecting and selecting item i
+            dp[i][c] = [dp[i - 1][c], dp[i - 1][c - wgt[i - 1]] + val[i - 1]].max
+          end
+        end
+      end
+      dp[n][cap]
+    ```
+
 
 Như được hiển thị trong hình bên dưới, cả độ phức tạp về thời gian và không gian đều được xác định bởi kích thước của mảng `dp`, là $O(n \times cap)$.
 
@@ -163,6 +312,64 @@ Hình dưới đây cho thấy quá trình chuyển đổi từ hàng $i = 1$ sa
 
 Trong quá trình triển khai mã, chúng ta chỉ cần xóa chiều đầu tiên $i$ của mảng `dp` và thay đổi vòng lặp bên trong để truyền tải ngược:
 
-```src
-[file]{knapsack}-[class]{}-[func]{knapsack_dp_comp}
-```
+=== "Python"
+    ```python title="knapsack.py"
+    def knapsack_dp_comp(wgt: list[int], val: list[int], cap: int) -> int:
+        """0-1 knapsack: Space-optimized dynamic programming"""
+        n = len(wgt)
+        # Initialize dp table
+        dp = [0] * (cap + 1)
+        # State transition
+        for i in range(1, n + 1):
+            # Traverse in reverse order
+            for c in range(cap, 0, -1):
+                if wgt[i - 1] > c:
+                    # If exceeds knapsack capacity, don't select item i
+                    dp[c] = dp[c]
+                else:
+                    # The larger value between not selecting and selecting item i
+                    dp[c] = max(dp[c], dp[c - wgt[i - 1]] + val[i - 1])
+        return dp[cap]
+    ```
+=== "Rust"
+    ```rust title="knapsack.rs"
+    fn knapsack_dp_comp(wgt: &[i32], val: &[i32], cap: usize) -> i32 {
+        let n = wgt.len();
+        // Initialize dp table
+        let mut dp = vec![0; cap + 1];
+        // State transition
+        for i in 1..=n {
+            // Traverse in reverse order
+            for c in (1..=cap).rev() {
+                if wgt[i - 1] <= c as i32 {
+                    // The larger value between not selecting and selecting item i
+                    dp[c] = std::cmp::max(dp[c], dp[c - wgt[i - 1] as usize] + val[i - 1]);
+                }
+            }
+        }
+        dp[cap]
+    }
+    ```
+=== "Ruby"
+    ```ruby title="knapsack.rb"
+    ### 0-1 knapsack: space-optimized DP ###
+    def knapsack_dp_comp(wgt, val, cap)
+      n = wgt.length
+      # Initialize dp table
+      dp = Array.new(cap + 1, 0)
+      # State transition
+      for i in 1...(n + 1)
+        # Traverse in reverse order
+        for c in cap.downto(1)
+          if wgt[i - 1] > c
+            # If exceeds knapsack capacity, don't select item i
+            dp[c] = dp[c]
+          else
+            # The larger value between not selecting and selecting item i
+            dp[c] = [dp[c], dp[c - wgt[i - 1]] + val[i - 1]].max
+          end
+        end
+      end
+      dp[cap]
+    ```
+

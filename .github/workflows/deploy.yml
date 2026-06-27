@@ -31,4 +31,5 @@ jobs:
       - name: Deploy
         run: |
           cd vi
+          python scripts/build_docs.py
           mkdocs gh-deploy --config-file mkdocs.yml --force

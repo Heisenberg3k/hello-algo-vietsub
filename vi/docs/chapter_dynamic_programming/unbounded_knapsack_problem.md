@@ -32,9 +32,67 @@ $$
 
 So sánh mã cho hai vấn đề, có một thay đổi trong quá trình chuyển đổi trạng thái từ $i-1$ sang $i$, với mọi thứ khác giống hệt nhau:
 
-```src
-[file]{unbounded_knapsack}-[class]{}-[func]{unbounded_knapsack_dp}
-```
+=== "Python"
+    ```python title="unbounded_knapsack.py"
+    def unbounded_knapsack_dp(wgt: list[int], val: list[int], cap: int) -> int:
+        """Unbounded knapsack: Dynamic programming"""
+        n = len(wgt)
+        # Initialize dp table
+        dp = [[0] * (cap + 1) for _ in range(n + 1)]
+        # State transition
+        for i in range(1, n + 1):
+            for c in range(1, cap + 1):
+                if wgt[i - 1] > c:
+                    # If exceeds knapsack capacity, don't select item i
+                    dp[i][c] = dp[i - 1][c]
+                else:
+                    # The larger value between not selecting and selecting item i
+                    dp[i][c] = max(dp[i - 1][c], dp[i][c - wgt[i - 1]] + val[i - 1])
+        return dp[n][cap]
+    ```
+=== "Rust"
+    ```rust title="unbounded_knapsack.rs"
+    fn unbounded_knapsack_dp(wgt: &[i32], val: &[i32], cap: usize) -> i32 {
+        let n = wgt.len();
+        // Initialize dp table
+        let mut dp = vec![vec![0; cap + 1]; n + 1];
+        // State transition
+        for i in 1..=n {
+            for c in 1..=cap {
+                if wgt[i - 1] > c as i32 {
+                    // If exceeds knapsack capacity, don't select item i
+                    dp[i][c] = dp[i - 1][c];
+                } else {
+                    // The larger value between not selecting and selecting item i
+                    dp[i][c] = std::cmp::max(dp[i - 1][c], dp[i][c - wgt[i - 1] as usize] + val[i - 1]);
+                }
+            }
+        }
+        return dp[n][cap];
+    }
+    ```
+=== "Ruby"
+    ```ruby title="unbounded_knapsack.rb"
+    ### Unbounded knapsack: dynamic programming ###
+    def unbounded_knapsack_dp(wgt, val, cap)
+      n = wgt.length
+      # Initialize dp table
+      dp = Array.new(n + 1) { Array.new(cap + 1, 0) }
+      # State transition
+      for i in 1...(n + 1)
+        for c in 1...(cap + 1)
+          if wgt[i - 1] > c
+            # If exceeds knapsack capacity, don't select item i
+            dp[i][c] = dp[i - 1][c]
+          else
+            # The larger value between not selecting and selecting item i
+            dp[i][c] = [dp[i - 1][c], dp[i][c - wgt[i - 1]] + val[i - 1]].max
+          end
+        end
+      end
+      dp[n][cap]
+    ```
+
 
 ### Tối ưu hóa không gian
 
@@ -62,9 +120,69 @@ Thứ tự di chuyển này hoàn toàn ngược lại với ba lô 0-1. Vui lò
 
 Việc thực hiện mã tương đối đơn giản, chỉ cần xóa chiều đầu tiên của mảng `dp`:
 
-```src
-[file]{unbounded_knapsack}-[class]{}-[func]{unbounded_knapsack_dp_comp}
-```
+=== "Python"
+    ```python title="unbounded_knapsack.py"
+    def unbounded_knapsack_dp_comp(wgt: list[int], val: list[int], cap: int) -> int:
+        """Unbounded knapsack: Space-optimized dynamic programming"""
+        n = len(wgt)
+        # Initialize dp table
+        dp = [0] * (cap + 1)
+        # State transition
+        for i in range(1, n + 1):
+            # Traverse in forward order
+            for c in range(1, cap + 1):
+                if wgt[i - 1] > c:
+                    # If exceeds knapsack capacity, don't select item i
+                    dp[c] = dp[c]
+                else:
+                    # The larger value between not selecting and selecting item i
+                    dp[c] = max(dp[c], dp[c - wgt[i - 1]] + val[i - 1])
+        return dp[cap]
+    ```
+=== "Rust"
+    ```rust title="unbounded_knapsack.rs"
+    fn unbounded_knapsack_dp_comp(wgt: &[i32], val: &[i32], cap: usize) -> i32 {
+        let n = wgt.len();
+        // Initialize dp table
+        let mut dp = vec![0; cap + 1];
+        // State transition
+        for i in 1..=n {
+            for c in 1..=cap {
+                if wgt[i - 1] > c as i32 {
+                    // If exceeds knapsack capacity, don't select item i
+                    dp[c] = dp[c];
+                } else {
+                    // The larger value between not selecting and selecting item i
+                    dp[c] = std::cmp::max(dp[c], dp[c - wgt[i - 1] as usize] + val[i - 1]);
+                }
+            }
+        }
+        dp[cap]
+    }
+    ```
+=== "Ruby"
+    ```ruby title="unbounded_knapsack.rb"
+    ### Unbounded knapsack: space-optimized DP ###
+    def unbounded_knapsack_dp_comp(wgt, val, cap)
+      n = wgt.length
+      # Initialize dp table
+      dp = Array.new(cap + 1, 0)
+      # State transition
+      for i in 1...(n + 1)
+        # Traverse in forward order
+        for c in 1...(cap + 1)
+          if wgt[i -1] > c
+            # If exceeds knapsack capacity, don't select item i
+            dp[c] = dp[c]
+          else
+            # The larger value between not selecting and selecting item i
+            dp[c] = [dp[c], dp[c - wgt[i - 1]] + val[i - 1]].max
+          end
+        end
+      end
+      dp[cap]
+    ```
+
 
 ## Vấn đề đổi xu
 
@@ -113,9 +231,83 @@ Hầu hết các ngôn ngữ lập trình không cung cấp biến $+ \infty$ v�
 
 Vì lý do này, chúng tôi sử dụng số $amt + 1$ để biểu thị các giải pháp không hợp lệ, vì số lượng xu tối đa cần thiết để tạo nên $amt$ nhiều nhất là $amt$. Trước khi quay lại, hãy kiểm tra xem $dp[n, amt]$ có bằng $amt + 1$; nếu vậy, hãy trả về $-1$, cho biết rằng số tiền mục tiêu không thể đạt được. Mã này như sau:
 
-```src
-[file]{coin_change}-[class]{}-[func]{coin_change_dp}
-```
+=== "Python"
+    ```python title="coin_change.py"
+    def coin_change_dp(coins: list[int], amt: int) -> int:
+        """Coin change: Dynamic programming"""
+        n = len(coins)
+        MAX = amt + 1
+        # Initialize dp table
+        dp = [[0] * (amt + 1) for _ in range(n + 1)]
+        # State transition: first row and first column
+        for a in range(1, amt + 1):
+            dp[0][a] = MAX
+        # State transition: rest of the rows and columns
+        for i in range(1, n + 1):
+            for a in range(1, amt + 1):
+                if coins[i - 1] > a:
+                    # If exceeds target amount, don't select coin i
+                    dp[i][a] = dp[i - 1][a]
+                else:
+                    # The smaller value between not selecting and selecting coin i
+                    dp[i][a] = min(dp[i - 1][a], dp[i][a - coins[i - 1]] + 1)
+        return dp[n][amt] if dp[n][amt] != MAX else -1
+    ```
+=== "Rust"
+    ```rust title="coin_change.rs"
+    fn coin_change_dp(coins: &[i32], amt: usize) -> i32 {
+        let n = coins.len();
+        let max = amt + 1;
+        // Initialize dp table
+        let mut dp = vec![vec![0; amt + 1]; n + 1];
+        // State transition: first row and first column
+        for a in 1..=amt {
+            dp[0][a] = max;
+        }
+        // State transition: rest of the rows and columns
+        for i in 1..=n {
+            for a in 1..=amt {
+                if coins[i - 1] > a as i32 {
+                    // If exceeds target amount, don't select coin i
+                    dp[i][a] = dp[i - 1][a];
+                } else {
+                    // The smaller value between not selecting and selecting coin i
+                    dp[i][a] = std::cmp::min(dp[i - 1][a], dp[i][a - coins[i - 1] as usize] + 1);
+                }
+            }
+        }
+        if dp[n][amt] != max {
+            return dp[n][amt] as i32;
+        } else {
+            -1
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="coin_change.rb"
+    ### Coin change: dynamic programming ###
+    def coin_change_dp(coins, amt)
+      n = coins.length
+      _MAX = amt + 1
+      # Initialize dp table
+      dp = Array.new(n + 1) { Array.new(amt + 1, 0) }
+      # State transition: first row and first column
+      (1...(amt + 1)).each { |a| dp[0][a] = _MAX }
+      # State transition: rest of the rows and columns
+      for i in 1...(n + 1)
+        for a in 1...(amt + 1)
+          if coins[i - 1] > a
+            # If exceeds target amount, don't select coin i
+            dp[i][a] = dp[i - 1][a]
+          else
+            # The smaller value between not selecting and selecting coin i
+            dp[i][a] = [dp[i - 1][a], dp[i][a - coins[i - 1]] + 1].min
+          end
+        end
+      end
+      dp[n][amt] != _MAX ? dp[n][amt] : -1
+    ```
+
 
 Hình dưới đây cho thấy quy trình lập trình động để đổi xu, rất giống với bài toán chiếc ba lô không giới hạn.
 
@@ -168,9 +360,80 @@ Hình dưới đây cho thấy quy trình lập trình động để đổi xu, 
 
 Việc tối ưu hóa không gian cho bài toán đổi xu được xử lý tương tự như bài toán chiếc ba lô không giới hạn:
 
-```src
-[file]{coin_change}-[class]{}-[func]{coin_change_dp_comp}
-```
+=== "Python"
+    ```python title="coin_change.py"
+    def coin_change_dp_comp(coins: list[int], amt: int) -> int:
+        """Coin change: Space-optimized dynamic programming"""
+        n = len(coins)
+        MAX = amt + 1
+        # Initialize dp table
+        dp = [MAX] * (amt + 1)
+        dp[0] = 0
+        # State transition
+        for i in range(1, n + 1):
+            # Traverse in forward order
+            for a in range(1, amt + 1):
+                if coins[i - 1] > a:
+                    # If exceeds target amount, don't select coin i
+                    dp[a] = dp[a]
+                else:
+                    # The smaller value between not selecting and selecting coin i
+                    dp[a] = min(dp[a], dp[a - coins[i - 1]] + 1)
+        return dp[amt] if dp[amt] != MAX else -1
+    ```
+=== "Rust"
+    ```rust title="coin_change.rs"
+    fn coin_change_dp_comp(coins: &[i32], amt: usize) -> i32 {
+        let n = coins.len();
+        let max = amt + 1;
+        // Initialize dp table
+        let mut dp = vec![0; amt + 1];
+        dp.fill(max);
+        dp[0] = 0;
+        // State transition
+        for i in 1..=n {
+            for a in 1..=amt {
+                if coins[i - 1] > a as i32 {
+                    // If exceeds target amount, don't select coin i
+                    dp[a] = dp[a];
+                } else {
+                    // The smaller value between not selecting and selecting coin i
+                    dp[a] = std::cmp::min(dp[a], dp[a - coins[i - 1] as usize] + 1);
+                }
+            }
+        }
+        if dp[amt] != max {
+            return dp[amt] as i32;
+        } else {
+            -1
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="coin_change.rb"
+    ### Coin change: space-optimized DP ###
+    def coin_change_dp_comp(coins, amt)
+      n = coins.length
+      _MAX = amt + 1
+      # Initialize dp table
+      dp = Array.new(amt + 1, _MAX)
+      dp[0] = 0
+      # State transition
+      for i in 1...(n + 1)
+        # Traverse in forward order
+        for a in 1...(amt + 1)
+          if coins[i - 1] > a
+            # If exceeds target amount, don't select coin i
+            dp[a] = dp[a]
+          else
+            # The smaller value between not selecting and selecting coin i
+            dp[a] = [dp[a], dp[a - coins[i - 1]] + 1].min
+          end
+        end
+      end
+      dp[amt] != _MAX ? dp[amt] : -1
+    ```
+
 
 ## Vấn đề đổi xu II
 
@@ -194,14 +457,144 @@ Khi số tiền mục tiêu là $0$, không cần chọn đồng xu nào để t
 
 ### Triển khai mã
 
-```src
-[file]{coin_change_ii}-[class]{}-[func]{coin_change_ii_dp}
-```
+=== "Python"
+    ```python title="coin_change_ii.py"
+    def coin_change_ii_dp(coins: list[int], amt: int) -> int:
+        """Coin change II: Dynamic programming"""
+        n = len(coins)
+        # Initialize dp table
+        dp = [[0] * (amt + 1) for _ in range(n + 1)]
+        # Initialize first column
+        for i in range(n + 1):
+            dp[i][0] = 1
+        # State transition
+        for i in range(1, n + 1):
+            for a in range(1, amt + 1):
+                if coins[i - 1] > a:
+                    # If exceeds target amount, don't select coin i
+                    dp[i][a] = dp[i - 1][a]
+                else:
+                    # Sum of the two options: not selecting and selecting coin i
+                    dp[i][a] = dp[i - 1][a] + dp[i][a - coins[i - 1]]
+        return dp[n][amt]
+    ```
+=== "Rust"
+    ```rust title="coin_change_ii.rs"
+    fn coin_change_ii_dp(coins: &[i32], amt: usize) -> i32 {
+        let n = coins.len();
+        // Initialize dp table
+        let mut dp = vec![vec![0; amt + 1]; n + 1];
+        // Initialize first column
+        for i in 0..=n {
+            dp[i][0] = 1;
+        }
+        // State transition
+        for i in 1..=n {
+            for a in 1..=amt {
+                if coins[i - 1] > a as i32 {
+                    // If exceeds target amount, don't select coin i
+                    dp[i][a] = dp[i - 1][a];
+                } else {
+                    // Sum of the two options: not selecting and selecting coin i
+                    dp[i][a] = dp[i - 1][a] + dp[i][a - coins[i - 1] as usize];
+                }
+            }
+        }
+        dp[n][amt]
+    }
+    ```
+=== "Ruby"
+    ```ruby title="coin_change_ii.rb"
+    ### Coin change II: dynamic programming ###
+    def coin_change_ii_dp(coins, amt)
+      n = coins.length
+      # Initialize dp table
+      dp = Array.new(n + 1) { Array.new(amt + 1, 0) }
+      # Initialize first column
+      (0...(n + 1)).each { |i| dp[i][0] = 1 }
+      # State transition
+      for i in 1...(n + 1)
+        for a in 1...(amt + 1)
+          if coins[i - 1] > a
+            # If exceeds target amount, don't select coin i
+            dp[i][a] = dp[i - 1][a]
+          else
+            # Sum of the two options: not selecting and selecting coin i
+            dp[i][a] = dp[i - 1][a] + dp[i][a - coins[i - 1]]
+          end
+        end
+      end
+      dp[n][amt]
+    ```
+
 
 ### Tối ưu hóa không gian
 
 Việc tối ưu hóa không gian được xử lý theo cách tương tự, chỉ cần xóa kích thước đồng xu:
 
-```src
-[file]{coin_change_ii}-[class]{}-[func]{coin_change_ii_dp_comp}
-```
+=== "Python"
+    ```python title="coin_change_ii.py"
+    def coin_change_ii_dp_comp(coins: list[int], amt: int) -> int:
+        """Coin change II: Space-optimized dynamic programming"""
+        n = len(coins)
+        # Initialize dp table
+        dp = [0] * (amt + 1)
+        dp[0] = 1
+        # State transition
+        for i in range(1, n + 1):
+            # Traverse in forward order
+            for a in range(1, amt + 1):
+                if coins[i - 1] > a:
+                    # If exceeds target amount, don't select coin i
+                    dp[a] = dp[a]
+                else:
+                    # Sum of the two options: not selecting and selecting coin i
+                    dp[a] = dp[a] + dp[a - coins[i - 1]]
+        return dp[amt]
+    ```
+=== "Rust"
+    ```rust title="coin_change_ii.rs"
+    fn coin_change_ii_dp_comp(coins: &[i32], amt: usize) -> i32 {
+        let n = coins.len();
+        // Initialize dp table
+        let mut dp = vec![0; amt + 1];
+        dp[0] = 1;
+        // State transition
+        for i in 1..=n {
+            for a in 1..=amt {
+                if coins[i - 1] > a as i32 {
+                    // If exceeds target amount, don't select coin i
+                    dp[a] = dp[a];
+                } else {
+                    // Sum of the two options: not selecting and selecting coin i
+                    dp[a] = dp[a] + dp[a - coins[i - 1] as usize];
+                }
+            }
+        }
+        dp[amt]
+    }
+    ```
+=== "Ruby"
+    ```ruby title="coin_change_ii.rb"
+    ### Coin change II: space-optimized DP ###
+    def coin_change_ii_dp_comp(coins, amt)
+      n = coins.length
+      # Initialize dp table
+      dp = Array.new(amt + 1, 0)
+      dp[0] = 1
+      # State transition
+      for i in 1...(n + 1)
+        # Traverse in forward order
+        for a in 1...(amt + 1)
+          if coins[i - 1] > a
+            # If exceeds target amount, don't select coin i
+            dp[a] = dp[a]
+          else
+            # Sum of the two options: not selecting and selecting coin i
+            dp[a] = dp[a] + dp[a - coins[i - 1]]
+          end
+        end
+      end
+      dp[amt]
+    ```
+

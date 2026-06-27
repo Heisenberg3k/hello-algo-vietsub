@@ -376,9 +376,583 @@ Như minh họa trong hình bên dưới, đối với thao tác đẩy, chúng 
 
 Dưới đây là mã mẫu để triển khai ngăn xếp dựa trên danh sách được liên kết:
 
-```src
-[file]{linkedlist_stack}-[class]{linked_list_stack}-[func]{}
-```
+=== "Python"
+    ```python title="linkedlist_stack.py"
+    class LinkedListStack:
+        """Stack based on linked list implementation"""
+    
+        def __init__(self):
+            """Constructor"""
+            self._peek: ListNode | None = None
+            self._size: int = 0
+    
+        def size(self) -> int:
+            """Get the length of the stack"""
+            return self._size
+    
+        def is_empty(self) -> bool:
+            """Check if the stack is empty"""
+            return self._size == 0
+    
+        def push(self, val: int):
+            """Push"""
+            node = ListNode(val)
+            node.next = self._peek
+            self._peek = node
+            self._size += 1
+    
+        def pop(self) -> int:
+            """Pop"""
+            num = self.peek()
+            self._peek = self._peek.next
+            self._size -= 1
+            return num
+    
+        def peek(self) -> int:
+            """Access top of the stack element"""
+            if self.is_empty():
+                raise IndexError("Stack is empty")
+            return self._peek.val
+    
+        def to_list(self) -> list[int]:
+            """Convert to list for printing"""
+            arr = []
+            node = self._peek
+            while node:
+                arr.append(node.val)
+                node = node.next
+            arr.reverse()
+            return arr
+    ```
+=== "C++"
+    ```cpp title="linkedlist_stack.cpp"
+    class LinkedListStack {
+      private:
+        ListNode *stackTop; // Use head node as stack top
+        int stkSize;        // Stack length
+    
+      public:
+        LinkedListStack() {
+            stackTop = nullptr;
+            stkSize = 0;
+        }
+    
+        ~LinkedListStack() {
+            // Traverse linked list to delete nodes and free memory
+            freeMemoryLinkedList(stackTop);
+        }
+    
+        /* Get the length of the stack */
+        int size() {
+            return stkSize;
+        }
+    
+        /* Check if the stack is empty */
+        bool isEmpty() {
+            return size() == 0;
+        }
+    
+        /* Push */
+        void push(int num) {
+            ListNode *node = new ListNode(num);
+            node->next = stackTop;
+            stackTop = node;
+            stkSize++;
+        }
+    
+        /* Pop */
+        int pop() {
+            int num = top();
+            ListNode *tmp = stackTop;
+            stackTop = stackTop->next;
+            // Free memory
+            delete tmp;
+            stkSize--;
+            return num;
+        }
+    
+        /* Return list for printing */
+        int top() {
+            if (isEmpty())
+                throw out_of_range("Stack is empty");
+            return stackTop->val;
+        }
+    
+        /* Convert List to Array and return */
+        vector<int> toVector() {
+            ListNode *node = stackTop;
+            vector<int> res(size());
+            for (int i = res.size() - 1; i >= 0; i--) {
+                res[i] = node->val;
+                node = node->next;
+            }
+            return res;
+        }
+    };
+    ```
+=== "Java"
+    ```java title="linkedlist_stack.java"
+    class LinkedListStack {
+        private ListNode stackPeek; // Use head node as stack top
+        private int stkSize = 0; // Stack length
+    
+        public LinkedListStack() {
+            stackPeek = null;
+        }
+    
+        /* Get the length of the stack */
+        public int size() {
+            return stkSize;
+        }
+    
+        /* Check if the stack is empty */
+        public boolean isEmpty() {
+            return size() == 0;
+        }
+    
+        /* Push */
+        public void push(int num) {
+            ListNode node = new ListNode(num);
+            node.next = stackPeek;
+            stackPeek = node;
+            stkSize++;
+        }
+    
+        /* Pop */
+        public int pop() {
+            int num = peek();
+            stackPeek = stackPeek.next;
+            stkSize--;
+            return num;
+        }
+    
+        /* Return list for printing */
+        public int peek() {
+            if (isEmpty())
+                throw new IndexOutOfBoundsException();
+            return stackPeek.val;
+        }
+    
+        /* Convert List to Array and return */
+        public int[] toArray() {
+            ListNode node = stackPeek;
+            int[] res = new int[size()];
+            for (int i = res.length - 1; i >= 0; i--) {
+                res[i] = node.val;
+                node = node.next;
+            }
+            return res;
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="linkedlist_stack.cs"
+    class LinkedListStack {
+        ListNode? stackPeek;  // Use head node as stack top
+        int stkSize = 0;   // Stack length
+    
+        public LinkedListStack() {
+            stackPeek = null;
+        }
+    
+        /* Get the length of the stack */
+        public int Size() {
+            return stkSize;
+        }
+    
+        /* Check if the stack is empty */
+        public bool IsEmpty() {
+            return Size() == 0;
+        }
+    
+        /* Push */
+        public void Push(int num) {
+            ListNode node = new(num) {
+                next = stackPeek
+            };
+            stackPeek = node;
+            stkSize++;
+        }
+    
+        /* Pop */
+        public int Pop() {
+            int num = Peek();
+            stackPeek = stackPeek!.next;
+            stkSize--;
+            return num;
+        }
+    
+        /* Return list for printing */
+        public int Peek() {
+            if (IsEmpty())
+                throw new Exception();
+            return stackPeek!.val;
+        }
+    
+        /* Convert List to Array and return */
+        public int[] ToArray() {
+            if (stackPeek == null)
+                return [];
+    
+            ListNode? node = stackPeek;
+            int[] res = new int[Size()];
+            for (int i = res.Length - 1; i >= 0; i--) {
+                res[i] = node!.val;
+                node = node.next;
+            }
+            return res;
+        }
+    }
+    ```
+=== "Go"
+    ```go title="linkedlist_stack.go"
+    type linkedListStack struct {
+    	// Use built-in package list to implement stack
+    	data *list.List
+    }
+    ```
+=== "Swift"
+    ```swift title="linkedlist_stack.swift"
+    class LinkedListStack {
+        private var _peek: ListNode? // Use head node as stack top
+        private var _size: Int // Stack length
+    
+        init() {
+            _size = 0
+        }
+    
+        /* Get the length of the stack */
+        func size() -> Int {
+            _size
+        }
+    
+        /* Check if the stack is empty */
+        func isEmpty() -> Bool {
+            size() == 0
+        }
+    
+        /* Push */
+        func push(num: Int) {
+            let node = ListNode(x: num)
+            node.next = _peek
+            _peek = node
+            _size += 1
+        }
+    
+        /* Pop */
+        @discardableResult
+        func pop() -> Int {
+            let num = peek()
+            _peek = _peek?.next
+            _size -= 1
+            return num
+        }
+    
+        /* Return list for printing */
+        func peek() -> Int {
+            if isEmpty() {
+                fatalError("Stack is empty")
+            }
+            return _peek!.val
+        }
+    
+        /* Convert List to Array and return */
+        func toArray() -> [Int] {
+            var node = _peek
+            var res = Array(repeating: 0, count: size())
+            for i in res.indices.reversed() {
+                res[i] = node!.val
+                node = node?.next
+            }
+            return res
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="linkedlist_stack.js"
+    class LinkedListStack {
+        #stackPeek; // Use head node as stack top
+        #stkSize = 0; // Stack length
+    
+        constructor() {
+            this.#stackPeek = null;
+        }
+    
+        /* Get the length of the stack */
+        get size() {
+            return this.#stkSize;
+        }
+    
+        /* Check if the stack is empty */
+        isEmpty() {
+            return this.size === 0;
+        }
+    
+        /* Push */
+        push(num) {
+            const node = new ListNode(num);
+            node.next = this.#stackPeek;
+            this.#stackPeek = node;
+            this.#stkSize++;
+        }
+    
+        /* Pop */
+        pop() {
+            const num = this.peek();
+            this.#stackPeek = this.#stackPeek.next;
+            this.#stkSize--;
+            return num;
+        }
+    
+        /* Return list for printing */
+        peek() {
+            if (!this.#stackPeek) throw new Error('Stack is empty');
+            return this.#stackPeek.val;
+        }
+    
+        /* Convert linked list to Array and return */
+        toArray() {
+            let node = this.#stackPeek;
+            const res = new Array(this.size);
+            for (let i = res.length - 1; i >= 0; i--) {
+                res[i] = node.val;
+                node = node.next;
+            }
+            return res;
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="linkedlist_stack.ts"
+    class LinkedListStack {
+        private stackPeek: ListNode | null; // Use head node as stack top
+        private stkSize: number = 0; // Stack length
+    
+        constructor() {
+            this.stackPeek = null;
+        }
+    
+        /* Get the length of the stack */
+        get size(): number {
+            return this.stkSize;
+        }
+    
+        /* Check if the stack is empty */
+        isEmpty(): boolean {
+            return this.size === 0;
+        }
+    
+        /* Push */
+        push(num: number): void {
+            const node = new ListNode(num);
+            node.next = this.stackPeek;
+            this.stackPeek = node;
+            this.stkSize++;
+        }
+    
+        /* Pop */
+        pop(): number {
+            const num = this.peek();
+            if (!this.stackPeek) throw new Error('Stack is empty');
+            this.stackPeek = this.stackPeek.next;
+            this.stkSize--;
+            return num;
+        }
+    
+        /* Return list for printing */
+        peek(): number {
+            if (!this.stackPeek) throw new Error('Stack is empty');
+            return this.stackPeek.val;
+        }
+    
+        /* Convert linked list to Array and return */
+        toArray(): number[] {
+            let node = this.stackPeek;
+            const res = new Array<number>(this.size);
+            for (let i = res.length - 1; i >= 0; i--) {
+                res[i] = node!.val;
+                node = node!.next;
+            }
+            return res;
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="linkedlist_stack.dart"
+    class LinkedListStack {
+      ListNode? _stackPeek; // Use head node as stack top
+      int _stkSize = 0; // Stack length
+    
+      LinkedListStack() {
+        _stackPeek = null;
+      }
+    
+      /* Get the length of the stack */
+      int size() {
+        return _stkSize;
+      }
+    
+      /* Check if the stack is empty */
+      bool isEmpty() {
+        return _stkSize == 0;
+      }
+    
+      /* Push */
+      void push(int _num) {
+        final ListNode node = ListNode(_num);
+        node.next = _stackPeek;
+        _stackPeek = node;
+        _stkSize++;
+      }
+    
+      /* Pop */
+      int pop() {
+        final int _num = peek();
+        _stackPeek = _stackPeek!.next;
+        _stkSize--;
+        return _num;
+      }
+    
+      /* Return list for printing */
+      int peek() {
+        if (_stackPeek == null) {
+          throw Exception("Stack is empty");
+        }
+        return _stackPeek!.val;
+      }
+    
+      /* Convert linked list to List and return */
+      List<int> toList() {
+        ListNode? node = _stackPeek;
+        List<int> list = [];
+        while (node != null) {
+          list.add(node.val);
+          node = node.next;
+        }
+        list = list.reversed.toList();
+        return list;
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="linkedlist_stack.rs"
+    #[allow(dead_code)]
+    pub struct LinkedListStack<T> {
+        stack_peek: Option<Rc<RefCell<ListNode<T>>>>, // Use head node as stack top
+        stk_size: usize,                              // Stack length
+    }
+    ```
+=== "C"
+    ```c title="linkedlist_stack.c"
+    LinkedListStack *newLinkedListStack() {
+        LinkedListStack *s = malloc(sizeof(LinkedListStack));
+        s->top = NULL;
+        s->size = 0;
+        return s;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="linkedlist_stack.kt"
+    class LinkedListStack(
+        private var stackPeek: ListNode? = null, // Use head node as stack top
+        private var stkSize: Int = 0 // Stack length
+    ) {
+    
+        /* Get the length of the stack */
+        fun size(): Int {
+            return stkSize
+        }
+    
+        /* Check if the stack is empty */
+        fun isEmpty(): Boolean {
+            return size() == 0
+        }
+    
+        /* Push */
+        fun push(num: Int) {
+            val node = ListNode(num)
+            node.next = stackPeek
+            stackPeek = node
+            stkSize++
+        }
+    
+        /* Pop */
+        fun pop(): Int? {
+            val num = peek()
+            stackPeek = stackPeek?.next
+            stkSize--
+            return num
+        }
+    
+        /* Return list for printing */
+        fun peek(): Int? {
+            if (isEmpty()) throw IndexOutOfBoundsException()
+            return stackPeek?._val
+        }
+    
+        /* Convert List to Array and return */
+        fun toArray(): IntArray {
+            var node = stackPeek
+            val res = IntArray(size())
+            for (i in res.size - 1 downTo 0) {
+                res[i] = node?._val!!
+                node = node.next
+            }
+            return res
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="linkedlist_stack.rb"
+    ### Stack based on linked list ###
+    class LinkedListStack
+      attr_reader :size
+    
+      ### Constructor ###
+      def initialize
+        @size = 0
+      end
+    
+      ### Check if stack is empty ###
+      def is_empty?
+        @peek.nil?
+      end
+    
+      ### Push ###
+      def push(val)
+        node = ListNode.new(val)
+        node.next = @peek
+        @peek = node
+        @size += 1
+      end
+    
+      ### Pop ###
+      def pop
+        num = peek
+        @peek = @peek.next
+        @size -= 1
+        num
+      end
+    
+      ### Access top element ###
+      def peek
+        raise IndexError, 'Stack is empty' if is_empty?
+    
+        @peek.val
+      end
+    
+      ### Convert linked list to Array and return ###
+      def to_array
+        arr = []
+        node = @peek
+        while node
+          arr << node.val
+          node = node.next
+        end
+        arr.reverse
+      end
+    ```
+
 
 ### Triển khai mảng
 
@@ -395,9 +969,454 @@ Khi triển khai ngăn xếp bằng mảng, chúng ta có thể coi phần cuố
 
 Vì các phần tử được đẩy lên ngăn xếp có thể tăng liên tục nên chúng ta có thể sử dụng mảng động, điều này giúp loại bỏ nhu cầu tự mình xử lý việc mở rộng mảng. Đây là mã mẫu:
 
-```src
-[file]{array_stack}-[class]{array_stack}-[func]{}
-```
+=== "Python"
+    ```python title="array_stack.py"
+    class ArrayStack:
+        """Stack based on array implementation"""
+    
+        def __init__(self):
+            """Constructor"""
+            self._stack: list[int] = []
+    
+        def size(self) -> int:
+            """Get the length of the stack"""
+            return len(self._stack)
+    
+        def is_empty(self) -> bool:
+            """Check if the stack is empty"""
+            return self.size() == 0
+    
+        def push(self, item: int):
+            """Push"""
+            self._stack.append(item)
+    
+        def pop(self) -> int:
+            """Pop"""
+            if self.is_empty():
+                raise IndexError("Stack is empty")
+            return self._stack.pop()
+    
+        def peek(self) -> int:
+            """Access top of the stack element"""
+            if self.is_empty():
+                raise IndexError("Stack is empty")
+            return self._stack[-1]
+    
+        def to_list(self) -> list[int]:
+            """Return list for printing"""
+            return self._stack
+    ```
+=== "C++"
+    ```cpp title="array_stack.cpp"
+    class ArrayStack {
+      private:
+        vector<int> stack;
+    
+      public:
+        /* Get the length of the stack */
+        int size() {
+            return stack.size();
+        }
+    
+        /* Check if the stack is empty */
+        bool isEmpty() {
+            return stack.size() == 0;
+        }
+    
+        /* Push */
+        void push(int num) {
+            stack.push_back(num);
+        }
+    
+        /* Pop */
+        int pop() {
+            int num = top();
+            stack.pop_back();
+            return num;
+        }
+    
+        /* Return list for printing */
+        int top() {
+            if (isEmpty())
+                throw out_of_range("Stack is empty");
+            return stack.back();
+        }
+    
+        /* Return Vector */
+        vector<int> toVector() {
+            return stack;
+        }
+    };
+    ```
+=== "Java"
+    ```java title="array_stack.java"
+    class ArrayStack {
+        private ArrayList<Integer> stack;
+    
+        public ArrayStack() {
+            // Initialize list (dynamic array)
+            stack = new ArrayList<>();
+        }
+    
+        /* Get the length of the stack */
+        public int size() {
+            return stack.size();
+        }
+    
+        /* Check if the stack is empty */
+        public boolean isEmpty() {
+            return size() == 0;
+        }
+    
+        /* Push */
+        public void push(int num) {
+            stack.add(num);
+        }
+    
+        /* Pop */
+        public int pop() {
+            if (isEmpty())
+                throw new IndexOutOfBoundsException();
+            return stack.remove(size() - 1);
+        }
+    
+        /* Return list for printing */
+        public int peek() {
+            if (isEmpty())
+                throw new IndexOutOfBoundsException();
+            return stack.get(size() - 1);
+        }
+    
+        /* Convert List to Array and return */
+        public Object[] toArray() {
+            return stack.toArray();
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="array_stack.cs"
+    class ArrayStack {
+        List<int> stack;
+        public ArrayStack() {
+            // Initialize list (dynamic array)
+            stack = [];
+        }
+    
+        /* Get the length of the stack */
+        public int Size() {
+            return stack.Count;
+        }
+    
+        /* Check if the stack is empty */
+        public bool IsEmpty() {
+            return Size() == 0;
+        }
+    
+        /* Push */
+        public void Push(int num) {
+            stack.Add(num);
+        }
+    
+        /* Pop */
+        public int Pop() {
+            if (IsEmpty())
+                throw new Exception();
+            var val = Peek();
+            stack.RemoveAt(Size() - 1);
+            return val;
+        }
+    
+        /* Return list for printing */
+        public int Peek() {
+            if (IsEmpty())
+                throw new Exception();
+            return stack[Size() - 1];
+        }
+    
+        /* Convert List to Array and return */
+        public int[] ToArray() {
+            return [.. stack];
+        }
+    }
+    ```
+=== "Go"
+    ```go title="array_stack.go"
+    type arrayStack struct {
+    	data []int // Data
+    }
+    ```
+=== "Swift"
+    ```swift title="array_stack.swift"
+    class ArrayStack {
+        private var stack: [Int]
+    
+        init() {
+            // Initialize list (dynamic array)
+            stack = []
+        }
+    
+        /* Get the length of the stack */
+        func size() -> Int {
+            stack.count
+        }
+    
+        /* Check if the stack is empty */
+        func isEmpty() -> Bool {
+            stack.isEmpty
+        }
+    
+        /* Push */
+        func push(num: Int) {
+            stack.append(num)
+        }
+    
+        /* Pop */
+        @discardableResult
+        func pop() -> Int {
+            if isEmpty() {
+                fatalError("Stack is empty")
+            }
+            return stack.removeLast()
+        }
+    
+        /* Return list for printing */
+        func peek() -> Int {
+            if isEmpty() {
+                fatalError("Stack is empty")
+            }
+            return stack.last!
+        }
+    
+        /* Convert List to Array and return */
+        func toArray() -> [Int] {
+            stack
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="array_stack.js"
+    class ArrayStack {
+        #stack;
+        constructor() {
+            this.#stack = [];
+        }
+    
+        /* Get the length of the stack */
+        get size() {
+            return this.#stack.length;
+        }
+    
+        /* Check if the stack is empty */
+        isEmpty() {
+            return this.#stack.length === 0;
+        }
+    
+        /* Push */
+        push(num) {
+            this.#stack.push(num);
+        }
+    
+        /* Pop */
+        pop() {
+            if (this.isEmpty()) throw new Error('Stack is empty');
+            return this.#stack.pop();
+        }
+    
+        /* Return list for printing */
+        top() {
+            if (this.isEmpty()) throw new Error('Stack is empty');
+            return this.#stack[this.#stack.length - 1];
+        }
+    
+        /* Return Array */
+        toArray() {
+            return this.#stack;
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="array_stack.ts"
+    class ArrayStack {
+        private stack: number[];
+        constructor() {
+            this.stack = [];
+        }
+    
+        /* Get the length of the stack */
+        get size(): number {
+            return this.stack.length;
+        }
+    
+        /* Check if the stack is empty */
+        isEmpty(): boolean {
+            return this.stack.length === 0;
+        }
+    
+        /* Push */
+        push(num: number): void {
+            this.stack.push(num);
+        }
+    
+        /* Pop */
+        pop(): number | undefined {
+            if (this.isEmpty()) throw new Error('Stack is empty');
+            return this.stack.pop();
+        }
+    
+        /* Return list for printing */
+        top(): number | undefined {
+            if (this.isEmpty()) throw new Error('Stack is empty');
+            return this.stack[this.stack.length - 1];
+        }
+    
+        /* Return Array */
+        toArray() {
+            return this.stack;
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="array_stack.dart"
+    class ArrayStack {
+      late List<int> _stack;
+      ArrayStack() {
+        _stack = [];
+      }
+    
+      /* Get the length of the stack */
+      int size() {
+        return _stack.length;
+      }
+    
+      /* Check if the stack is empty */
+      bool isEmpty() {
+        return _stack.isEmpty;
+      }
+    
+      /* Push */
+      void push(int _num) {
+        _stack.add(_num);
+      }
+    
+      /* Pop */
+      int pop() {
+        if (isEmpty()) {
+          throw Exception("Stack is empty");
+        }
+        return _stack.removeLast();
+      }
+    
+      /* Return list for printing */
+      int peek() {
+        if (isEmpty()) {
+          throw Exception("Stack is empty");
+        }
+        return _stack.last;
+      }
+    
+      /* Convert stack to Array and return */
+      List<int> toArray() => _stack;
+    }
+    ```
+=== "Rust"
+    ```rust title="array_stack.rs"
+    struct ArrayStack<T> {
+        stack: Vec<T>,
+    }
+    ```
+=== "C"
+    ```c title="array_stack.c"
+    ArrayStack *newArrayStack() {
+        ArrayStack *stack = malloc(sizeof(ArrayStack));
+        // Initialize with large capacity to avoid expansion
+        stack->data = malloc(sizeof(int) * MAX_SIZE);
+        stack->size = 0;
+        return stack;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="array_stack.kt"
+    class ArrayStack {
+        // Initialize list (dynamic array)
+        private val stack = mutableListOf<Int>()
+    
+        /* Get the length of the stack */
+        fun size(): Int {
+            return stack.size
+        }
+    
+        /* Check if the stack is empty */
+        fun isEmpty(): Boolean {
+            return size() == 0
+        }
+    
+        /* Push */
+        fun push(num: Int) {
+            stack.add(num)
+        }
+    
+        /* Pop */
+        fun pop(): Int {
+            if (isEmpty()) throw IndexOutOfBoundsException()
+            return stack.removeAt(size() - 1)
+        }
+    
+        /* Return list for printing */
+        fun peek(): Int {
+            if (isEmpty()) throw IndexOutOfBoundsException()
+            return stack[size() - 1]
+        }
+    
+        /* Convert List to Array and return */
+        fun toArray(): Array<Any> {
+            return stack.toTypedArray()
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="array_stack.rb"
+    ### Stack based on array ###
+    class ArrayStack
+      ### Constructor ###
+      def initialize
+        @stack = []
+      end
+    
+      ### Get stack length ###
+      def size
+        @stack.length
+      end
+    
+      ### Check if stack is empty ###
+      def is_empty?
+        @stack.empty?
+      end
+    
+      ### Push ###
+      def push(item)
+        @stack << item
+      end
+    
+      ### Pop ###
+      def pop
+        raise IndexError, 'Stack is empty' if is_empty?
+    
+        @stack.pop
+      end
+    
+      ### Access top element ###
+      def peek
+        raise IndexError, 'Stack is empty' if is_empty?
+    
+        @stack.last
+      end
+    
+      ### Return list for printing ###
+      def to_array
+        @stack
+      end
+    ```
+
 
 ## So sánh hai cách triển khai
 

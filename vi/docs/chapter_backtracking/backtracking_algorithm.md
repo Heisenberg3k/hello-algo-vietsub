@@ -10,9 +10,187 @@ Cho một cây nhị phân, tìm kiếm và ghi lại tất cả các nút có g
 
 Đối với vấn đề này, chúng tôi thực hiện duyệt cây theo thứ tự trước và kiểm tra xem giá trị của nút hiện tại có phải là $7$ hay không. Nếu đúng như vậy, chúng tôi thêm nút vào danh sách kết quả `res`. Việc triển khai có liên quan được thể hiện trong hình và mã sau:
 
-```src
-[file]{preorder_traversal_i_compact}-[class]{}-[func]{pre_order}
-```
+=== "Python"
+    ```python title="preorder_traversal_i_compact.py"
+    def pre_order(root: TreeNode):
+        """Preorder traversal: Example 1"""
+        if root is None:
+            return
+        if root.val == 7:
+            # Record solution
+            res.append(root)
+        pre_order(root.left)
+        pre_order(root.right)
+    ```
+=== "C++"
+    ```cpp title="preorder_traversal_i_compact.cpp"
+    void preOrder(TreeNode *root) {
+        if (root == nullptr) {
+            return;
+        }
+        if (root->val == 7) {
+            // Record solution
+            res.push_back(root);
+        }
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+    ```
+=== "Java"
+    ```java title="preorder_traversal_i_compact.java"
+    static void preOrder(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            if (root.val == 7) {
+                // Record solution
+                res.add(root);
+            }
+            preOrder(root.left);
+            preOrder(root.right);
+        }
+    ```
+=== "C#"
+    ```csharp title="preorder_traversal_i_compact.cs"
+    void PreOrder(TreeNode? root) {
+            if (root == null) {
+                return;
+            }
+            if (root.val == 7) {
+                // Record solution
+                res.Add(root);
+            }
+            PreOrder(root.left);
+            PreOrder(root.right);
+        }
+    ```
+=== "Go"
+    ```go title="preorder_traversal_i_compact.go"
+    func preOrderI(root *TreeNode, res *[]*TreeNode) {
+    	if root == nil {
+    		return
+    	}
+    	if (root.Val).(int) == 7 {
+    		// Record solution
+    		*res = append(*res, root)
+    	}
+    	preOrderI(root.Left, res)
+    	preOrderI(root.Right, res)
+    }
+    ```
+=== "Swift"
+    ```swift title="preorder_traversal_i_compact.swift"
+    func preOrder(root: TreeNode?) {
+        guard let root = root else {
+            return
+        }
+        if root.val == 7 {
+            // Record solution
+            res.append(root)
+        }
+        preOrder(root: root.left)
+        preOrder(root: root.right)
+    }
+    ```
+=== "JS"
+    ```javascript title="preorder_traversal_i_compact.js"
+    function preOrder(root, res) {
+        if (root === null) {
+            return;
+        }
+        if (root.val === 7) {
+            // Record solution
+            res.push(root);
+        }
+        preOrder(root.left, res);
+        preOrder(root.right, res);
+    }
+    ```
+=== "TS"
+    ```typescript title="preorder_traversal_i_compact.ts"
+    function preOrder(root: TreeNode | null, res: TreeNode[]): void {
+        if (root === null) {
+            return;
+        }
+        if (root.val === 7) {
+            // Record solution
+            res.push(root);
+        }
+        preOrder(root.left, res);
+        preOrder(root.right, res);
+    }
+    ```
+=== "Dart"
+    ```dart title="preorder_traversal_i_compact.dart"
+    void preOrder(TreeNode? root, List<TreeNode> res) {
+      if (root == null) {
+        return;
+      }
+      if (root.val == 7) {
+        // Record solution
+        res.add(root);
+      }
+      preOrder(root.left, res);
+      preOrder(root.right, res);
+    }
+    ```
+=== "Rust"
+    ```rust title="preorder_traversal_i_compact.rs"
+    fn pre_order(res: &mut Vec<Rc<RefCell<TreeNode>>>, root: Option<&Rc<RefCell<TreeNode>>>) {
+        if root.is_none() {
+            return;
+        }
+        if let Some(node) = root {
+            if node.borrow().val == 7 {
+                // Record solution
+                res.push(node.clone());
+            }
+            pre_order(res, node.borrow().left.as_ref());
+            pre_order(res, node.borrow().right.as_ref());
+        }
+    }
+    ```
+=== "C"
+    ```c title="preorder_traversal_i_compact.c"
+    void preOrder(TreeNode *root) {
+        if (root == NULL) {
+            return;
+        }
+        if (root->val == 7) {
+            // Record solution
+            res[resSize++] = root;
+        }
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="preorder_traversal_i_compact.kt"
+    fun preOrder(root: TreeNode?) {
+        if (root == null) {
+            return
+        }
+        if (root._val == 7) {
+            // Record solution
+            res!!.add(root)
+        }
+        preOrder(root.left)
+        preOrder(root.right)
+    }
+    ```
+=== "Ruby"
+    ```ruby title="preorder_traversal_i_compact.rb"
+    ### Pre-order traversal: example 1 ###
+    def pre_order(root)
+      return unless root
+    
+      # Record solution
+      $res << root if root.val == 7
+    
+      pre_order(root.left)
+      pre_order(root.right)
+    ```
+
 
 ![Search for nodes in preorder traversal](backtracking_algorithm.assets/preorder_find_nodes.png)
 
@@ -30,9 +208,257 @@ Trong cây nhị phân, tìm kiếm tất cả các nút có giá trị $7$, **v
 
 Dựa trên mã từ Ví dụ 1, chúng ta cần sử dụng danh sách `path` để ghi lại đường dẫn của các nút đã truy cập. Khi chúng tôi đến một nút có giá trị $7$, chúng tôi sao chép `path` và thêm nó vào danh sách kết quả `res`. Sau khi quá trình truyền tải hoàn tất, `res` chứa tất cả các giải pháp. Mã này như sau:
 
-```src
-[file]{preorder_traversal_ii_compact}-[class]{}-[func]{pre_order}
-```
+=== "Python"
+    ```python title="preorder_traversal_ii_compact.py"
+    def pre_order(root: TreeNode):
+        """Preorder traversal: Example 2"""
+        if root is None:
+            return
+        # Attempt
+        path.append(root)
+        if root.val == 7:
+            # Record solution
+            res.append(list(path))
+        pre_order(root.left)
+        pre_order(root.right)
+        # Backtrack
+        path.pop()
+    ```
+=== "C++"
+    ```cpp title="preorder_traversal_ii_compact.cpp"
+    void preOrder(TreeNode *root) {
+        if (root == nullptr) {
+            return;
+        }
+        // Attempt
+        path.push_back(root);
+        if (root->val == 7) {
+            // Record solution
+            res.push_back(path);
+        }
+        preOrder(root->left);
+        preOrder(root->right);
+        // Backtrack
+        path.pop_back();
+    }
+    ```
+=== "Java"
+    ```java title="preorder_traversal_ii_compact.java"
+    static void preOrder(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            // Attempt
+            path.add(root);
+            if (root.val == 7) {
+                // Record solution
+                res.add(new ArrayList<>(path));
+            }
+            preOrder(root.left);
+            preOrder(root.right);
+            // Backtrack
+            path.remove(path.size() - 1);
+        }
+    ```
+=== "C#"
+    ```csharp title="preorder_traversal_ii_compact.cs"
+    void PreOrder(TreeNode? root) {
+            if (root == null) {
+                return;
+            }
+            // Attempt
+            path.Add(root);
+            if (root.val == 7) {
+                // Record solution
+                res.Add(new List<TreeNode>(path));
+            }
+            PreOrder(root.left);
+            PreOrder(root.right);
+            // Backtrack
+            path.RemoveAt(path.Count - 1);
+        }
+    ```
+=== "Go"
+    ```go title="preorder_traversal_ii_compact.go"
+    func preOrderII(root *TreeNode, res *[][]*TreeNode, path *[]*TreeNode) {
+    	if root == nil {
+    		return
+    	}
+    	// Attempt
+    	*path = append(*path, root)
+    	if root.Val.(int) == 7 {
+    		// Record solution
+    		*res = append(*res, append([]*TreeNode{}, *path...))
+    	}
+    	preOrderII(root.Left, res, path)
+    	preOrderII(root.Right, res, path)
+    	// Backtrack
+    	*path = (*path)[:len(*path)-1]
+    }
+    ```
+=== "Swift"
+    ```swift title="preorder_traversal_ii_compact.swift"
+    func preOrder(root: TreeNode?) {
+        guard let root = root else {
+            return
+        }
+        // Attempt
+        path.append(root)
+        if root.val == 7 {
+            // Record solution
+            res.append(path)
+        }
+        preOrder(root: root.left)
+        preOrder(root: root.right)
+        // Backtrack
+        path.removeLast()
+    }
+    ```
+=== "JS"
+    ```javascript title="preorder_traversal_ii_compact.js"
+    function preOrder(root, path, res) {
+        if (root === null) {
+            return;
+        }
+        // Attempt
+        path.push(root);
+        if (root.val === 7) {
+            // Record solution
+            res.push([...path]);
+        }
+        preOrder(root.left, path, res);
+        preOrder(root.right, path, res);
+        // Backtrack
+        path.pop();
+    }
+    ```
+=== "TS"
+    ```typescript title="preorder_traversal_ii_compact.ts"
+    function preOrder(
+        root: TreeNode | null,
+        path: TreeNode[],
+        res: TreeNode[][]
+    ): void {
+        if (root === null) {
+            return;
+        }
+        // Attempt
+        path.push(root);
+        if (root.val === 7) {
+            // Record solution
+            res.push([...path]);
+        }
+        preOrder(root.left, path, res);
+        preOrder(root.right, path, res);
+        // Backtrack
+        path.pop();
+    }
+    ```
+=== "Dart"
+    ```dart title="preorder_traversal_ii_compact.dart"
+    void preOrder(
+      TreeNode? root,
+      List<TreeNode> path,
+      List<List<TreeNode>> res,
+    ) {
+      if (root == null) {
+        return;
+      }
+    
+      // Attempt
+      path.add(root);
+      if (root.val == 7) {
+        // Record solution
+        res.add(List.from(path));
+      }
+      preOrder(root.left, path, res);
+      preOrder(root.right, path, res);
+      // Backtrack
+      path.removeLast();
+    }
+    ```
+=== "Rust"
+    ```rust title="preorder_traversal_ii_compact.rs"
+    fn pre_order(
+        res: &mut Vec<Vec<Rc<RefCell<TreeNode>>>>,
+        path: &mut Vec<Rc<RefCell<TreeNode>>>,
+        root: Option<&Rc<RefCell<TreeNode>>>,
+    ) {
+        if root.is_none() {
+            return;
+        }
+        if let Some(node) = root {
+            // Attempt
+            path.push(node.clone());
+            if node.borrow().val == 7 {
+                // Record solution
+                res.push(path.clone());
+            }
+            pre_order(res, path, node.borrow().left.as_ref());
+            pre_order(res, path, node.borrow().right.as_ref());
+            // Backtrack
+            path.pop();
+        }
+    }
+    ```
+=== "C"
+    ```c title="preorder_traversal_ii_compact.c"
+    void preOrder(TreeNode *root) {
+        if (root == NULL) {
+            return;
+        }
+        // Attempt
+        path[pathSize++] = root;
+        if (root->val == 7) {
+            // Record solution
+            for (int i = 0; i < pathSize; ++i) {
+                res[resSize][i] = path[i];
+            }
+            resSize++;
+        }
+        preOrder(root->left);
+        preOrder(root->right);
+        // Backtrack
+        pathSize--;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="preorder_traversal_ii_compact.kt"
+    fun preOrder(root: TreeNode?) {
+        if (root == null) {
+            return
+        }
+        // Attempt
+        path!!.add(root)
+        if (root._val == 7) {
+            // Record solution
+            res!!.add(path!!.toMutableList())
+        }
+        preOrder(root.left)
+        preOrder(root.right)
+        // Backtrack
+        path!!.removeAt(path!!.size - 1)
+    }
+    ```
+=== "Ruby"
+    ```ruby title="preorder_traversal_ii_compact.rb"
+    ### Pre-order traversal: example 2 ###
+    def pre_order(root)
+      return unless root
+    
+      # Attempt
+      $path << root
+    
+      # Record solution
+      $res << $path.dup if root.val == 7
+    
+      pre_order(root.left)
+      pre_order(root.right)
+    
+      # Backtrack
+      $path.pop
+    ```
+
 
 Trong mỗi lần "thử", chúng tôi ghi lại đường dẫn bằng cách thêm nút hiện tại vào `path`; trước khi "quay lại", chúng ta cần xóa nút khỏi `path`, **để khôi phục trạng thái trước lần thử này**.
 
@@ -80,9 +506,269 @@ Trong cây nhị phân, tìm kiếm tất cả các nút có giá trị $7$ và 
 
 Để thỏa mãn các ràng buộc trên, **chúng ta cần thêm các thao tác cắt tỉa**: trong quá trình tìm kiếm, nếu gặp nút có giá trị $3$, chúng ta quay lại sớm và không tiếp tục tìm kiếm. Mã này như sau:
 
-```src
-[file]{preorder_traversal_iii_compact}-[class]{}-[func]{pre_order}
-```
+=== "Python"
+    ```python title="preorder_traversal_iii_compact.py"
+    def pre_order(root: TreeNode):
+        """Preorder traversal: Example 3"""
+        # Pruning
+        if root is None or root.val == 3:
+            return
+        # Attempt
+        path.append(root)
+        if root.val == 7:
+            # Record solution
+            res.append(list(path))
+        pre_order(root.left)
+        pre_order(root.right)
+        # Backtrack
+        path.pop()
+    ```
+=== "C++"
+    ```cpp title="preorder_traversal_iii_compact.cpp"
+    void preOrder(TreeNode *root) {
+        // Pruning
+        if (root == nullptr || root->val == 3) {
+            return;
+        }
+        // Attempt
+        path.push_back(root);
+        if (root->val == 7) {
+            // Record solution
+            res.push_back(path);
+        }
+        preOrder(root->left);
+        preOrder(root->right);
+        // Backtrack
+        path.pop_back();
+    }
+    ```
+=== "Java"
+    ```java title="preorder_traversal_iii_compact.java"
+    static void preOrder(TreeNode root) {
+            // Pruning
+            if (root == null || root.val == 3) {
+                return;
+            }
+            // Attempt
+            path.add(root);
+            if (root.val == 7) {
+                // Record solution
+                res.add(new ArrayList<>(path));
+            }
+            preOrder(root.left);
+            preOrder(root.right);
+            // Backtrack
+            path.remove(path.size() - 1);
+        }
+    ```
+=== "C#"
+    ```csharp title="preorder_traversal_iii_compact.cs"
+    void PreOrder(TreeNode? root) {
+            // Pruning
+            if (root == null || root.val == 3) {
+                return;
+            }
+            // Attempt
+            path.Add(root);
+            if (root.val == 7) {
+                // Record solution
+                res.Add(new List<TreeNode>(path));
+            }
+            PreOrder(root.left);
+            PreOrder(root.right);
+            // Backtrack
+            path.RemoveAt(path.Count - 1);
+        }
+    ```
+=== "Go"
+    ```go title="preorder_traversal_iii_compact.go"
+    func preOrderIII(root *TreeNode, res *[][]*TreeNode, path *[]*TreeNode) {
+    	// Pruning
+    	if root == nil || root.Val == 3 {
+    		return
+    	}
+    	// Attempt
+    	*path = append(*path, root)
+    	if root.Val.(int) == 7 {
+    		// Record solution
+    		*res = append(*res, append([]*TreeNode{}, *path...))
+    	}
+    	preOrderIII(root.Left, res, path)
+    	preOrderIII(root.Right, res, path)
+    	// Backtrack
+    	*path = (*path)[:len(*path)-1]
+    }
+    ```
+=== "Swift"
+    ```swift title="preorder_traversal_iii_compact.swift"
+    func preOrder(root: TreeNode?) {
+        // Pruning
+        guard let root = root, root.val != 3 else {
+            return
+        }
+        // Attempt
+        path.append(root)
+        if root.val == 7 {
+            // Record solution
+            res.append(path)
+        }
+        preOrder(root: root.left)
+        preOrder(root: root.right)
+        // Backtrack
+        path.removeLast()
+    }
+    ```
+=== "JS"
+    ```javascript title="preorder_traversal_iii_compact.js"
+    function preOrder(root, path, res) {
+        // Pruning
+        if (root === null || root.val === 3) {
+            return;
+        }
+        // Attempt
+        path.push(root);
+        if (root.val === 7) {
+            // Record solution
+            res.push([...path]);
+        }
+        preOrder(root.left, path, res);
+        preOrder(root.right, path, res);
+        // Backtrack
+        path.pop();
+    }
+    ```
+=== "TS"
+    ```typescript title="preorder_traversal_iii_compact.ts"
+    function preOrder(
+        root: TreeNode | null,
+        path: TreeNode[],
+        res: TreeNode[][]
+    ): void {
+        // Pruning
+        if (root === null || root.val === 3) {
+            return;
+        }
+        // Attempt
+        path.push(root);
+        if (root.val === 7) {
+            // Record solution
+            res.push([...path]);
+        }
+        preOrder(root.left, path, res);
+        preOrder(root.right, path, res);
+        // Backtrack
+        path.pop();
+    }
+    ```
+=== "Dart"
+    ```dart title="preorder_traversal_iii_compact.dart"
+    void preOrder(
+      TreeNode? root,
+      List<TreeNode> path,
+      List<List<TreeNode>> res,
+    ) {
+      if (root == null || root.val == 3) {
+        return;
+      }
+    
+      // Attempt
+      path.add(root);
+      if (root.val == 7) {
+        // Record solution
+        res.add(List.from(path));
+      }
+      preOrder(root.left, path, res);
+      preOrder(root.right, path, res);
+      // Backtrack
+      path.removeLast();
+    }
+    ```
+=== "Rust"
+    ```rust title="preorder_traversal_iii_compact.rs"
+    fn pre_order(
+        res: &mut Vec<Vec<Rc<RefCell<TreeNode>>>>,
+        path: &mut Vec<Rc<RefCell<TreeNode>>>,
+        root: Option<&Rc<RefCell<TreeNode>>>,
+    ) {
+        // Pruning
+        if root.is_none() || root.as_ref().unwrap().borrow().val == 3 {
+            return;
+        }
+        if let Some(node) = root {
+            // Attempt
+            path.push(node.clone());
+            if node.borrow().val == 7 {
+                // Record solution
+                res.push(path.clone());
+            }
+            pre_order(res, path, node.borrow().left.as_ref());
+            pre_order(res, path, node.borrow().right.as_ref());
+            // Backtrack
+            path.pop();
+        }
+    }
+    ```
+=== "C"
+    ```c title="preorder_traversal_iii_compact.c"
+    void preOrder(TreeNode *root) {
+        // Pruning
+        if (root == NULL || root->val == 3) {
+            return;
+        }
+        // Attempt
+        path[pathSize++] = root;
+        if (root->val == 7) {
+            // Record solution
+            for (int i = 0; i < pathSize; i++) {
+                res[resSize][i] = path[i];
+            }
+            resSize++;
+        }
+        preOrder(root->left);
+        preOrder(root->right);
+        // Backtrack
+        pathSize--;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="preorder_traversal_iii_compact.kt"
+    fun preOrder(root: TreeNode?) {
+        // Pruning
+        if (root == null || root._val == 3) {
+            return
+        }
+        // Attempt
+        path!!.add(root)
+        if (root._val == 7) {
+            // Record solution
+            res!!.add(path!!.toMutableList())
+        }
+        preOrder(root.left)
+        preOrder(root.right)
+        // Backtrack
+        path!!.removeAt(path!!.size - 1)
+    }
+    ```
+=== "Ruby"
+    ```ruby title="preorder_traversal_iii_compact.rb"
+    ### Pre-order traversal: example 3 ###
+    def pre_order(root)
+      # Pruning
+      return if !root || root.val == 3
+    
+      # Attempt
+      $path.append(root)
+    
+      # Record solution
+      $res << $path.dup if root.val == 7
+    
+      pre_order(root.left)
+      pre_order(root.right)
+    
+      # Backtrack
+      $path.pop
+    ```
+
 
 "Cắt tỉa" là một thuật ngữ sống động. Như được hiển thị trong hình dưới đây, trong quá trình tìm kiếm, **chúng tôi "cắt tỉa" các nhánh tìm kiếm không thỏa mãn các ràng buộc**, tránh nhiều nỗ lực vô nghĩa và do đó cải thiện hiệu quả tìm kiếm.
 
@@ -430,9 +1116,301 @@ Trong mã khung sau đây, `state` thể hiện trạng thái hiện tại của
 
 Tiếp theo, chúng ta giải Ví dụ 3 dựa trên mã khung. Trạng thái `state` là đường dẫn truyền tải nút, các lựa chọn `lựa chọn` là các nút con trái và phải của nút hiện tại và kết quả `res` là danh sách các đường dẫn:
 
-```src
-[file]{preorder_traversal_iii_template}-[class]{}-[func]{backtrack}
-```
+=== "Python"
+    ```python title="preorder_traversal_iii_template.py"
+    def backtrack(
+        state: list[TreeNode], choices: list[TreeNode], res: list[list[TreeNode]]
+    ```
+=== "C++"
+    ```cpp title="preorder_traversal_iii_template.cpp"
+    void backtrack(vector<TreeNode *> &state, vector<TreeNode *> &choices, vector<vector<TreeNode *>> &res) {
+        // Check if it is a solution
+        if (isSolution(state)) {
+            // Record solution
+            recordSolution(state, res);
+        }
+        // Traverse all choices
+        for (TreeNode *choice : choices) {
+            // Pruning: check if the choice is valid
+            if (isValid(state, choice)) {
+                // Attempt: make choice, update state
+                makeChoice(state, choice);
+                // Proceed to the next round of selection
+                vector<TreeNode *> nextChoices{choice->left, choice->right};
+                backtrack(state, nextChoices, res);
+                // Backtrack: undo choice, restore to previous state
+                undoChoice(state, choice);
+            }
+        }
+    }
+    ```
+=== "Java"
+    ```java title="preorder_traversal_iii_template.java"
+    static void backtrack(List<TreeNode> state, List<TreeNode> choices, List<List<TreeNode>> res) {
+            // Check if it is a solution
+            if (isSolution(state)) {
+                // Record solution
+                recordSolution(state, res);
+            }
+            // Traverse all choices
+            for (TreeNode choice : choices) {
+                // Pruning: check if the choice is valid
+                if (isValid(state, choice)) {
+                    // Attempt: make choice, update state
+                    makeChoice(state, choice);
+                    // Proceed to the next round of selection
+                    backtrack(state, Arrays.asList(choice.left, choice.right), res);
+                    // Backtrack: undo choice, restore to previous state
+                    undoChoice(state, choice);
+                }
+            }
+        }
+    ```
+=== "C#"
+    ```csharp title="preorder_traversal_iii_template.cs"
+    void Backtrack(List<TreeNode> state, List<TreeNode> choices, List<List<TreeNode>> res) {
+            // Check if it is a solution
+            if (IsSolution(state)) {
+                // Record solution
+                RecordSolution(state, res);
+            }
+            // Traverse all choices
+            foreach (TreeNode choice in choices) {
+                // Pruning: check if the choice is valid
+                if (IsValid(state, choice)) {
+                    // Attempt: make choice, update state
+                    MakeChoice(state, choice);
+                    // Proceed to the next round of selection
+                    Backtrack(state, [choice.left!, choice.right!], res);
+                    // Backtrack: undo choice, restore to previous state
+                    UndoChoice(state, choice);
+                }
+            }
+        }
+    ```
+=== "Go"
+    ```go title="preorder_traversal_iii_template.go"
+    func backtrackIII(state *[]*TreeNode, choices *[]*TreeNode, res *[][]*TreeNode) {
+    	// Check if it is a solution
+    	if isSolution(state) {
+    		// Record solution
+    		recordSolution(state, res)
+    	}
+    	// Traverse all choices
+    	for _, choice := range *choices {
+    		// Pruning: check if the choice is valid
+    		if isValid(state, choice) {
+    			// Attempt: make choice, update state
+    			makeChoice(state, choice)
+    			// Proceed to the next round of selection
+    			temp := make([]*TreeNode, 0)
+    			temp = append(temp, choice.Left, choice.Right)
+    			backtrackIII(state, &temp, res)
+    			// Backtrack: undo choice, restore to previous state
+    			undoChoice(state, choice)
+    		}
+    	}
+    }
+    ```
+=== "Swift"
+    ```swift title="preorder_traversal_iii_template.swift"
+    func backtrack(state: inout [TreeNode], choices: [TreeNode], res: inout [[TreeNode]]) {
+        // Check if it is a solution
+        if isSolution(state: state) {
+            recordSolution(state: state, res: &res)
+        }
+        // Traverse all choices
+        for choice in choices {
+            // Pruning: check if the choice is valid
+            if isValid(state: state, choice: choice) {
+                // Attempt: make choice, update state
+                makeChoice(state: &state, choice: choice)
+                // Proceed to the next round of selection
+                backtrack(state: &state, choices: [choice.left, choice.right].compactMap { $0 }, res: &res)
+                // Backtrack: undo choice, restore to previous state
+                undoChoice(state: &state, choice: choice)
+            }
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="preorder_traversal_iii_template.js"
+    function backtrack(state, choices, res) {
+        // Check if it is a solution
+        if (isSolution(state)) {
+            // Record solution
+            recordSolution(state, res);
+        }
+        // Traverse all choices
+        for (const choice of choices) {
+            // Pruning: check if the choice is valid
+            if (isValid(state, choice)) {
+                // Attempt: make choice, update state
+                makeChoice(state, choice);
+                // Proceed to the next round of selection
+                backtrack(state, [choice.left, choice.right], res);
+                // Backtrack: undo choice, restore to previous state
+                undoChoice(state);
+            }
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="preorder_traversal_iii_template.ts"
+    function backtrack(
+        state: TreeNode[],
+        choices: TreeNode[],
+        res: TreeNode[][]
+    ): void {
+        // Check if it is a solution
+        if (isSolution(state)) {
+            // Record solution
+            recordSolution(state, res);
+        }
+        // Traverse all choices
+        for (const choice of choices) {
+            // Pruning: check if the choice is valid
+            if (isValid(state, choice)) {
+                // Attempt: make choice, update state
+                makeChoice(state, choice);
+                // Proceed to the next round of selection
+                backtrack(state, [choice.left, choice.right], res);
+                // Backtrack: undo choice, restore to previous state
+                undoChoice(state);
+            }
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="preorder_traversal_iii_template.dart"
+    void backtrack(
+      List<TreeNode> state,
+      List<TreeNode?> choices,
+      List<List<TreeNode>> res,
+    ) {
+      // Check if it is a solution
+      if (isSolution(state)) {
+        // Record solution
+        recordSolution(state, res);
+      }
+      // Traverse all choices
+      for (TreeNode? choice in choices) {
+        // Pruning: check if the choice is valid
+        if (isValid(state, choice)) {
+          // Attempt: make choice, update state
+          makeChoice(state, choice);
+          // Proceed to the next round of selection
+          backtrack(state, [choice!.left, choice.right], res);
+          // Backtrack: undo choice, restore to previous state
+          undoChoice(state, choice);
+        }
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="preorder_traversal_iii_template.rs"
+    fn backtrack(
+        state: &mut Vec<Rc<RefCell<TreeNode>>>,
+        choices: &Vec<Option<&Rc<RefCell<TreeNode>>>>,
+        res: &mut Vec<Vec<Rc<RefCell<TreeNode>>>>,
+    ) {
+        // Check if it is a solution
+        if is_solution(state) {
+            // Record solution
+            record_solution(state, res);
+        }
+        // Traverse all choices
+        for &choice in choices.iter() {
+            // Pruning: check if the choice is valid
+            if is_valid(state, choice) {
+                // Attempt: make choice, update state
+                make_choice(state, choice.unwrap().clone());
+                // Proceed to the next round of selection
+                backtrack(
+                    state,
+                    &vec![
+                        choice.unwrap().borrow().left.as_ref(),
+                        choice.unwrap().borrow().right.as_ref(),
+                    ],
+                    res,
+                );
+                // Backtrack: undo choice, restore to previous state
+                undo_choice(state, choice.unwrap().clone());
+            }
+        }
+    }
+    ```
+=== "C"
+    ```c title="preorder_traversal_iii_template.c"
+    void backtrack(TreeNode *choices[2]) {
+        // Check if it is a solution
+        if (isSolution()) {
+            // Record solution
+            recordSolution();
+        }
+        // Traverse all choices
+        for (int i = 0; i < 2; i++) {
+            TreeNode *choice = choices[i];
+            // Pruning: check if the choice is valid
+            if (isValid(choice)) {
+                // Attempt: make choice, update state
+                makeChoice(choice);
+                // Proceed to the next round of selection
+                TreeNode *nextChoices[2] = {choice->left, choice->right};
+                backtrack(nextChoices);
+                // Backtrack: undo choice, restore to previous state
+                undoChoice();
+            }
+        }
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="preorder_traversal_iii_template.kt"
+    fun backtrack(
+        state: MutableList<TreeNode?>,
+        choices: MutableList<TreeNode?>,
+        res: MutableList<MutableList<TreeNode?>?>
+    ) {
+        // Check if it is a solution
+        if (isSolution(state)) {
+            // Record solution
+            recordSolution(state, res)
+        }
+        // Traverse all choices
+        for (choice in choices) {
+            // Pruning: check if the choice is valid
+            if (isValid(state, choice)) {
+                // Attempt: make choice, update state
+                makeChoice(state, choice)
+                // Proceed to the next round of selection
+                backtrack(state, mutableListOf(choice!!.left, choice.right), res)
+                // Backtrack: undo choice, restore to previous state
+                undoChoice(state, choice)
+            }
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="preorder_traversal_iii_template.rb"
+    ### Backtracking: example 3 ###
+    def backtrack(state, choices, res)
+      # Check if it is a solution
+      record_solution(state, res) if is_solution?(state)
+    
+      # Traverse all choices
+      for choice in choices
+        # Pruning: check if the choice is valid
+        if is_valid?(state, choice)
+          # Attempt: make choice, update state
+          make_choice(state, choice)
+          # Proceed to the next round of selection
+          backtrack(state, [choice.left, choice.right], res)
+          # Backtrack: undo choice, restore to previous state
+          undo_choice(state, choice)
+        end
+      end
+    ```
+
 
 Theo báo cáo vấn đề, chúng ta nên tiếp tục tìm kiếm sau khi tìm thấy nút có giá trị $7$. **Vì vậy, chúng ta cần xóa câu lệnh `return` sau khi ghi lại giải pháp**. Hình dưới đây so sánh quá trình tìm kiếm có và không có câu lệnh `return`.
 

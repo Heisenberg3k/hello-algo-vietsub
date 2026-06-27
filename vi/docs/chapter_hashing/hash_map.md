@@ -561,9 +561,775 @@ Giả sử độ dài mảng là `capacity = 100` và thuật toán băm là `ha
 
 Đoạn mã sau thực hiện một bảng băm đơn giản. Ở đây, chúng tôi gói gọn `key` và `value` vào một lớp `Pair` để biểu thị một cặp khóa-giá trị.
 
-```src
-[file]{array_hash_map}-[class]{array_hash_map}-[func]{}
-```
+=== "Python"
+    ```python title="array_hash_map.py"
+    class ArrayHashMap:
+        """Hash table based on array implementation"""
+    
+        def __init__(self):
+            """Constructor"""
+            # Initialize array with 100 buckets
+            self.buckets: list[Pair | None] = [None] * 100
+    
+        def hash_func(self, key: int) -> int:
+            """Hash function"""
+            index = key % 100
+            return index
+    
+        def get(self, key: int) -> str | None:
+            """Query operation"""
+            index: int = self.hash_func(key)
+            pair: Pair = self.buckets[index]
+            if pair is None:
+                return None
+            return pair.val
+    
+        def put(self, key: int, val: str):
+            """Add and update operation"""
+            pair = Pair(key, val)
+            index: int = self.hash_func(key)
+            self.buckets[index] = pair
+    
+        def remove(self, key: int):
+            """Remove operation"""
+            index: int = self.hash_func(key)
+            # Set to None to represent removal
+            self.buckets[index] = None
+    
+        def entry_set(self) -> list[Pair]:
+            """Get all key-value pairs"""
+            result: list[Pair] = []
+            for pair in self.buckets:
+                if pair is not None:
+                    result.append(pair)
+            return result
+    
+        def key_set(self) -> list[int]:
+            """Get all keys"""
+            result = []
+            for pair in self.buckets:
+                if pair is not None:
+                    result.append(pair.key)
+            return result
+    
+        def value_set(self) -> list[str]:
+            """Get all values"""
+            result = []
+            for pair in self.buckets:
+                if pair is not None:
+                    result.append(pair.val)
+            return result
+    
+        def print(self):
+            """Print hash table"""
+            for pair in self.buckets:
+                if pair is not None:
+                    print(pair.key, "->", pair.val)
+    ```
+=== "C++"
+    ```cpp title="array_hash_map.cpp"
+    class ArrayHashMap {
+      private:
+        vector<Pair *> buckets;
+    
+      public:
+        ArrayHashMap() {
+            // Initialize array with 100 buckets
+            buckets = vector<Pair *>(100);
+        }
+    
+        ~ArrayHashMap() {
+            // Free memory
+            for (const auto &bucket : buckets) {
+                delete bucket;
+            }
+            buckets.clear();
+        }
+    
+        /* Hash function */
+        int hashFunc(int key) {
+            int index = key % 100;
+            return index;
+        }
+    
+        /* Query operation */
+        string get(int key) {
+            int index = hashFunc(key);
+            Pair *pair = buckets[index];
+            if (pair == nullptr)
+                return "";
+            return pair->val;
+        }
+    
+        /* Add operation */
+        void put(int key, string val) {
+            Pair *pair = new Pair(key, val);
+            int index = hashFunc(key);
+            buckets[index] = pair;
+        }
+    
+        /* Remove operation */
+        void remove(int key) {
+            int index = hashFunc(key);
+            // Free memory and set to nullptr
+            delete buckets[index];
+            buckets[index] = nullptr;
+        }
+    
+        /* Get all key-value pairs */
+        vector<Pair *> pairSet() {
+            vector<Pair *> pairSet;
+            for (Pair *pair : buckets) {
+                if (pair != nullptr) {
+                    pairSet.push_back(pair);
+                }
+            }
+            return pairSet;
+        }
+    
+        /* Get all keys */
+        vector<int> keySet() {
+            vector<int> keySet;
+            for (Pair *pair : buckets) {
+                if (pair != nullptr) {
+                    keySet.push_back(pair->key);
+                }
+            }
+            return keySet;
+        }
+    
+        /* Get all values */
+        vector<string> valueSet() {
+            vector<string> valueSet;
+            for (Pair *pair : buckets) {
+                if (pair != nullptr) {
+                    valueSet.push_back(pair->val);
+                }
+            }
+            return valueSet;
+        }
+    
+        /* Print hash table */
+        void print() {
+            for (Pair *kv : pairSet()) {
+                cout << kv->key << " -> " << kv->val << endl;
+            }
+        }
+    };
+    ```
+=== "Java"
+    ```java title="array_hash_map.java"
+    class ArrayHashMap {
+        private List<Pair> buckets;
+    
+        public ArrayHashMap() {
+            // Initialize array with 100 buckets
+            buckets = new ArrayList<>();
+            for (int i = 0; i < 100; i++) {
+                buckets.add(null);
+            }
+        }
+    
+        /* Hash function */
+        private int hashFunc(int key) {
+            int index = key % 100;
+            return index;
+        }
+    
+        /* Query operation */
+        public String get(int key) {
+            int index = hashFunc(key);
+            Pair pair = buckets.get(index);
+            if (pair == null)
+                return null;
+            return pair.val;
+        }
+    
+        /* Add operation */
+        public void put(int key, String val) {
+            Pair pair = new Pair(key, val);
+            int index = hashFunc(key);
+            buckets.set(index, pair);
+        }
+    
+        /* Remove operation */
+        public void remove(int key) {
+            int index = hashFunc(key);
+            // Set to null to represent deletion
+            buckets.set(index, null);
+        }
+    
+        /* Get all key-value pairs */
+        public List<Pair> pairSet() {
+            List<Pair> pairSet = new ArrayList<>();
+            for (Pair pair : buckets) {
+                if (pair != null)
+                    pairSet.add(pair);
+            }
+            return pairSet;
+        }
+    
+        /* Get all keys */
+        public List<Integer> keySet() {
+            List<Integer> keySet = new ArrayList<>();
+            for (Pair pair : buckets) {
+                if (pair != null)
+                    keySet.add(pair.key);
+            }
+            return keySet;
+        }
+    
+        /* Get all values */
+        public List<String> valueSet() {
+            List<String> valueSet = new ArrayList<>();
+            for (Pair pair : buckets) {
+                if (pair != null)
+                    valueSet.add(pair.val);
+            }
+            return valueSet;
+        }
+    
+        /* Print hash table */
+        public void print() {
+            for (Pair kv : pairSet()) {
+                System.out.println(kv.key + " -> " + kv.val);
+            }
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="array_hash_map.cs"
+    class ArrayHashMap {
+        List<Pair?> buckets;
+        public ArrayHashMap() {
+            // Initialize array with 100 buckets
+            buckets = [];
+            for (int i = 0; i < 100; i++) {
+                buckets.Add(null);
+            }
+        }
+    
+        /* Hash function */
+        int HashFunc(int key) {
+            int index = key % 100;
+            return index;
+        }
+    
+        /* Query operation */
+        public string? Get(int key) {
+            int index = HashFunc(key);
+            Pair? pair = buckets[index];
+            if (pair == null) return null;
+            return pair.val;
+        }
+    
+        /* Add operation */
+        public void Put(int key, string val) {
+            Pair pair = new(key, val);
+            int index = HashFunc(key);
+            buckets[index] = pair;
+        }
+    
+        /* Remove operation */
+        public void Remove(int key) {
+            int index = HashFunc(key);
+            // Set to null to represent deletion
+            buckets[index] = null;
+        }
+    
+        /* Get all key-value pairs */
+        public List<Pair> PairSet() {
+            List<Pair> pairSet = [];
+            foreach (Pair? pair in buckets) {
+                if (pair != null)
+                    pairSet.Add(pair);
+            }
+            return pairSet;
+        }
+    
+        /* Get all keys */
+        public List<int> KeySet() {
+            List<int> keySet = [];
+            foreach (Pair? pair in buckets) {
+                if (pair != null)
+                    keySet.Add(pair.key);
+            }
+            return keySet;
+        }
+    
+        /* Get all values */
+        public List<string> ValueSet() {
+            List<string> valueSet = [];
+            foreach (Pair? pair in buckets) {
+                if (pair != null)
+                    valueSet.Add(pair.val);
+            }
+            return valueSet;
+        }
+    
+        /* Print hash table */
+        public void Print() {
+            foreach (Pair kv in PairSet()) {
+                Console.WriteLine(kv.key + " -> " + kv.val);
+            }
+        }
+    }
+    ```
+=== "Go"
+    ```go title="array_hash_map.go"
+    type arrayHashMap struct {
+    	buckets []*pair
+    }
+    ```
+=== "Swift"
+    ```swift title="array_hash_map.swift"
+    class ArrayHashMap {
+        private var buckets: [Pair?]
+    
+        init() {
+            // Initialize array with 100 buckets
+            buckets = Array(repeating: nil, count: 100)
+        }
+    
+        /* Hash function */
+        private func hashFunc(key: Int) -> Int {
+            let index = key % 100
+            return index
+        }
+    
+        /* Query operation */
+        func get(key: Int) -> String? {
+            let index = hashFunc(key: key)
+            let pair = buckets[index]
+            return pair?.val
+        }
+    
+        /* Add operation */
+        func put(key: Int, val: String) {
+            let pair = Pair(key: key, val: val)
+            let index = hashFunc(key: key)
+            buckets[index] = pair
+        }
+    
+        /* Remove operation */
+        func remove(key: Int) {
+            let index = hashFunc(key: key)
+            // Set to nil to delete
+            buckets[index] = nil
+        }
+    
+        /* Get all key-value pairs */
+        func pairSet() -> [Pair] {
+            buckets.compactMap { $0 }
+        }
+    
+        /* Get all keys */
+        func keySet() -> [Int] {
+            buckets.compactMap { $0?.key }
+        }
+    
+        /* Get all values */
+        func valueSet() -> [String] {
+            buckets.compactMap { $0?.val }
+        }
+    
+        /* Print hash table */
+        func print() {
+            for pair in pairSet() {
+                Swift.print("\(pair.key) -> \(pair.val)")
+            }
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="array_hash_map.js"
+    class ArrayHashMap {
+        #buckets;
+        constructor() {
+            // Initialize array with 100 buckets
+            this.#buckets = new Array(100).fill(null);
+        }
+    
+        /* Hash function */
+        #hashFunc(key) {
+            return key % 100;
+        }
+    
+        /* Query operation */
+        get(key) {
+            let index = this.#hashFunc(key);
+            let pair = this.#buckets[index];
+            if (pair === null) return null;
+            return pair.val;
+        }
+    
+        /* Add operation */
+        set(key, val) {
+            let index = this.#hashFunc(key);
+            this.#buckets[index] = new Pair(key, val);
+        }
+    
+        /* Remove operation */
+        delete(key) {
+            let index = this.#hashFunc(key);
+            // Set to null to represent deletion
+            this.#buckets[index] = null;
+        }
+    
+        /* Get all key-value pairs */
+        entries() {
+            let arr = [];
+            for (let i = 0; i < this.#buckets.length; i++) {
+                if (this.#buckets[i]) {
+                    arr.push(this.#buckets[i]);
+                }
+            }
+            return arr;
+        }
+    
+        /* Get all keys */
+        keys() {
+            let arr = [];
+            for (let i = 0; i < this.#buckets.length; i++) {
+                if (this.#buckets[i]) {
+                    arr.push(this.#buckets[i].key);
+                }
+            }
+            return arr;
+        }
+    
+        /* Get all values */
+        values() {
+            let arr = [];
+            for (let i = 0; i < this.#buckets.length; i++) {
+                if (this.#buckets[i]) {
+                    arr.push(this.#buckets[i].val);
+                }
+            }
+            return arr;
+        }
+    
+        /* Print hash table */
+        print() {
+            let pairSet = this.entries();
+            for (const pair of pairSet) {
+                console.info(`${pair.key} -> ${pair.val}`);
+            }
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="array_hash_map.ts"
+    class ArrayHashMap {
+        private readonly buckets: (Pair | null)[];
+    
+        constructor() {
+            // Initialize array with 100 buckets
+            this.buckets = new Array(100).fill(null);
+        }
+    
+        /* Hash function */
+        private hashFunc(key: number): number {
+            return key % 100;
+        }
+    
+        /* Query operation */
+        public get(key: number): string | null {
+            let index = this.hashFunc(key);
+            let pair = this.buckets[index];
+            if (pair === null) return null;
+            return pair.val;
+        }
+    
+        /* Add operation */
+        public set(key: number, val: string) {
+            let index = this.hashFunc(key);
+            this.buckets[index] = new Pair(key, val);
+        }
+    
+        /* Remove operation */
+        public delete(key: number) {
+            let index = this.hashFunc(key);
+            // Set to null to represent deletion
+            this.buckets[index] = null;
+        }
+    
+        /* Get all key-value pairs */
+        public entries(): (Pair | null)[] {
+            let arr: (Pair | null)[] = [];
+            for (let i = 0; i < this.buckets.length; i++) {
+                if (this.buckets[i]) {
+                    arr.push(this.buckets[i]);
+                }
+            }
+            return arr;
+        }
+    
+        /* Get all keys */
+        public keys(): (number | undefined)[] {
+            let arr: (number | undefined)[] = [];
+            for (let i = 0; i < this.buckets.length; i++) {
+                if (this.buckets[i]) {
+                    arr.push(this.buckets[i].key);
+                }
+            }
+            return arr;
+        }
+    
+        /* Get all values */
+        public values(): (string | undefined)[] {
+            let arr: (string | undefined)[] = [];
+            for (let i = 0; i < this.buckets.length; i++) {
+                if (this.buckets[i]) {
+                    arr.push(this.buckets[i].val);
+                }
+            }
+            return arr;
+        }
+    
+        /* Print hash table */
+        public print() {
+            let pairSet = this.entries();
+            for (const pair of pairSet) {
+                console.info(`${pair.key} -> ${pair.val}`);
+            }
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="array_hash_map.dart"
+    class ArrayHashMap {
+      late List<Pair?> _buckets;
+    
+      ArrayHashMap() {
+        // Initialize array with 100 buckets
+        _buckets = List.filled(100, null);
+      }
+    
+      /* Hash function */
+      int _hashFunc(int key) {
+        final int index = key % 100;
+        return index;
+      }
+    
+      /* Query operation */
+      String? get(int key) {
+        final int index = _hashFunc(key);
+        final Pair? pair = _buckets[index];
+        if (pair == null) {
+          return null;
+        }
+        return pair.val;
+      }
+    
+      /* Add operation */
+      void put(int key, String val) {
+        final Pair pair = Pair(key, val);
+        final int index = _hashFunc(key);
+        _buckets[index] = pair;
+      }
+    
+      /* Remove operation */
+      void remove(int key) {
+        final int index = _hashFunc(key);
+        _buckets[index] = null;
+      }
+    
+      /* Get all key-value pairs */
+      List<Pair> pairSet() {
+        List<Pair> pairSet = [];
+        for (final Pair? pair in _buckets) {
+          if (pair != null) {
+            pairSet.add(pair);
+          }
+        }
+        return pairSet;
+      }
+    
+      /* Get all keys */
+      List<int> keySet() {
+        List<int> keySet = [];
+        for (final Pair? pair in _buckets) {
+          if (pair != null) {
+            keySet.add(pair.key);
+          }
+        }
+        return keySet;
+      }
+    
+      /* Get all values */
+      List<String> values() {
+        List<String> valueSet = [];
+        for (final Pair? pair in _buckets) {
+          if (pair != null) {
+            valueSet.add(pair.val);
+          }
+        }
+        return valueSet;
+      }
+    
+      /* Print hash table */
+      void printHashMap() {
+        for (final Pair kv in pairSet()) {
+          print("${kv.key} -> ${kv.val}");
+        }
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="array_hash_map.rs"
+    pub struct ArrayHashMap {
+        buckets: Vec<Option<Pair>>,
+    }
+    ```
+=== "C"
+    ```c title="array_hash_map.c"
+    ArrayHashMap *newArrayHashMap() {
+        ArrayHashMap *hmap = malloc(sizeof(ArrayHashMap));
+        for (int i=0; i < MAX_SIZE; i++) {
+            hmap->buckets[i] = NULL;
+        }
+        return hmap;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="array_hash_map.kt"
+    class ArrayHashMap {
+        // Initialize array with 100 buckets
+        private val buckets = arrayOfNulls<Pair>(100)
+    
+        /* Hash function */
+        fun hashFunc(key: Int): Int {
+            val index = key % 100
+            return index
+        }
+    
+        /* Query operation */
+        fun get(key: Int): String? {
+            val index = hashFunc(key)
+            val pair = buckets[index] ?: return null
+            return pair._val
+        }
+    
+        /* Add operation */
+        fun put(key: Int, _val: String) {
+            val pair = Pair(key, _val)
+            val index = hashFunc(key)
+            buckets[index] = pair
+        }
+    
+        /* Remove operation */
+        fun remove(key: Int) {
+            val index = hashFunc(key)
+            // Set to null to represent deletion
+            buckets[index] = null
+        }
+    
+        /* Get all key-value pairs */
+        fun pairSet(): MutableList<Pair> {
+            val pairSet = mutableListOf<Pair>()
+            for (pair in buckets) {
+                if (pair != null)
+                    pairSet.add(pair)
+            }
+            return pairSet
+        }
+    
+        /* Get all keys */
+        fun keySet(): MutableList<Int> {
+            val keySet = mutableListOf<Int>()
+            for (pair in buckets) {
+                if (pair != null)
+                    keySet.add(pair.key)
+            }
+            return keySet
+        }
+    
+        /* Get all values */
+        fun valueSet(): MutableList<String> {
+            val valueSet = mutableListOf<String>()
+            for (pair in buckets) {
+                if (pair != null)
+                    valueSet.add(pair._val)
+            }
+            return valueSet
+        }
+    
+        /* Print hash table */
+        fun print() {
+            for (kv in pairSet()) {
+                val key = kv.key
+                val _val = kv._val
+                println("$key -> $_val")
+            }
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="array_hash_map.rb"
+    ### Hash map based on array ###
+    class ArrayHashMap
+      ### Constructor ###
+      def initialize
+        # Initialize array with 100 buckets
+        @buckets = Array.new(100)
+      end
+    
+      ### Hash function ###
+      def hash_func(key)
+        index = key % 100
+      end
+    
+      ### Query operation ###
+      def get(key)
+        index = hash_func(key)
+        pair = @buckets[index]
+    
+        return if pair.nil?
+        pair.val
+      end
+    
+      ### Add operation ###
+      def put(key, val)
+        pair = Pair.new(key, val)
+        index = hash_func(key)
+        @buckets[index] = pair
+      end
+    
+      ### Delete operation ###
+      def remove(key)
+        index = hash_func(key)
+        # Set to nil to delete
+        @buckets[index] = nil
+      end
+    
+      ### Get all key-value pairs ###
+      def entry_set
+        result = []
+        @buckets.each { |pair| result << pair unless pair.nil? }
+        result
+      end
+    
+      ### Get all keys ###
+      def key_set
+        result = []
+        @buckets.each { |pair| result << pair.key unless pair.nil? }
+        result
+      end
+    
+      ### Get all values ###
+      def value_set
+        result = []
+        @buckets.each { |pair| result << pair.val unless pair.nil? }
+        result
+      end
+    
+      ### Print hash table ###
+      def print
+        @buckets.each { |pair| puts "#{pair.key} -> #{pair.val}" unless pair.nil? }
+      end
+    ```
+
 
 ## Va chạm băm và thay đổi kích thước
 

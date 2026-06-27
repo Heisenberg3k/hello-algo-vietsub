@@ -428,17 +428,192 @@ Như được hiển thị trong hình bên dưới, với chỉ số $i$, chỉ
 
 Chúng ta có thể gói gọn công thức ánh xạ chỉ mục thành các hàm để thuận tiện cho việc sử dụng sau này:
 
-```src
-[file]{my_heap}-[class]{max_heap}-[func]{parent}
-```
+=== "Python"
+    ```python title="my_heap.py"
+    # Heapify all nodes except leaf nodes
+            for i in range(self.parent(self.size() - 1), -1, -1):
+                self.sift_down(i)
+    ```
+=== "C++"
+    ```cpp title="my_heap.cpp"
+    int parent(int i) {
+            return (i - 1) / 2; // Floor division
+        }
+    ```
+=== "Java"
+    ```java title="my_heap.java"
+    // Heapify all nodes except leaf nodes
+            for (int i = parent(size() - 1); i >= 0; i--) {
+                siftDown(i);
+            }
+    ```
+=== "C#"
+    ```csharp title="my_heap.cs"
+    // Heapify all nodes except leaf nodes
+            var size = Parent(this.Size() - 1);
+            for (int i = size; i >= 0; i--) {
+                SiftDown(i);
+            }
+    ```
+=== "Go"
+    ```go title="my_heap.go"
+    for i := h.parent(len(h.data) - 1); i >= 0; i-- {
+    		// Heapify all nodes except leaf nodes
+    		h.siftDown(i)
+    	}
+    ```
+=== "Swift"
+    ```swift title="my_heap.swift"
+    // Heapify all nodes except leaf nodes
+            for i in (0 ... parent(i: size() - 1)).reversed() {
+                siftDown(i: i)
+            }
+    ```
+=== "JS"
+    ```javascript title="my_heap.js"
+    // Heapify all nodes except leaf nodes
+            for (let i = this.#parent(this.size() - 1); i >= 0; i--) {
+                this.#siftDown(i);
+            }
+    ```
+=== "TS"
+    ```typescript title="my_heap.ts"
+    // Heapify all nodes except leaf nodes
+            for (let i = this.parent(this.size() - 1); i >= 0; i--) {
+                this.siftDown(i);
+            }
+    ```
+=== "Dart"
+    ```dart title="my_heap.dart"
+    // Heapify all nodes except leaf nodes
+        for (int i = _parent(size() - 1); i >= 0; i--) {
+          siftDown(i);
+        }
+    ```
+=== "Rust"
+    ```rust title="my_heap.rs"
+    // Heapify all nodes except leaf nodes
+            for i in (0..=Self::parent(heap.size() - 1)).rev() {
+                heap.sift_down(i);
+            }
+    ```
+=== "C"
+    ```c title="my_heap.c"
+    int parent(MaxHeap *maxHeap, int i);
+    
+    /* Constructor, build heap from slice */
+    MaxHeap *newMaxHeap(int nums[], int size) {
+        // Push all elements to heap
+        MaxHeap *maxHeap = (MaxHeap *)malloc(sizeof(MaxHeap));
+        maxHeap->size = size;
+        memcpy(maxHeap->data, nums, size * sizeof(int));
+        for (int i = parent(maxHeap, size - 1); i >= 0; i--) {
+            // Heapify all nodes except leaf nodes
+            siftDown(maxHeap, i);
+        }
+        return maxHeap;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="my_heap.kt"
+    // Heapify all nodes except leaf nodes
+            for (i in parent(size() - 1) downTo 0) {
+                siftDown(i)
+            }
+    ```
+=== "Ruby"
+    ```ruby title="my_heap.rb"
+    # Add list elements to heap as is
+        @max_heap = nums
+        # Heapify all nodes except leaf nodes
+        parent(size - 1).downto(0) do |i|
+          sift_down(i)
+    ```
+
 
 ### Truy cập phần tử hàng đầu của Heap
 
 Phần tử trên cùng của heap là nút gốc của cây nhị phân, cũng là phần tử đầu tiên của danh sách:
 
-```src
-[file]{my_heap}-[class]{max_heap}-[func]{peek}
-```
+=== "Python"
+    ```python title="my_heap.py"
+    def peek(self) -> int:
+            """Access top element"""
+            return self.max_heap[0]
+    ```
+=== "C++"
+    ```cpp title="my_heap.cpp"
+    int peek() {
+            return maxHeap[0];
+        }
+    ```
+=== "Java"
+    ```java title="my_heap.java"
+    public int peek() {
+            return maxHeap.get(0);
+        }
+    ```
+=== "C#"
+    ```csharp title="my_heap.cs"
+    public int Peek() {
+            return maxHeap[0];
+        }
+    ```
+=== "Go"
+    ```go title="my_heap.go"
+    func (h *maxHeap) peek() any {
+    	return h.data[0]
+    }
+    ```
+=== "Swift"
+    ```swift title="my_heap.swift"
+    func peek() -> Int {
+            maxHeap[0]
+        }
+    ```
+=== "JS"
+    ```javascript title="my_heap.js"
+    peek() {
+            return this.#maxHeap[0];
+        }
+    ```
+=== "TS"
+    ```typescript title="my_heap.ts"
+    public peek(): number {
+            return this.maxHeap[0];
+        }
+    ```
+=== "Dart"
+    ```dart title="my_heap.dart"
+    int peek() {
+        return _maxHeap[0];
+      }
+    ```
+=== "Rust"
+    ```rust title="my_heap.rs"
+    fn peek(&self) -> Option<i32> {
+            self.max_heap.first().copied()
+        }
+    ```
+=== "C"
+    ```c title="my_heap.c"
+    int peek(MaxHeap *maxHeap) {
+        return maxHeap->data[0];
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="my_heap.kt"
+    fun peek(): Int {
+            return maxHeap[0]
+        }
+    ```
+=== "Ruby"
+    ```ruby title="my_heap.rb"
+    ### Access heap top element ###
+      def peek
+        @max_heap[0]
+    ```
+
 
 ### Chèn một phần tử vào Heap
 
@@ -475,9 +650,134 @@ Bắt đầu từ nút được chèn, **thực hiện heapify từ dưới lên
 
 Với tổng số nút $n$, chiều cao của cây là $O(\log n)$. Do đó, số lần lặp vòng lặp trong thao tác heapify nhiều nhất là $O(\log n)$, **làm cho thao tác chèn phần tử trở nên phức tạp $O(\log n)$**. Mã này như sau:
 
-```src
-[file]{my_heap}-[class]{max_heap}-[func]{sift_up}
-```
+=== "Python"
+    ```python title="my_heap.py"
+    # Heapify from bottom to top
+            self.sift_up(self.size() - 1)
+    ```
+=== "C++"
+    ```cpp title="my_heap.cpp"
+    void siftUp(int i) {
+            while (true) {
+                // Get parent node of node i
+                int p = parent(i);
+                // When "crossing root node" or "node needs no repair", end heapify
+                if (p < 0 || maxHeap[i] <= maxHeap[p])
+                    break;
+                // Swap two nodes
+                swap(maxHeap[i], maxHeap[p]);
+                // Loop upward heapify
+                i = p;
+            }
+        }
+    ```
+=== "Java"
+    ```java title="my_heap.java"
+    // Heapify from bottom to top
+            siftUp(size() - 1);
+        }
+    
+        /* Starting from node i, heapify from bottom to top */
+        private void siftUp(int i) {
+    ```
+=== "C#"
+    ```csharp title="my_heap.cs"
+    // Heapify from bottom to top
+            SiftUp(Size() - 1);
+        }
+    
+        /* Get heap size */
+        public int Size() {
+    ```
+=== "Go"
+    ```go title="my_heap.go"
+    // Heapify from bottom to top
+    	h.siftUp(len(h.data) - 1)
+    }
+    
+    /* Starting from node i, heapify from bottom to top */
+    func (h *maxHeap) siftUp(i int) {
+    ```
+=== "Swift"
+    ```swift title="my_heap.swift"
+    // Heapify from bottom to top
+            siftUp(i: size() - 1)
+        }
+    
+        /* Starting from node i, heapify from bottom to top */
+        private func siftUp(i: Int) {
+    ```
+=== "JS"
+    ```javascript title="my_heap.js"
+    // Heapify from bottom to top
+            this.#siftUp(this.size() - 1);
+        }
+    
+        /* Starting from node i, heapify from bottom to top */
+        #siftUp(i) {
+    ```
+=== "TS"
+    ```typescript title="my_heap.ts"
+    // Heapify from bottom to top
+            this.siftUp(this.size() - 1);
+        }
+    
+        /* Starting from node i, heapify from bottom to top */
+        private siftUp(i: number): void {
+    ```
+=== "Dart"
+    ```dart title="my_heap.dart"
+    // Heapify from bottom to top
+        siftUp(size() - 1);
+      }
+    
+      /* Starting from node i, heapify from bottom to top */
+      void siftUp(int i) {
+    ```
+=== "Rust"
+    ```rust title="my_heap.rs"
+    // Heapify from bottom to top
+            self.sift_up(self.size() - 1);
+        }
+    
+        /* Starting from node i, heapify from bottom to top */
+        fn sift_up(&mut self, mut i: usize) {
+    ```
+=== "C"
+    ```c title="my_heap.c"
+    void siftUp(MaxHeap *maxHeap, int i);
+    int parent(MaxHeap *maxHeap, int i);
+    
+    /* Constructor, build heap from slice */
+    MaxHeap *newMaxHeap(int nums[], int size) {
+        // Push all elements to heap
+        MaxHeap *maxHeap = (MaxHeap *)malloc(sizeof(MaxHeap));
+        maxHeap->size = size;
+        memcpy(maxHeap->data, nums, size * sizeof(int));
+        for (int i = parent(maxHeap, size - 1); i >= 0; i--) {
+            // Heapify all nodes except leaf nodes
+            siftDown(maxHeap, i);
+        }
+        return maxHeap;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="my_heap.kt"
+    // Heapify from bottom to top
+            siftUp(size() - 1)
+        }
+    
+        /* Starting from node i, heapify from bottom to top */
+        private fun siftUp(it: Int) {
+    ```
+=== "Ruby"
+    ```ruby title="my_heap.rb"
+    # Add node
+        @max_heap << val
+        # Heapify from bottom to top
+        sift_up(size - 1)
+    ```
+
 
 ### Xóa phần tử trên cùng của Heap
 
@@ -521,9 +821,138 @@ Như được hiển thị trong hình bên dưới, **hướng của "heapify t
 
 Tương tự như thao tác chèn phần tử, độ phức tạp về thời gian của thao tác loại bỏ phần tử trên cùng của heap cũng là $O(\log n)$. Mã này như sau:
 
-```src
-[file]{my_heap}-[class]{max_heap}-[func]{sift_down}
-```
+=== "Python"
+    ```python title="my_heap.py"
+    self.sift_down(i)
+    ```
+=== "C++"
+    ```cpp title="my_heap.cpp"
+    void siftDown(int i) {
+            while (true) {
+                // If node i is largest or indices l, r are out of bounds, no need to continue heapify, break
+                int l = left(i), r = right(i), ma = i;
+                if (l < size() && maxHeap[l] > maxHeap[ma])
+                    ma = l;
+                if (r < size() && maxHeap[r] > maxHeap[ma])
+                    ma = r;
+                // Swap two nodes
+                if (ma == i)
+                    break;
+                swap(maxHeap[i], maxHeap[ma]);
+                // Loop downwards heapification
+                i = ma;
+            }
+        }
+    ```
+=== "Java"
+    ```java title="my_heap.java"
+    siftDown(i);
+            }
+        }
+    
+        /* Get index of left child node */
+        private int left(int i) {
+    ```
+=== "C#"
+    ```csharp title="my_heap.cs"
+    SiftDown(i);
+            }
+        }
+    
+        /* Get index of left child node */
+        int Left(int i) {
+    ```
+=== "Go"
+    ```go title="my_heap.go"
+    // Heapify all nodes except leaf nodes
+    		h.siftDown(i)
+    	}
+    	return h
+    }
+    
+    /* Get index of left child node */
+    func (h *maxHeap) left(i int) int {
+    ```
+=== "Swift"
+    ```swift title="my_heap.swift"
+    siftDown(i: i)
+            }
+        }
+    
+        /* Get index of left child node */
+        private func left(i: Int) -> Int {
+    ```
+=== "JS"
+    ```javascript title="my_heap.js"
+    this.#siftDown(i);
+            }
+        }
+    
+        /* Get index of left child node */
+        #left(i) {
+    ```
+=== "TS"
+    ```typescript title="my_heap.ts"
+    this.siftDown(i);
+            }
+        }
+    
+        /* Get index of left child node */
+        private left(i: number): number {
+    ```
+=== "Dart"
+    ```dart title="my_heap.dart"
+    siftDown(i);
+        }
+      }
+    
+      /* Get index of left child node */
+      int _left(int i) {
+    ```
+=== "Rust"
+    ```rust title="my_heap.rs"
+    heap.sift_down(i);
+            }
+            heap
+        }
+    
+        /* Get index of left child node */
+        fn left(i: usize) -> usize {
+    ```
+=== "C"
+    ```c title="my_heap.c"
+    // Function declaration
+    void siftDown(MaxHeap *maxHeap, int i);
+    void siftUp(MaxHeap *maxHeap, int i);
+    int parent(MaxHeap *maxHeap, int i);
+    
+    /* Constructor, build heap from slice */
+    MaxHeap *newMaxHeap(int nums[], int size) {
+        // Push all elements to heap
+        MaxHeap *maxHeap = (MaxHeap *)malloc(sizeof(MaxHeap));
+        maxHeap->size = size;
+        memcpy(maxHeap->data, nums, size * sizeof(int));
+        for (int i = parent(maxHeap, size - 1); i >= 0; i--) {
+            // Heapify all nodes except leaf nodes
+            siftDown(maxHeap, i);
+        }
+        return maxHeap;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="my_heap.kt"
+    siftDown(i)
+            }
+        }
+    
+        /* Get index of left child node */
+        private fun left(i: Int): Int {
+    ```
+=== "Ruby"
+    ```ruby title="my_heap.rb"
+    sift_down(i)
+    ```
+
 
 ## Ứng dụng phổ biến của Heap
 

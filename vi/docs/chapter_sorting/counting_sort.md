@@ -14,9 +14,312 @@ Hãy bắt đầu với một ví dụ đơn giản. Cho một mảng `nums` có
 
 Mã này như sau:
 
-```src
-[file]{counting_sort}-[class]{}-[func]{counting_sort_naive}
-```
+=== "Python"
+    ```python title="counting_sort.py"
+    def counting_sort_naive(nums: list[int]):
+        """Counting sort"""
+        # Simple implementation, cannot be used for sorting objects
+        # 1. Count the maximum element m in the array
+        m = 0
+        for num in nums:
+            m = max(m, num)
+        # 2. Count the occurrence of each number
+        # counter[num] represents the occurrence of num
+        counter = [0] * (m + 1)
+        for num in nums:
+            counter[num] += 1
+        # 3. Traverse counter, filling each element back into the original array nums
+        i = 0
+        for num in range(m + 1):
+            for _ in range(counter[num]):
+                nums[i] = num
+                i += 1
+    ```
+=== "C++"
+    ```cpp title="counting_sort.cpp"
+    // Simple implementation, cannot be used for sorting objects
+    void countingSortNaive(vector<int> &nums) {
+        // 1. Count the maximum element m in the array
+        int m = 0;
+        for (int num : nums) {
+            m = max(m, num);
+        }
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        vector<int> counter(m + 1, 0);
+        for (int num : nums) {
+            counter[num]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        int i = 0;
+        for (int num = 0; num < m + 1; num++) {
+            for (int j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+    }
+    ```
+=== "Java"
+    ```java title="counting_sort.java"
+    // Simple implementation, cannot be used for sorting objects
+        static void countingSortNaive(int[] nums) {
+            // 1. Count the maximum element m in the array
+            int m = 0;
+            for (int num : nums) {
+                m = Math.max(m, num);
+            }
+            // 2. Count the occurrence of each number
+            // counter[num] represents the occurrence of num
+            int[] counter = new int[m + 1];
+            for (int num : nums) {
+                counter[num]++;
+            }
+            // 3. Traverse counter, filling each element back into the original array nums
+            int i = 0;
+            for (int num = 0; num < m + 1; num++) {
+                for (int j = 0; j < counter[num]; j++, i++) {
+                    nums[i] = num;
+                }
+            }
+        }
+    ```
+=== "C#"
+    ```csharp title="counting_sort.cs"
+    // Simple implementation, cannot be used for sorting objects
+        void CountingSortNaive(int[] nums) {
+            // 1. Count the maximum element m in the array
+            int m = 0;
+            foreach (int num in nums) {
+                m = Math.Max(m, num);
+            }
+            // 2. Count the occurrence of each number
+            // counter[num] represents the occurrence of num
+            int[] counter = new int[m + 1];
+            foreach (int num in nums) {
+                counter[num]++;
+            }
+            // 3. Traverse counter, filling each element back into the original array nums
+            int i = 0;
+            for (int num = 0; num < m + 1; num++) {
+                for (int j = 0; j < counter[num]; j++, i++) {
+                    nums[i] = num;
+                }
+            }
+        }
+    ```
+=== "Go"
+    ```go title="counting_sort.go"
+    // Simple implementation, cannot be used for sorting objects
+    func countingSortNaive(nums []int) {
+    	// 1. Count the maximum element m in the array
+    	m := 0
+    	for _, num := range nums {
+    		if num > m {
+    			m = num
+    		}
+    	}
+    	// 2. Count the occurrence of each number
+    	// counter[num] represents the occurrence of num
+    	counter := make([]int, m+1)
+    	for _, num := range nums {
+    		counter[num]++
+    	}
+    	// 3. Traverse counter, filling each element back into the original array nums
+    	for i, num := 0, 0; num < m+1; num++ {
+    		for j := 0; j < counter[num]; j++ {
+    			nums[i] = num
+    			i++
+    		}
+    	}
+    }
+    ```
+=== "Swift"
+    ```swift title="counting_sort.swift"
+    // Simple implementation, cannot be used for sorting objects
+    func countingSortNaive(nums: inout [Int]) {
+        // 1. Count the maximum element m in the array
+        let m = nums.max()!
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        var counter = Array(repeating: 0, count: m + 1)
+        for num in nums {
+            counter[num] += 1
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        var i = 0
+        for num in 0 ..< m + 1 {
+            for _ in 0 ..< counter[num] {
+                nums[i] = num
+                i += 1
+            }
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="counting_sort.js"
+    // Simple implementation, cannot be used for sorting objects
+    function countingSortNaive(nums) {
+        // 1. Count the maximum element m in the array
+        let m = Math.max(...nums);
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        const counter = new Array(m + 1).fill(0);
+        for (const num of nums) {
+            counter[num]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        let i = 0;
+        for (let num = 0; num < m + 1; num++) {
+            for (let j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="counting_sort.ts"
+    // Simple implementation, cannot be used for sorting objects
+    function countingSortNaive(nums: number[]): void {
+        // 1. Count the maximum element m in the array
+        let m: number = Math.max(...nums);
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        const counter: number[] = new Array<number>(m + 1).fill(0);
+        for (const num of nums) {
+            counter[num]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        let i = 0;
+        for (let num = 0; num < m + 1; num++) {
+            for (let j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="counting_sort.dart"
+    // Simple implementation, cannot be used for sorting objects
+    void countingSortNaive(List<int> nums) {
+      // 1. Count the maximum element m in the array
+      int m = 0;
+      for (int _num in nums) {
+        m = max(m, _num);
+      }
+      // 2. Count the occurrence of each number
+      // counter[_num] represents occurrence count of _num
+      List<int> counter = List.filled(m + 1, 0);
+      for (int _num in nums) {
+        counter[_num]++;
+      }
+      // 3. Traverse counter, filling each element back into the original array nums
+      int i = 0;
+      for (int _num = 0; _num < m + 1; _num++) {
+        for (int j = 0; j < counter[_num]; j++, i++) {
+          nums[i] = _num;
+        }
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="counting_sort.rs"
+    // Simple implementation, cannot be used for sorting objects
+    fn counting_sort_naive(nums: &mut [i32]) {
+        // 1. Count the maximum element m in the array
+        let m = *nums.iter().max().unwrap();
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        let mut counter = vec![0; m as usize + 1];
+        for &num in nums.iter() {
+            counter[num as usize] += 1;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        let mut i = 0;
+        for num in 0..m + 1 {
+            for _ in 0..counter[num as usize] {
+                nums[i] = num;
+                i += 1;
+            }
+        }
+    }
+    ```
+=== "C"
+    ```c title="counting_sort.c"
+    // Simple implementation, cannot be used for sorting objects
+    void countingSortNaive(int nums[], int size) {
+        // 1. Count the maximum element m in the array
+        int m = 0;
+        for (int i = 0; i < size; i++) {
+            if (nums[i] > m) {
+                m = nums[i];
+            }
+        }
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        int *counter = calloc(m + 1, sizeof(int));
+        for (int i = 0; i < size; i++) {
+            counter[nums[i]]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        int i = 0;
+        for (int num = 0; num < m + 1; num++) {
+            for (int j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+        // 4. Free memory
+        free(counter);
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="counting_sort.kt"
+    // Simple implementation, cannot be used for sorting objects
+    fun countingSortNaive(nums: IntArray) {
+        // 1. Count the maximum element m in the array
+        var m = 0
+        for (num in nums) {
+            m = max(m, num)
+        }
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        val counter = IntArray(m + 1)
+        for (num in nums) {
+            counter[num]++
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        var i = 0
+        for (num in 0..<m + 1) {
+            var j = 0
+            while (j < counter[num]) {
+                nums[i] = num
+                j++
+                i++
+            }
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="counting_sort.rb"
+    ### Counting sort ###
+    def counting_sort_naive(nums)
+      # Simple implementation, cannot be used for sorting objects
+      # 1. Count the maximum element m in the array
+      m = 0
+      nums.each { |num| m = [m, num].max }
+      # 2. Count the occurrence of each number
+      # counter[num] represents the occurrence of num
+      counter = Array.new(m + 1, 0)
+      nums.each { |num| counter[num] += 1 }
+      # 3. Traverse counter, filling each element back into the original array nums
+      i = 0
+      for num in 0...(m + 1)
+        (0...counter[num]).each do
+          nums[i] = num
+          i += 1
+        end
+      end
+    ```
+
 
 !!! lưu ý "Kết nối giữa sắp xếp đếm và sắp xếp nhóm"
 
@@ -65,9 +368,426 @@ Sau khi quá trình truyền tải hoàn tất, mảng `res` chứa kết quả 
 
 Việc thực hiện sắp xếp đếm được hiển thị dưới đây:
 
-```src
-[file]{counting_sort}-[class]{}-[func]{counting_sort}
-```
+=== "Python"
+    ```python title="counting_sort.py"
+    def counting_sort_naive(nums: list[int]):
+        """Counting sort"""
+        # Simple implementation, cannot be used for sorting objects
+        # 1. Count the maximum element m in the array
+        m = 0
+        for num in nums:
+            m = max(m, num)
+        # 2. Count the occurrence of each number
+        # counter[num] represents the occurrence of num
+        counter = [0] * (m + 1)
+        for num in nums:
+            counter[num] += 1
+        # 3. Traverse counter, filling each element back into the original array nums
+        i = 0
+        for num in range(m + 1):
+            for _ in range(counter[num]):
+                nums[i] = num
+                i += 1
+    ```
+=== "C++"
+    ```cpp title="counting_sort.cpp"
+    // Simple implementation, cannot be used for sorting objects
+    void countingSortNaive(vector<int> &nums) {
+        // 1. Count the maximum element m in the array
+        int m = 0;
+        for (int num : nums) {
+            m = max(m, num);
+        }
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        vector<int> counter(m + 1, 0);
+        for (int num : nums) {
+            counter[num]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        int i = 0;
+        for (int num = 0; num < m + 1; num++) {
+            for (int j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+    }
+    ```
+=== "Java"
+    ```java title="counting_sort.java"
+    public class counting_sort {
+        /* Counting sort */
+        // Simple implementation, cannot be used for sorting objects
+        static void countingSortNaive(int[] nums) {
+            // 1. Count the maximum element m in the array
+            int m = 0;
+            for (int num : nums) {
+                m = Math.max(m, num);
+            }
+            // 2. Count the occurrence of each number
+            // counter[num] represents the occurrence of num
+            int[] counter = new int[m + 1];
+            for (int num : nums) {
+                counter[num]++;
+            }
+            // 3. Traverse counter, filling each element back into the original array nums
+            int i = 0;
+            for (int num = 0; num < m + 1; num++) {
+                for (int j = 0; j < counter[num]; j++, i++) {
+                    nums[i] = num;
+                }
+            }
+        }
+    
+        /* Counting sort */
+        // Complete implementation, can sort objects and is a stable sort
+        static void countingSort(int[] nums) {
+            // 1. Count the maximum element m in the array
+            int m = 0;
+            for (int num : nums) {
+                m = Math.max(m, num);
+            }
+            // 2. Count the occurrence of each number
+            // counter[num] represents the occurrence of num
+            int[] counter = new int[m + 1];
+            for (int num : nums) {
+                counter[num]++;
+            }
+            // 3. Calculate the prefix sum of counter, converting "occurrence count" to "tail index"
+            // counter[num]-1 is the last index where num appears in res
+            for (int i = 0; i < m; i++) {
+                counter[i + 1] += counter[i];
+            }
+            // 4. Traverse nums in reverse order, placing each element into the result array res
+            // Initialize the array res to record results
+            int n = nums.length;
+            int[] res = new int[n];
+            for (int i = n - 1; i >= 0; i--) {
+                int num = nums[i];
+                res[counter[num] - 1] = num; // Place num at the corresponding index
+                counter[num]--; // Decrement the prefix sum by 1, getting the next index to place num
+            }
+            // Use result array res to overwrite the original array nums
+            for (int i = 0; i < n; i++) {
+                nums[i] = res[i];
+            }
+        }
+    
+        public static void main(String[] args) {
+            int[] nums = { 1, 0, 1, 2, 0, 4, 0, 2, 2, 4 };
+            countingSortNaive(nums);
+            System.out.println("After counting sort (cannot sort objects) completes, nums = " + Arrays.toString(nums));
+    
+            int[] nums1 = { 1, 0, 1, 2, 0, 4, 0, 2, 2, 4 };
+            countingSort(nums1);
+            System.out.println("After counting sort completes, nums1 = " + Arrays.toString(nums1));
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="counting_sort.cs"
+    public class counting_sort {
+        /* Counting sort */
+        // Simple implementation, cannot be used for sorting objects
+        void CountingSortNaive(int[] nums) {
+            // 1. Count the maximum element m in the array
+            int m = 0;
+            foreach (int num in nums) {
+                m = Math.Max(m, num);
+            }
+            // 2. Count the occurrence of each number
+            // counter[num] represents the occurrence of num
+            int[] counter = new int[m + 1];
+            foreach (int num in nums) {
+                counter[num]++;
+            }
+            // 3. Traverse counter, filling each element back into the original array nums
+            int i = 0;
+            for (int num = 0; num < m + 1; num++) {
+                for (int j = 0; j < counter[num]; j++, i++) {
+                    nums[i] = num;
+                }
+            }
+        }
+    
+        /* Counting sort */
+        // Complete implementation, can sort objects and is a stable sort
+        void CountingSort(int[] nums) {
+            // 1. Count the maximum element m in the array
+            int m = 0;
+            foreach (int num in nums) {
+                m = Math.Max(m, num);
+            }
+            // 2. Count the occurrence of each number
+            // counter[num] represents the occurrence of num
+            int[] counter = new int[m + 1];
+            foreach (int num in nums) {
+                counter[num]++;
+            }
+            // 3. Calculate the prefix sum of counter, converting "occurrence count" to "tail index"
+            // counter[num]-1 is the last index where num appears in res
+            for (int i = 0; i < m; i++) {
+                counter[i + 1] += counter[i];
+            }
+            // 4. Traverse nums in reverse order, placing each element into the result array res
+            // Initialize the array res to record results
+            int n = nums.Length;
+            int[] res = new int[n];
+            for (int i = n - 1; i >= 0; i--) {
+                int num = nums[i];
+                res[counter[num] - 1] = num; // Place num at the corresponding index
+                counter[num]--; // Decrement the prefix sum by 1, getting the next index to place num
+            }
+            // Use result array res to overwrite the original array nums
+            for (int i = 0; i < n; i++) {
+                nums[i] = res[i];
+            }
+        }
+    
+        [Test]
+        public void Test() {
+            int[] nums = [1, 0, 1, 2, 0, 4, 0, 2, 2, 4];
+            CountingSortNaive(nums);
+            Console.WriteLine("After counting sort (cannot sort objects) completes, nums = " + string.Join(" ", nums));
+    
+            int[] nums1 = [1, 0, 1, 2, 0, 4, 0, 2, 2, 4];
+            CountingSort(nums1);
+            Console.WriteLine("After counting sort completes, nums1 = " + string.Join(" ", nums));
+        }
+    }
+    ```
+=== "Go"
+    ```go title="counting_sort.go"
+    // Simple implementation, cannot be used for sorting objects
+    func countingSortNaive(nums []int) {
+    	// 1. Count the maximum element m in the array
+    	m := 0
+    	for _, num := range nums {
+    		if num > m {
+    			m = num
+    		}
+    	}
+    	// 2. Count the occurrence of each number
+    	// counter[num] represents the occurrence of num
+    	counter := make([]int, m+1)
+    	for _, num := range nums {
+    		counter[num]++
+    	}
+    	// 3. Traverse counter, filling each element back into the original array nums
+    	for i, num := 0, 0; num < m+1; num++ {
+    		for j := 0; j < counter[num]; j++ {
+    			nums[i] = num
+    			i++
+    		}
+    	}
+    }
+    ```
+=== "Swift"
+    ```swift title="counting_sort.swift"
+    // Simple implementation, cannot be used for sorting objects
+    func countingSortNaive(nums: inout [Int]) {
+        // 1. Count the maximum element m in the array
+        let m = nums.max()!
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        var counter = Array(repeating: 0, count: m + 1)
+        for num in nums {
+            counter[num] += 1
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        var i = 0
+        for num in 0 ..< m + 1 {
+            for _ in 0 ..< counter[num] {
+                nums[i] = num
+                i += 1
+            }
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="counting_sort.js"
+    // Complete implementation, can sort objects and is a stable sort
+    function countingSort(nums) {
+        // 1. Count the maximum element m in the array
+        let m = Math.max(...nums);
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        const counter = new Array(m + 1).fill(0);
+        for (const num of nums) {
+            counter[num]++;
+        }
+        // 3. Calculate the prefix sum of counter, converting "occurrence count" to "tail index"
+        // counter[num]-1 is the last index where num appears in res
+        for (let i = 0; i < m; i++) {
+            counter[i + 1] += counter[i];
+        }
+        // 4. Traverse nums in reverse order, placing each element into the result array res
+        // Initialize the array res to record results
+        const n = nums.length;
+        const res = new Array(n);
+        for (let i = n - 1; i >= 0; i--) {
+            const num = nums[i];
+            res[counter[num] - 1] = num; // Place num at the corresponding index
+            counter[num]--; // Decrement the prefix sum by 1, getting the next index to place num
+        }
+        // Use result array res to overwrite the original array nums
+        for (let i = 0; i < n; i++) {
+            nums[i] = res[i];
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="counting_sort.ts"
+    // Simple implementation, cannot be used for sorting objects
+    function countingSortNaive(nums: number[]): void {
+        // 1. Count the maximum element m in the array
+        let m: number = Math.max(...nums);
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        const counter: number[] = new Array<number>(m + 1).fill(0);
+        for (const num of nums) {
+            counter[num]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        let i = 0;
+        for (let num = 0; num < m + 1; num++) {
+            for (let j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="counting_sort.dart"
+    // Simple implementation, cannot be used for sorting objects
+    void countingSortNaive(List<int> nums) {
+      // 1. Count the maximum element m in the array
+      int m = 0;
+      for (int _num in nums) {
+        m = max(m, _num);
+      }
+      // 2. Count the occurrence of each number
+      // counter[_num] represents occurrence count of _num
+      List<int> counter = List.filled(m + 1, 0);
+      for (int _num in nums) {
+        counter[_num]++;
+      }
+      // 3. Traverse counter, filling each element back into the original array nums
+      int i = 0;
+      for (int _num = 0; _num < m + 1; _num++) {
+        for (int j = 0; j < counter[_num]; j++, i++) {
+          nums[i] = _num;
+        }
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="counting_sort.rs"
+    // Simple implementation, cannot be used for sorting objects
+    fn counting_sort_naive(nums: &mut [i32]) {
+        // 1. Count the maximum element m in the array
+        let m = *nums.iter().max().unwrap();
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        let mut counter = vec![0; m as usize + 1];
+        for &num in nums.iter() {
+            counter[num as usize] += 1;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        let mut i = 0;
+        for num in 0..m + 1 {
+            for _ in 0..counter[num as usize] {
+                nums[i] = num;
+                i += 1;
+            }
+        }
+    }
+    ```
+=== "C"
+    ```c title="counting_sort.c"
+    // Simple implementation, cannot be used for sorting objects
+    void countingSortNaive(int nums[], int size) {
+        // 1. Count the maximum element m in the array
+        int m = 0;
+        for (int i = 0; i < size; i++) {
+            if (nums[i] > m) {
+                m = nums[i];
+            }
+        }
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        int *counter = calloc(m + 1, sizeof(int));
+        for (int i = 0; i < size; i++) {
+            counter[nums[i]]++;
+        }
+        // 3. Traverse counter, filling each element back into the original array nums
+        int i = 0;
+        for (int num = 0; num < m + 1; num++) {
+            for (int j = 0; j < counter[num]; j++, i++) {
+                nums[i] = num;
+            }
+        }
+        // 4. Free memory
+        free(counter);
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="counting_sort.kt"
+    // Complete implementation, can sort objects and is a stable sort
+    fun countingSort(nums: IntArray) {
+        // 1. Count the maximum element m in the array
+        var m = 0
+        for (num in nums) {
+            m = max(m, num)
+        }
+        // 2. Count the occurrence of each number
+        // counter[num] represents the occurrence of num
+        val counter = IntArray(m + 1)
+        for (num in nums) {
+            counter[num]++
+        }
+        // 3. Calculate the prefix sum of counter, converting "occurrence count" to "tail index"
+        // counter[num]-1 is the last index where num appears in res
+        for (i in 0..<m) {
+            counter[i + 1] += counter[i]
+        }
+        // 4. Traverse nums in reverse order, placing each element into the result array res
+        // Initialize the array res to record results
+        val n = nums.size
+        val res = IntArray(n)
+        for (i in n - 1 downTo 0) {
+            val num = nums[i]
+            res[counter[num] - 1] = num // Place num at the corresponding index
+            counter[num]-- // Decrement the prefix sum by 1, getting the next index to place num
+        }
+        // Use result array res to overwrite the original array nums
+        for (i in 0..<n) {
+            nums[i] = res[i]
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="counting_sort.rb"
+    ### Counting sort ###
+    def counting_sort_naive(nums)
+      # Simple implementation, cannot be used for sorting objects
+      # 1. Count the maximum element m in the array
+      m = 0
+      nums.each { |num| m = [m, num].max }
+      # 2. Count the occurrence of each number
+      # counter[num] represents the occurrence of num
+      counter = Array.new(m + 1, 0)
+      nums.each { |num| counter[num] += 1 }
+      # 3. Traverse counter, filling each element back into the original array nums
+      i = 0
+      for num in 0...(m + 1)
+        (0...counter[num]).each do
+          nums[i] = num
+          i += 1
+        end
+      end
+    ```
+
 
 ## Đặc điểm thuật toán
 

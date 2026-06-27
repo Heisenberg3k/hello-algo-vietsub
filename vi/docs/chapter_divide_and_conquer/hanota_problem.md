@@ -82,9 +82,111 @@ Từ đó, chúng ta có thể tóm tắt chiến lược chia để trị để
 
 Trong mã, chúng ta khai báo một hàm đệ quy `dfs(i, src, buf, tar)`, với mục đích là di chuyển các đĩa $i$ trên cùng từ cột `src` sang cột đích `tar` với sự trợ giúp của cột đệm `buf`:
 
-```src
-[file]{hanota}-[class]{}-[func]{solve_hanota}
-```
+=== "Python"
+    ```python title="hanota.py"
+    def solve_hanota(A: list[int], B: list[int], C: list[int]):
+        """Solve the Tower of Hanoi problem"""
+        n = len(A)
+        # Move the top n disks from A to C using B
+        dfs(n, A, B, C)
+    ```
+=== "C++"
+    ```cpp title="hanota.cpp"
+    void solveHanota(vector<int> &A, vector<int> &B, vector<int> &C) {
+        int n = A.size();
+        // Move the top n disks from A to C using B
+        dfs(n, A, B, C);
+    }
+    ```
+=== "Java"
+    ```java title="hanota.java"
+    static void solveHanota(List<Integer> A, List<Integer> B, List<Integer> C) {
+            int n = A.size();
+            // Move the top n disks from A to C using B
+            dfs(n, A, B, C);
+        }
+    ```
+=== "C#"
+    ```csharp title="hanota.cs"
+    void SolveHanota(List<int> A, List<int> B, List<int> C) {
+            int n = A.Count;
+            // Move the top n disks from A to C using B
+            DFS(n, A, B, C);
+        }
+    ```
+=== "Go"
+    ```go title="hanota.go"
+    func solveHanota(A, B, C *list.List) {
+    	n := A.Len()
+    	// Move the top n disks from A to C using B
+    	dfsHanota(n, A, B, C)
+    }
+    ```
+=== "Swift"
+    ```swift title="hanota.swift"
+    func solveHanota(A: inout [Int], B: inout [Int], C: inout [Int]) {
+        let n = A.count
+        // The tail of the list is the top of the rod
+        // Move top n disks from src to C using B
+        dfs(i: n, src: &A, buf: &B, tar: &C)
+    }
+    ```
+=== "JS"
+    ```javascript title="hanota.js"
+    function solveHanota(A, B, C) {
+        const n = A.length;
+        // Move the top n disks from A to C using B
+        dfs(n, A, B, C);
+    }
+    ```
+=== "TS"
+    ```typescript title="hanota.ts"
+    function solveHanota(A: number[], B: number[], C: number[]): void {
+        const n = A.length;
+        // Move the top n disks from A to C using B
+        dfs(n, A, B, C);
+    }
+    ```
+=== "Dart"
+    ```dart title="hanota.dart"
+    void solveHanota(List<int> A, List<int> B, List<int> C) {
+      int n = A.length;
+      // Move the top n disks from A to C using B
+      dfs(n, A, B, C);
+    }
+    ```
+=== "Rust"
+    ```rust title="hanota.rs"
+    fn solve_hanota(A: &mut Vec<i32>, B: &mut Vec<i32>, C: &mut Vec<i32>) {
+        let n = A.len() as i32;
+        // Move the top n disks from A to C using B
+        dfs(n, A, B, C);
+    }
+    ```
+=== "C"
+    ```c title="hanota.c"
+    void solveHanota(int *A, int *ASize, int *B, int *BSize, int *C, int *CSize) {
+        // Move the top n disks from A to C using B
+        dfs(*ASize, A, ASize, B, BSize, C, CSize);
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="hanota.kt"
+    fun solveHanota(A: MutableList<Int>, B: MutableList<Int>, C: MutableList<Int>) {
+        val n = A.size
+        // Move the top n disks from A to C using B
+        dfs(n, A, B, C)
+    }
+    ```
+=== "Ruby"
+    ```ruby title="hanota.rb"
+    ### Solve Tower of Hanoi ###
+    def solve_hanota(_A, _B, _C)
+      n = _A.length
+      # Move the top n disks from A to C using B
+      dfs(n, _A, _B, _C)
+    ```
+
 
 Như được hiển thị trong hình bên dưới, bài toán hanota tạo thành một cây đệ quy có chiều cao $n$, trong đó mỗi nút biểu thị một bài toán con tương ứng với một lệnh gọi hàm `dfs()`, **do đó độ phức tạp về thời gian là $O(2^n)$ và độ phức tạp về không gian là $O(n)$**.
 

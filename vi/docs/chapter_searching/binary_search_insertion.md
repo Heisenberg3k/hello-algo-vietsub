@@ -22,9 +22,256 @@ Sự cố yêu cầu chèn `target` vào bên trái của các phần tử bằn
 
 Do đó, khi tìm kiếm nhị phân kết thúc, $i$ phải trỏ đến phần tử đầu tiên lớn hơn `target`, và $j$ phải trỏ đến phần tử đầu tiên nhỏ hơn `target`. **Theo sau đó, khi mảng không chứa `target`, chỉ mục chèn là $i$**. Mã được hiển thị dưới đây:
 
-```src
-[file]{binary_search_insertion}-[class]{}-[func]{binary_search_insertion_simple}
-```
+=== "Python"
+    ```python title="binary_search_insertion.py"
+    def binary_search_insertion_simple(nums: list[int], target: int) -> int:
+        """Binary search for insertion point (no duplicate elements)"""
+        i, j = 0, len(nums) - 1  # Initialize closed interval [0, n-1]
+        while i <= j:
+            m = (i + j) // 2  # Calculate midpoint index m
+            if nums[m] < target:
+                i = m + 1  # target is in the interval [m+1, j]
+            elif nums[m] > target:
+                j = m - 1  # target is in the interval [i, m-1]
+            else:
+                return m  # Found target, return insertion point m
+        # Target not found, return insertion point i
+        return i
+    ```
+=== "C++"
+    ```cpp title="binary_search_insertion.cpp"
+    int binarySearchInsertionSimple(vector<int> &nums, int target) {
+        int i = 0, j = nums.size() - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            int m = i + (j - i) / 2; // Calculate the midpoint index m
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m; // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i;
+    }
+    ```
+=== "Java"
+    ```java title="binary_search_insertion.java"
+    static int binarySearchInsertionSimple(int[] nums, int target) {
+            int i = 0, j = nums.length - 1; // Initialize closed interval [0, n-1]
+            while (i <= j) {
+                int m = i + (j - i) / 2; // Calculate the midpoint index m
+                if (nums[m] < target) {
+                    i = m + 1; // target is in the interval [m+1, j]
+                } else if (nums[m] > target) {
+                    j = m - 1; // target is in the interval [i, m-1]
+                } else {
+                    return m; // Found target, return insertion point m
+                }
+            }
+            // Target not found, return insertion point i
+            return i;
+        }
+    ```
+=== "C#"
+    ```csharp title="binary_search_insertion.cs"
+    public static int BinarySearchInsertionSimple(int[] nums, int target) {
+            int i = 0, j = nums.Length - 1; // Initialize closed interval [0, n-1]
+            while (i <= j) {
+                int m = i + (j - i) / 2; // Calculate the midpoint index m
+                if (nums[m] < target) {
+                    i = m + 1; // target is in the interval [m+1, j]
+                } else if (nums[m] > target) {
+                    j = m - 1; // target is in the interval [i, m-1]
+                } else {
+                    return m; // Found target, return insertion point m
+                }
+            }
+            // Target not found, return insertion point i
+            return i;
+        }
+    ```
+=== "Go"
+    ```go title="binary_search_insertion.go"
+    func binarySearchInsertionSimple(nums []int, target int) int {
+    	// Initialize closed interval [0, n-1]
+    	i, j := 0, len(nums)-1
+    	for i <= j {
+    		// Calculate the midpoint index m
+    		m := i + (j-i)/2
+    		if nums[m] < target {
+    			// target is in the interval [m+1, j]
+    			i = m + 1
+    		} else if nums[m] > target {
+    			// target is in the interval [i, m-1]
+    			j = m - 1
+    		} else {
+    			// Found target, return insertion point m
+    			return m
+    		}
+    	}
+    	// Target not found, return insertion point i
+    	return i
+    }
+    ```
+=== "Swift"
+    ```swift title="binary_search_insertion.swift"
+    func binarySearchInsertionSimple(nums: [Int], target: Int) -> Int {
+        // Initialize closed interval [0, n-1]
+        var i = nums.startIndex
+        var j = nums.endIndex - 1
+        while i <= j {
+            let m = i + (j - i) / 2 // Calculate the midpoint index m
+            if nums[m] < target {
+                i = m + 1 // target is in the interval [m+1, j]
+            } else if nums[m] > target {
+                j = m - 1 // target is in the interval [i, m-1]
+            } else {
+                return m // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i
+    }
+    ```
+=== "JS"
+    ```javascript title="binary_search_insertion.js"
+    function binarySearchInsertionSimple(nums, target) {
+        let i = 0,
+            j = nums.length - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            const m = Math.floor(i + (j - i) / 2); // Calculate midpoint index m, use Math.floor() to round down
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m; // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i;
+    }
+    ```
+=== "TS"
+    ```typescript title="binary_search_insertion.ts"
+    function binarySearchInsertionSimple(
+        nums: Array<number>,
+        target: number
+    ): number {
+        let i = 0,
+            j = nums.length - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            const m = Math.floor(i + (j - i) / 2); // Calculate midpoint index m, use Math.floor() to round down
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m; // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i;
+    }
+    ```
+=== "Dart"
+    ```dart title="binary_search_insertion.dart"
+    int binarySearchInsertionSimple(List<int> nums, int target) {
+      int i = 0, j = nums.length - 1; // Initialize closed interval [0, n-1]
+      while (i <= j) {
+        int m = i + (j - i) ~/ 2; // Calculate the midpoint index m
+        if (nums[m] < target) {
+          i = m + 1; // target is in the interval [m+1, j]
+        } else if (nums[m] > target) {
+          j = m - 1; // target is in the interval [i, m-1]
+        } else {
+          return m; // Found target, return insertion point m
+        }
+      }
+      // Target not found, return insertion point i
+      return i;
+    }
+    ```
+=== "Rust"
+    ```rust title="binary_search_insertion.rs"
+    fn binary_search_insertion_simple(nums: &[i32], target: i32) -> i32 {
+        let (mut i, mut j) = (0, nums.len() as i32 - 1); // Initialize closed interval [0, n-1]
+        while i <= j {
+            let m = i + (j - i) / 2; // Calculate the midpoint index m
+            if nums[m as usize] < target {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if nums[m as usize] > target {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m;
+            }
+        }
+        // Target not found, return insertion point i
+        i
+    }
+    ```
+=== "C"
+    ```c title="binary_search_insertion.c"
+    int binarySearchInsertionSimple(int *nums, int numSize, int target) {
+        int i = 0, j = numSize - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            int m = i + (j - i) / 2; // Calculate the midpoint index m
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m; // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="binary_search_insertion.kt"
+    fun binarySearchInsertionSimple(nums: IntArray, target: Int): Int {
+        var i = 0
+        var j = nums.size - 1 // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            val m = i + (j - i) / 2 // Calculate the midpoint index m
+            if (nums[m] < target) {
+                i = m + 1 // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1 // target is in the interval [i, m-1]
+            } else {
+                return m // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i
+    }
+    ```
+=== "Ruby"
+    ```ruby title="binary_search_insertion.rb"
+    ### Binary search insertion point (no duplicates) ###
+    def binary_search_insertion_simple(nums, target)
+      # Initialize closed interval [0, n-1]
+      i, j = 0, nums.length - 1
+    
+      while i <= j
+        # Calculate the midpoint index m
+        m = (i + j) / 2
+    
+        if nums[m] < target
+          i = m + 1 # target is in the interval [m+1, j]
+        elsif nums[m] > target
+          j = m - 1 # target is in the interval [i, m-1]
+        else
+          return m  # Found target, return insertion point m
+        end
+      end
+    
+      i # Target not found, return insertion point i
+    ```
+
 
 ## Trường hợp có phần tử trùng lặp
 
@@ -78,9 +325,334 @@ Hãy quan sát đoạn mã sau: các nhánh `nums[m] > target` và `nums[m] == t
 
 Mặc dù vậy, chúng ta vẫn có thể mở rộng các nhánh có điều kiện vì logic rõ ràng và dễ đọc hơn.
 
-```src
-[file]{binary_search_insertion}-[class]{}-[func]{binary_search_insertion}
-```
+=== "Python"
+    ```python title="binary_search_insertion.py"
+    def binary_search_insertion_simple(nums: list[int], target: int) -> int:
+        """Binary search for insertion point (no duplicate elements)"""
+        i, j = 0, len(nums) - 1  # Initialize closed interval [0, n-1]
+        while i <= j:
+            m = (i + j) // 2  # Calculate midpoint index m
+            if nums[m] < target:
+                i = m + 1  # target is in the interval [m+1, j]
+            elif nums[m] > target:
+                j = m - 1  # target is in the interval [i, m-1]
+            else:
+                return m  # Found target, return insertion point m
+        # Target not found, return insertion point i
+        return i
+    ```
+=== "C++"
+    ```cpp title="binary_search_insertion.cpp"
+    int binarySearchInsertionSimple(vector<int> &nums, int target) {
+        int i = 0, j = nums.size() - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            int m = i + (j - i) / 2; // Calculate the midpoint index m
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m; // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i;
+    }
+    ```
+=== "Java"
+    ```java title="binary_search_insertion.java"
+    class binary_search_insertion {
+        /* Binary search for insertion point (no duplicate elements) */
+        static int binarySearchInsertionSimple(int[] nums, int target) {
+            int i = 0, j = nums.length - 1; // Initialize closed interval [0, n-1]
+            while (i <= j) {
+                int m = i + (j - i) / 2; // Calculate the midpoint index m
+                if (nums[m] < target) {
+                    i = m + 1; // target is in the interval [m+1, j]
+                } else if (nums[m] > target) {
+                    j = m - 1; // target is in the interval [i, m-1]
+                } else {
+                    return m; // Found target, return insertion point m
+                }
+            }
+            // Target not found, return insertion point i
+            return i;
+        }
+    
+        /* Binary search for insertion point (with duplicate elements) */
+        static int binarySearchInsertion(int[] nums, int target) {
+            int i = 0, j = nums.length - 1; // Initialize closed interval [0, n-1]
+            while (i <= j) {
+                int m = i + (j - i) / 2; // Calculate the midpoint index m
+                if (nums[m] < target) {
+                    i = m + 1; // target is in the interval [m+1, j]
+                } else if (nums[m] > target) {
+                    j = m - 1; // target is in the interval [i, m-1]
+                } else {
+                    j = m - 1; // The first element less than target is in the interval [i, m-1]
+                }
+            }
+            // Return insertion point i
+            return i;
+        }
+    
+        public static void main(String[] args) {
+            // Array without duplicate elements
+            int[] nums = { 1, 3, 6, 8, 12, 15, 23, 26, 31, 35 };
+            System.out.println("\nArray nums = " + java.util.Arrays.toString(nums));
+            // Binary search for insertion point
+            for (int target : new int[] { 6, 9 }) {
+                int index = binarySearchInsertionSimple(nums, target);
+                System.out.println("Insertion point index for element " + target + " is " + index);
+            }
+    
+            // Array with duplicate elements
+            nums = new int[] { 1, 3, 6, 6, 6, 6, 6, 10, 12, 15 };
+            System.out.println("\nArray nums = " + java.util.Arrays.toString(nums));
+            // Binary search for insertion point
+            for (int target : new int[] { 2, 6, 20 }) {
+                int index = binarySearchInsertion(nums, target);
+                System.out.println("Insertion point index for element " + target + " is " + index);
+            }
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="binary_search_insertion.cs"
+    public class binary_search_insertion {
+        /* Binary search for insertion point (no duplicate elements) */
+        public static int BinarySearchInsertionSimple(int[] nums, int target) {
+            int i = 0, j = nums.Length - 1; // Initialize closed interval [0, n-1]
+            while (i <= j) {
+                int m = i + (j - i) / 2; // Calculate the midpoint index m
+                if (nums[m] < target) {
+                    i = m + 1; // target is in the interval [m+1, j]
+                } else if (nums[m] > target) {
+                    j = m - 1; // target is in the interval [i, m-1]
+                } else {
+                    return m; // Found target, return insertion point m
+                }
+            }
+            // Target not found, return insertion point i
+            return i;
+        }
+    
+        /* Binary search for insertion point (with duplicate elements) */
+        public static int BinarySearchInsertion(int[] nums, int target) {
+            int i = 0, j = nums.Length - 1; // Initialize closed interval [0, n-1]
+            while (i <= j) {
+                int m = i + (j - i) / 2; // Calculate the midpoint index m
+                if (nums[m] < target) {
+                    i = m + 1; // target is in the interval [m+1, j]
+                } else if (nums[m] > target) {
+                    j = m - 1; // target is in the interval [i, m-1]
+                } else {
+                    j = m - 1; // The first element less than target is in the interval [i, m-1]
+                }
+            }
+            // Return insertion point i
+            return i;
+        }
+    
+        [Test]
+        public void Test() {
+            // Array without duplicate elements
+            int[] nums = [1, 3, 6, 8, 12, 15, 23, 26, 31, 35];
+            Console.WriteLine("\nArray nums = " + nums.PrintList());
+            // Binary search for insertion point
+            foreach (int target in new int[] { 6, 9 }) {
+                int index = BinarySearchInsertionSimple(nums, target);
+                Console.WriteLine("Element " + target + "'s insertion point index is " + index);
+            }
+    
+            // Array with duplicate elements
+            nums = [1, 3, 6, 6, 6, 6, 6, 10, 12, 15];
+            Console.WriteLine("\nArray nums = " + nums.PrintList());
+            // Binary search for insertion point
+            foreach (int target in new int[] { 2, 6, 20 }) {
+                int index = BinarySearchInsertion(nums, target);
+                Console.WriteLine("Element " + target + "'s insertion point index is " + index);
+            }
+        }
+    }
+    ```
+=== "Go"
+    ```go title="binary_search_insertion.go"
+    func binarySearchInsertionSimple(nums []int, target int) int {
+    	// Initialize closed interval [0, n-1]
+    	i, j := 0, len(nums)-1
+    	for i <= j {
+    		// Calculate the midpoint index m
+    		m := i + (j-i)/2
+    		if nums[m] < target {
+    			// target is in the interval [m+1, j]
+    			i = m + 1
+    		} else if nums[m] > target {
+    			// target is in the interval [i, m-1]
+    			j = m - 1
+    		} else {
+    			// Found target, return insertion point m
+    			return m
+    		}
+    	}
+    	// Target not found, return insertion point i
+    	return i
+    }
+    ```
+=== "Swift"
+    ```swift title="binary_search_insertion.swift"
+    func binarySearchInsertionSimple(nums: [Int], target: Int) -> Int {
+        // Initialize closed interval [0, n-1]
+        var i = nums.startIndex
+        var j = nums.endIndex - 1
+        while i <= j {
+            let m = i + (j - i) / 2 // Calculate the midpoint index m
+            if nums[m] < target {
+                i = m + 1 // target is in the interval [m+1, j]
+            } else if nums[m] > target {
+                j = m - 1 // target is in the interval [i, m-1]
+            } else {
+                return m // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i
+    }
+    ```
+=== "JS"
+    ```javascript title="binary_search_insertion.js"
+    function binarySearchInsertion(nums, target) {
+        let i = 0,
+            j = nums.length - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            const m = Math.floor(i + (j - i) / 2); // Calculate midpoint index m, use Math.floor() to round down
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                j = m - 1; // The first element less than target is in the interval [i, m-1]
+            }
+        }
+        // Return insertion point i
+        return i;
+    }
+    ```
+=== "TS"
+    ```typescript title="binary_search_insertion.ts"
+    function binarySearchInsertion(nums: Array<number>, target: number): number {
+        let i = 0,
+            j = nums.length - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            const m = Math.floor(i + (j - i) / 2); // Calculate midpoint index m, use Math.floor() to round down
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                j = m - 1; // The first element less than target is in the interval [i, m-1]
+            }
+        }
+        // Return insertion point i
+        return i;
+    }
+    ```
+=== "Dart"
+    ```dart title="binary_search_insertion.dart"
+    int binarySearchInsertionSimple(List<int> nums, int target) {
+      int i = 0, j = nums.length - 1; // Initialize closed interval [0, n-1]
+      while (i <= j) {
+        int m = i + (j - i) ~/ 2; // Calculate the midpoint index m
+        if (nums[m] < target) {
+          i = m + 1; // target is in the interval [m+1, j]
+        } else if (nums[m] > target) {
+          j = m - 1; // target is in the interval [i, m-1]
+        } else {
+          return m; // Found target, return insertion point m
+        }
+      }
+      // Target not found, return insertion point i
+      return i;
+    }
+    ```
+=== "Rust"
+    ```rust title="binary_search_insertion.rs"
+    fn binary_search_insertion_simple(nums: &[i32], target: i32) -> i32 {
+        let (mut i, mut j) = (0, nums.len() as i32 - 1); // Initialize closed interval [0, n-1]
+        while i <= j {
+            let m = i + (j - i) / 2; // Calculate the midpoint index m
+            if nums[m as usize] < target {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if nums[m as usize] > target {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m;
+            }
+        }
+        // Target not found, return insertion point i
+        i
+    }
+    ```
+=== "C"
+    ```c title="binary_search_insertion.c"
+    int binarySearchInsertionSimple(int *nums, int numSize, int target) {
+        int i = 0, j = numSize - 1; // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            int m = i + (j - i) / 2; // Calculate the midpoint index m
+            if (nums[m] < target) {
+                i = m + 1; // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1; // target is in the interval [i, m-1]
+            } else {
+                return m; // Found target, return insertion point m
+            }
+        }
+        // Target not found, return insertion point i
+        return i;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="binary_search_insertion.kt"
+    fun binarySearchInsertion(nums: IntArray, target: Int): Int {
+        var i = 0
+        var j = nums.size - 1 // Initialize closed interval [0, n-1]
+        while (i <= j) {
+            val m = i + (j - i) / 2 // Calculate the midpoint index m
+            if (nums[m] < target) {
+                i = m + 1 // target is in the interval [m+1, j]
+            } else if (nums[m] > target) {
+                j = m - 1 // target is in the interval [i, m-1]
+            } else {
+                j = m - 1 // The first element less than target is in the interval [i, m-1]
+            }
+        }
+        // Return insertion point i
+        return i
+    }
+    ```
+=== "Ruby"
+    ```ruby title="binary_search_insertion.rb"
+    ### Binary search insertion point (no duplicates) ###
+    def binary_search_insertion_simple(nums, target)
+      # Initialize closed interval [0, n-1]
+      i, j = 0, nums.length - 1
+    
+      while i <= j
+        # Calculate the midpoint index m
+        m = (i + j) / 2
+    
+        if nums[m] < target
+          i = m + 1 # target is in the interval [m+1, j]
+        elsif nums[m] > target
+          j = m - 1 # target is in the interval [i, m-1]
+        else
+          return m  # Found target, return insertion point m
+        end
+      end
+    
+      i # Target not found, return insertion point i
+    ```
+
 
 !!! mẹo
 

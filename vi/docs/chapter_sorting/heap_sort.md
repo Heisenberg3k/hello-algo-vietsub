@@ -62,9 +62,284 @@ Trên thực tế, thao tác loại bỏ phần tử còn bao gồm các bước
 
 Trong đoạn mã bên dưới, chúng ta sử dụng cùng hàm `sift_down()` để tạo đống dữ liệu từ trên xuống dưới như trong chương "Heap". Điều đáng chú ý là do độ dài heap giảm khi phần tử lớn nhất được trích xuất, chúng ta cần thêm tham số độ dài $n$ vào `sift_down()` để chỉ định độ dài hiệu dụng hiện tại của heap. Mã này như sau:
 
-```src
-[file]{heap_sort}-[class]{}-[func]{heap_sort}
-```
+=== "Python"
+    ```python title="heap_sort.py"
+    def heap_sort(nums: list[int]):
+        """Heap sort"""
+        # Build heap operation: heapify all nodes except leaves
+        for i in range(len(nums) // 2 - 1, -1, -1):
+            sift_down(nums, len(nums), i)
+        # Extract the largest element from the heap and repeat for n-1 rounds
+        for i in range(len(nums) - 1, 0, -1):
+            # Swap the root node with the rightmost leaf node (swap the first element with the last element)
+            nums[0], nums[i] = nums[i], nums[0]
+            # Start heapifying the root node, from top to bottom
+            sift_down(nums, i, 0)
+    ```
+=== "C++"
+    ```cpp title="heap_sort.cpp"
+    void heapSort(vector<int> &nums) {
+        // Build heap operation: heapify all nodes except leaves
+        for (int i = nums.size() / 2 - 1; i >= 0; --i) {
+            siftDown(nums, nums.size(), i);
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for (int i = nums.size() - 1; i > 0; --i) {
+            // Delete node
+            swap(nums[0], nums[i]);
+            // Start heapifying the root node, from top to bottom
+            siftDown(nums, i, 0);
+        }
+    }
+    ```
+=== "Java"
+    ```java title="heap_sort.java"
+    public class heap_sort {
+        /* Heap length is n, start heapifying node i, from top to bottom */
+        public static void siftDown(int[] nums, int n, int i) {
+            while (true) {
+                // If node i is largest or indices l, r are out of bounds, no need to continue heapify, break
+                int l = 2 * i + 1;
+                int r = 2 * i + 2;
+                int ma = i;
+                if (l < n && nums[l] > nums[ma])
+                    ma = l;
+                if (r < n && nums[r] > nums[ma])
+                    ma = r;
+                // Swap two nodes
+                if (ma == i)
+                    break;
+                // Swap two nodes
+                int temp = nums[i];
+                nums[i] = nums[ma];
+                nums[ma] = temp;
+                // Loop downwards heapification
+                i = ma;
+            }
+        }
+    
+        /* Heap sort */
+        public static void heapSort(int[] nums) {
+            // Build heap operation: heapify all nodes except leaves
+            for (int i = nums.length / 2 - 1; i >= 0; i--) {
+                siftDown(nums, nums.length, i);
+            }
+            // Extract the largest element from the heap and repeat for n-1 rounds
+            for (int i = nums.length - 1; i > 0; i--) {
+                // Delete node
+                int tmp = nums[0];
+                nums[0] = nums[i];
+                nums[i] = tmp;
+                // Start heapifying the root node, from top to bottom
+                siftDown(nums, i, 0);
+            }
+        }
+    
+        public static void main(String[] args) {
+            int[] nums = { 4, 1, 3, 1, 5, 2 };
+            heapSort(nums);
+            System.out.println("After heap sort completes, nums = " + Arrays.toString(nums));
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="heap_sort.cs"
+    public class heap_sort {
+        /* Heap length is n, start heapifying node i, from top to bottom */
+        void SiftDown(int[] nums, int n, int i) {
+            while (true) {
+                // If node i is largest or indices l, r are out of bounds, no need to continue heapify, break
+                int l = 2 * i + 1;
+                int r = 2 * i + 2;
+                int ma = i;
+                if (l < n && nums[l] > nums[ma])
+                    ma = l;
+                if (r < n && nums[r] > nums[ma])
+                    ma = r;
+                // Swap two nodes
+                if (ma == i)
+                    break;
+                // Swap two nodes
+                (nums[ma], nums[i]) = (nums[i], nums[ma]);
+                // Loop downwards heapification
+                i = ma;
+            }
+        }
+    
+        /* Heap sort */
+        void HeapSort(int[] nums) {
+            // Build heap operation: heapify all nodes except leaves
+            for (int i = nums.Length / 2 - 1; i >= 0; i--) {
+                SiftDown(nums, nums.Length, i);
+            }
+            // Extract the largest element from the heap and repeat for n-1 rounds
+            for (int i = nums.Length - 1; i > 0; i--) {
+                // Delete node
+                (nums[i], nums[0]) = (nums[0], nums[i]);
+                // Start heapifying the root node, from top to bottom
+                SiftDown(nums, i, 0);
+            }
+        }
+    
+        [Test]
+        public void Test() {
+            int[] nums = [4, 1, 3, 1, 5, 2];
+            HeapSort(nums);
+            Console.WriteLine("After heap sort completes, nums = " + string.Join(" ", nums));
+        }
+    }
+    ```
+=== "Go"
+    ```go title="heap_sort.go"
+    func heapSort(nums *[]int) {
+    	// Build heap operation: heapify all nodes except leaves
+    	for i := len(*nums)/2 - 1; i >= 0; i-- {
+    		siftDown(nums, len(*nums), i)
+    	}
+    	// Extract the largest element from the heap and repeat for n-1 rounds
+    	for i := len(*nums) - 1; i > 0; i-- {
+    		// Delete node
+    		(*nums)[0], (*nums)[i] = (*nums)[i], (*nums)[0]
+    		// Start heapifying the root node, from top to bottom
+    		siftDown(nums, i, 0)
+    	}
+    }
+    ```
+=== "Swift"
+    ```swift title="heap_sort.swift"
+    func heapSort(nums: inout [Int]) {
+        // Build heap operation: heapify all nodes except leaves
+        for i in stride(from: nums.count / 2 - 1, through: 0, by: -1) {
+            siftDown(nums: &nums, n: nums.count, i: i)
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for i in nums.indices.dropFirst().reversed() {
+            // Delete node
+            nums.swapAt(0, i)
+            // Start heapifying the root node, from top to bottom
+            siftDown(nums: &nums, n: i, i: 0)
+        }
+    }
+    ```
+=== "JS"
+    ```javascript title="heap_sort.js"
+    function heapSort(nums) {
+        // Build heap operation: heapify all nodes except leaves
+        for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {
+            siftDown(nums, nums.length, i);
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for (let i = nums.length - 1; i > 0; i--) {
+            // Delete node
+            [nums[0], nums[i]] = [nums[i], nums[0]];
+            // Start heapifying the root node, from top to bottom
+            siftDown(nums, i, 0);
+        }
+    }
+    ```
+=== "TS"
+    ```typescript title="heap_sort.ts"
+    function heapSort(nums: number[]): void {
+        // Build heap operation: heapify all nodes except leaves
+        for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {
+            siftDown(nums, nums.length, i);
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for (let i = nums.length - 1; i > 0; i--) {
+            // Delete node
+            [nums[0], nums[i]] = [nums[i], nums[0]];
+            // Start heapifying the root node, from top to bottom
+            siftDown(nums, i, 0);
+        }
+    }
+    ```
+=== "Dart"
+    ```dart title="heap_sort.dart"
+    void heapSort(List<int> nums) {
+      // Build heap operation: heapify all nodes except leaves
+      for (int i = nums.length ~/ 2 - 1; i >= 0; i--) {
+        siftDown(nums, nums.length, i);
+      }
+      // Extract the largest element from the heap and repeat for n-1 rounds
+      for (int i = nums.length - 1; i > 0; i--) {
+        // Delete node
+        int tmp = nums[0];
+        nums[0] = nums[i];
+        nums[i] = tmp;
+        // Start heapifying the root node, from top to bottom
+        siftDown(nums, i, 0);
+      }
+    }
+    ```
+=== "Rust"
+    ```rust title="heap_sort.rs"
+    fn heap_sort(nums: &mut [i32]) {
+        // Build heap operation: heapify all nodes except leaves
+        for i in (0..nums.len() / 2).rev() {
+            sift_down(nums, nums.len(), i);
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for i in (1..nums.len()).rev() {
+            // Delete node
+            nums.swap(0, i);
+            // Start heapifying the root node, from top to bottom
+            sift_down(nums, i, 0);
+        }
+    }
+    ```
+=== "C"
+    ```c title="heap_sort.c"
+    void heapSort(int nums[], int n) {
+        // Build heap operation: heapify all nodes except leaves
+        for (int i = n / 2 - 1; i >= 0; --i) {
+            siftDown(nums, n, i);
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for (int i = n - 1; i > 0; --i) {
+            // Delete node
+            int tmp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = tmp;
+            // Start heapifying the root node, from top to bottom
+            siftDown(nums, i, 0);
+        }
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="heap_sort.kt"
+    fun heapSort(nums: IntArray) {
+        // Build heap operation: heapify all nodes except leaves
+        for (i in nums.size / 2 - 1 downTo 0) {
+            siftDown(nums, nums.size, i)
+        }
+        // Extract the largest element from the heap and repeat for n-1 rounds
+        for (i in nums.size - 1 downTo 1) {
+            // Delete node
+            val temp = nums[0]
+            nums[0] = nums[i]
+            nums[i] = temp
+            // Start heapifying the root node, from top to bottom
+            siftDown(nums, i, 0)
+        }
+    }
+    ```
+=== "Ruby"
+    ```ruby title="heap_sort.rb"
+    ### Heap sort ###
+    def heap_sort(nums)
+      # Build heap operation: heapify all nodes except leaves
+      (nums.length / 2 - 1).downto(0) do |i|
+        sift_down(nums, nums.length, i)
+      end
+      # Extract the largest element from the heap and repeat for n-1 rounds
+      (nums.length - 1).downto(1) do |i|
+        # Delete node
+        nums[0], nums[i] = nums[i], nums[0]
+        # Start heapifying the root node, from top to bottom
+        sift_down(nums, i, 0)
+      end
+    ```
+
 
 ## Đặc điểm thuật toán
 

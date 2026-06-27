@@ -78,9 +78,321 @@ Mã chạy tối đa $n$ vòng, **vì vậy độ phức tạp về thời gian 
 
 Các biến $i$, $j$ và $res$ chỉ sử dụng một lượng không gian bổ sung không đổi, **vì vậy độ phức tạp của không gian là $O(1)$**.
 
-```src
-[file]{max_capacity}-[class]{}-[func]{max_capacity}
-```
+=== "Python"
+    ```python title="max_capacity.py"
+    def max_capacity(ht: list[int]) -> int:
+        """Max capacity: Greedy algorithm"""
+        # Initialize i, j to be at both ends of the array
+        i, j = 0, len(ht) - 1
+        # Initial max capacity is 0
+        res = 0
+        # Loop for greedy selection until the two boards meet
+        while i < j:
+            # Update max capacity
+            cap = min(ht[i], ht[j]) * (j - i)
+            res = max(res, cap)
+            # Move the shorter board inward
+            if ht[i] < ht[j]:
+                i += 1
+            else:
+                j -= 1
+        return res
+    ```
+=== "C++"
+    ```cpp title="max_capacity.cpp"
+    int maxCapacity(vector<int> &ht) {
+        // Initialize i, j to be at both ends of the array
+        int i = 0, j = ht.size() - 1;
+        // Initial max capacity is 0
+        int res = 0;
+        // Loop for greedy selection until the two boards meet
+        while (i < j) {
+            // Update max capacity
+            int cap = min(ht[i], ht[j]) * (j - i);
+            res = max(res, cap);
+            // Move the shorter board inward
+            if (ht[i] < ht[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return res;
+    }
+    ```
+=== "Java"
+    ```java title="max_capacity.java"
+    public class max_capacity {
+        /* Max capacity: Greedy algorithm */
+        static int maxCapacity(int[] ht) {
+            // Initialize i, j to be at both ends of the array
+            int i = 0, j = ht.length - 1;
+            // Initial max capacity is 0
+            int res = 0;
+            // Loop for greedy selection until the two boards meet
+            while (i < j) {
+                // Update max capacity
+                int cap = Math.min(ht[i], ht[j]) * (j - i);
+                res = Math.max(res, cap);
+                // Move the shorter board inward
+                if (ht[i] < ht[j]) {
+                    i++;
+                } else {
+                    j--;
+                }
+            }
+            return res;
+        }
+    
+        public static void main(String[] args) {
+            int[] ht = { 3, 8, 5, 2, 7, 7, 3, 4 };
+    
+            // Greedy algorithm
+            int res = maxCapacity(ht);
+            System.out.println("Maximum capacity is " + res);
+        }
+    }
+    ```
+=== "C#"
+    ```csharp title="max_capacity.cs"
+    public class max_capacity {
+        /* Max capacity: Greedy algorithm */
+        int MaxCapacity(int[] ht) {
+            // Initialize i, j to be at both ends of the array
+            int i = 0, j = ht.Length - 1;
+            // Initial max capacity is 0
+            int res = 0;
+            // Loop for greedy selection until the two boards meet
+            while (i < j) {
+                // Update max capacity
+                int cap = Math.Min(ht[i], ht[j]) * (j - i);
+                res = Math.Max(res, cap);
+                // Move the shorter board inward
+                if (ht[i] < ht[j]) {
+                    i++;
+                } else {
+                    j--;
+                }
+            }
+            return res;
+        }
+    
+        [Test]
+        public void Test() {
+            int[] ht = [3, 8, 5, 2, 7, 7, 3, 4];
+    
+            // Greedy algorithm
+            int res = MaxCapacity(ht);
+            Console.WriteLine("Maximum capacity is " + res);
+        }
+    }
+    ```
+=== "Go"
+    ```go title="max_capacity.go"
+    func maxCapacity(ht []int) int {
+    	// Initialize i, j to be at both ends of the array
+    	i, j := 0, len(ht)-1
+    	// Initial max capacity is 0
+    	res := 0
+    	// Loop for greedy selection until the two boards meet
+    	for i < j {
+    		// Update max capacity
+    		capacity := int(math.Min(float64(ht[i]), float64(ht[j]))) * (j - i)
+    		res = int(math.Max(float64(res), float64(capacity)))
+    		// Move the shorter board inward
+    		if ht[i] < ht[j] {
+    			i++
+    		} else {
+    			j--
+    		}
+    	}
+    	return res
+    }
+    ```
+=== "Swift"
+    ```swift title="max_capacity.swift"
+    func maxCapacity(ht: [Int]) -> Int {
+        // Initialize i, j to be at both ends of the array
+        var i = ht.startIndex, j = ht.endIndex - 1
+        // Initial max capacity is 0
+        var res = 0
+        // Loop for greedy selection until the two boards meet
+        while i < j {
+            // Update max capacity
+            let cap = min(ht[i], ht[j]) * (j - i)
+            res = max(res, cap)
+            // Move the shorter board inward
+            if ht[i] < ht[j] {
+                i += 1
+            } else {
+                j -= 1
+            }
+        }
+        return res
+    }
+    ```
+=== "JS"
+    ```javascript title="max_capacity.js"
+    function maxCapacity(ht) {
+        // Initialize i, j to be at both ends of the array
+        let i = 0,
+            j = ht.length - 1;
+        // Initial max capacity is 0
+        let res = 0;
+        // Loop for greedy selection until the two boards meet
+        while (i < j) {
+            // Update max capacity
+            const cap = Math.min(ht[i], ht[j]) * (j - i);
+            res = Math.max(res, cap);
+            // Move the shorter board inward
+            if (ht[i] < ht[j]) {
+                i += 1;
+            } else {
+                j -= 1;
+            }
+        }
+        return res;
+    }
+    ```
+=== "TS"
+    ```typescript title="max_capacity.ts"
+    function maxCapacity(ht: number[]): number {
+        // Initialize i, j to be at both ends of the array
+        let i = 0,
+            j = ht.length - 1;
+        // Initial max capacity is 0
+        let res = 0;
+        // Loop for greedy selection until the two boards meet
+        while (i < j) {
+            // Update max capacity
+            const cap: number = Math.min(ht[i], ht[j]) * (j - i);
+            res = Math.max(res, cap);
+            // Move the shorter board inward
+            if (ht[i] < ht[j]) {
+                i += 1;
+            } else {
+                j -= 1;
+            }
+        }
+        return res;
+    }
+    ```
+=== "Dart"
+    ```dart title="max_capacity.dart"
+    int maxCapacity(List<int> ht) {
+      // Initialize i, j to be at both ends of the array
+      int i = 0, j = ht.length - 1;
+      // Initial max capacity is 0
+      int res = 0;
+      // Loop for greedy selection until the two boards meet
+      while (i < j) {
+        // Update max capacity
+        int cap = min(ht[i], ht[j]) * (j - i);
+        res = max(res, cap);
+        // Move the shorter board inward
+        if (ht[i] < ht[j]) {
+          i++;
+        } else {
+          j--;
+        }
+      }
+      return res;
+    }
+    ```
+=== "Rust"
+    ```rust title="max_capacity.rs"
+    fn max_capacity(ht: &[i32]) -> i32 {
+        // Initialize i, j to be at both ends of the array
+        let mut i = 0;
+        let mut j = ht.len() - 1;
+        // Initial max capacity is 0
+        let mut res = 0;
+        // Loop for greedy selection until the two boards meet
+        while i < j {
+            // Update max capacity
+            let cap = std::cmp::min(ht[i], ht[j]) * (j - i) as i32;
+            res = std::cmp::max(res, cap);
+            // Move the shorter board inward
+            if ht[i] < ht[j] {
+                i += 1;
+            } else {
+                j -= 1;
+            }
+        }
+        res
+    }
+    ```
+=== "C"
+    ```c title="max_capacity.c"
+    int maxCapacity(int ht[], int htLength) {
+        // Initialize i, j to be at both ends of the array
+        int i = 0;
+        int j = htLength - 1;
+        // Initial max capacity is 0
+        int res = 0;
+        // Loop for greedy selection until the two boards meet
+        while (i < j) {
+            // Update max capacity
+            int capacity = myMin(ht[i], ht[j]) * (j - i);
+            res = myMax(res, capacity);
+            // Move the shorter board inward
+            if (ht[i] < ht[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return res;
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="max_capacity.kt"
+    fun maxCapacity(ht: IntArray): Int {
+        // Initialize i, j to be at both ends of the array
+        var i = 0
+        var j = ht.size - 1
+        // Initial max capacity is 0
+        var res = 0
+        // Loop for greedy selection until the two boards meet
+        while (i < j) {
+            // Update max capacity
+            val cap = min(ht[i], ht[j]) * (j - i)
+            res = max(res, cap)
+            // Move the shorter board inward
+            if (ht[i] < ht[j]) {
+                i++
+            } else {
+                j--
+            }
+        }
+        return res
+    }
+    ```
+=== "Ruby"
+    ```ruby title="max_capacity.rb"
+    ### Maximum capacity: greedy ###
+    def max_capacity(ht)
+      # Initialize i, j to be at both ends of the array
+      i, j = 0, ht.length - 1
+      # Initial max capacity is 0
+      res = 0
+    
+      # Loop for greedy selection until the two boards meet
+      while i < j
+        # Update max capacity
+        cap = [ht[i], ht[j]].min * (j - i)
+        res = [res, cap].max
+        # Move the shorter board inward
+        if ht[i] < ht[j]
+          i += 1
+        else
+          j -= 1
+        end
+      end
+    
+      res
+    ```
+
 
 ### Bằng chứng về tính đúng đắn
 
