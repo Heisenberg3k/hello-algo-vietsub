@@ -4493,7 +4493,7 @@
 <p>Khi phân tích độ phức tạp về không gian của một chương trình, <strong>chúng tôi thường xem xét ba phần: dữ liệu tạm thời, không gian khung ngăn xếp và dữ liệu đầu ra</strong>, như minh họa trong hình sau.</p>
 <p><img alt="Algorithm-related space" src="../space_complexity.assets/space_types.png" /></p>
 <p>Mã liên quan như sau:</p>
-<p>=== "Trăn"</p>
+<p>=== "Python"</p>
 <div class="language-text highlight"><pre><span></span><code>```python title=&quot;&quot;
 class Node:
     &quot;&quot;&quot;Class&quot;&quot;&quot;
@@ -4825,7 +4825,7 @@ end
 <li><strong>Dựa trên dữ liệu đầu vào tệ nhất</strong>: Khi <span class="arithmatex">\(n &lt; 10\)</span>, độ phức tạp của không gian là <span class="arithmatex">\(O(1)\)</span>; nhưng khi <span class="arithmatex">\(n &gt; 10\)</span>, mảng khởi tạo <code>nums</code> chiếm không gian <span class="arithmatex">\(O(n)\)</span>, do đó độ phức tạp của không gian trong trường hợp xấu nhất là <span class="arithmatex">\(O(n)\)</span>.</li>
 <li><strong>Dựa trên bộ nhớ tối đa trong quá trình thực hiện thuật toán</strong>: Ví dụ: trước khi thực hiện dòng cuối cùng, chương trình chiếm không gian <span class="arithmatex">\(O(1)\)</span>; khi khởi tạo mảng <code>nums</code>, chương trình chiếm không gian <span class="arithmatex">\(O(n)\)</span>, do đó độ phức tạp không gian trong trường hợp xấu nhất là <span class="arithmatex">\(O(n)\)</span>.</li>
 </ol>
-<p>=== "Trăn"</p>
+<p>=== "Python"</p>
 <div class="language-text highlight"><pre><span></span><code>```python title=&quot;&quot;
 def algorithm(n: int):
     a = 0               # O(1)
@@ -4964,7 +4964,7 @@ end
 ```
 </code></pre></div>
 <p><strong>Trong các hàm đệ quy, cần phải đếm không gian khung ngăn xếp</strong>. Quan sát đoạn mã sau:</p>
-<p>=== "Trăn"</p>
+<p>=== "Python"</p>
 <div class="language-text highlight"><pre><span></span><code>```python title=&quot;&quot;
 def function() -&gt; int:
     # Perform some operations

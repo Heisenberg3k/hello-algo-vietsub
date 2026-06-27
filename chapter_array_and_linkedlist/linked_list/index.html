@@ -4486,7 +4486,7 @@
 <li>Trong các ngôn ngữ hỗ trợ con trỏ, chẳng hạn như C, C++, Go và Rust, nên thay thế "tham chiếu" nói trên bằng "con trỏ".</li>
 </ul>
 <p>Như được hiển thị trong đoạn mã sau, nút danh sách được liên kết <code>ListNode</code> không chỉ chứa một giá trị mà còn chứa một tham chiếu bổ sung (con trỏ). Do đó, <strong>danh sách liên kết chiếm nhiều dung lượng bộ nhớ hơn mảng khi lưu trữ cùng một lượng dữ liệu</strong>.</p>
-<p>=== "Trăn"</p>
+<p>=== "Python"</p>
 <div class="language-text highlight"><pre><span></span><code>```python title=&quot;&quot;
 class ListNode:
     &quot;&quot;&quot;Linked list node class&quot;&quot;&quot;
@@ -4645,7 +4645,7 @@ end
 <h2 id="cac-thao-tac-danh-sach-lien-ket-pho-bien">Các thao tác danh sách liên kết phổ biến<a class="headerlink" href="#cac-thao-tac-danh-sach-lien-ket-pho-bien" title="Permanent link">&para;</a></h2>
 <h3 id="khoi-tao-danh-sach-lien-ket">Khởi tạo danh sách liên kết<a class="headerlink" href="#khoi-tao-danh-sach-lien-ket" title="Permanent link">&para;</a></h3>
 <p>Việc xây dựng danh sách liên kết bao gồm hai bước: đầu tiên, khởi tạo từng đối tượng nút; thứ hai, xây dựng mối quan hệ tham chiếu giữa các nút. Sau khi quá trình khởi tạo hoàn tất, chúng ta có thể duyệt qua tất cả các nút bắt đầu từ nút đầu của danh sách được liên kết thông qua tham chiếu <code>next</code>.</p>
-<p>=== "Trăn"</p>
+<p>=== "Python"</p>
 <div class="language-text highlight"><pre><span></span><code>```python title=&quot;linked_list.py&quot;
 # Initialize linked list 1 -&gt; 3 -&gt; 2 -&gt; 5 -&gt; 4
 # Initialize each node
@@ -5463,7 +5463,7 @@ n3.next = n4
 <li><strong>Danh sách liên kết vòng</strong>: Nếu chúng ta làm cho nút đuôi của danh sách liên kết đơn trỏ đến nút đầu (nối đuôi với đầu), chúng ta sẽ có một danh sách liên kết vòng. Trong danh sách liên kết vòng, bất kỳ nút nào cũng có thể được xem là nút đầu.</li>
 <li><strong>Danh sách liên kết đôi</strong>: So với danh sách liên kết đơn, danh sách liên kết đôi ghi lại các tham chiếu theo cả hai hướng. Định nghĩa nút của danh sách liên kết đôi bao gồm các tham chiếu đến cả nút kế tiếp (nút tiếp theo) và nút tiền thân (nút trước). So với danh sách liên kết đơn, danh sách liên kết đôi linh hoạt hơn và có thể duyệt danh sách liên kết theo cả hai hướng, nhưng nó cũng yêu cầu nhiều dung lượng bộ nhớ hơn.</li>
 </ul>
-<p>=== "Trăn"</p>
+<p>=== "Python"</p>
 <div class="language-text highlight"><pre><span></span><code>```python title=&quot;&quot;
 class ListNode:
     &quot;&quot;&quot;Doubly linked list node class&quot;&quot;&quot;
