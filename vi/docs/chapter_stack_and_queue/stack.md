@@ -22,7 +22,7 @@ Các thao tác phổ biến trên ngăn xếp được thể hiện trong bảng
 
 Thông thường, chúng ta có thể trực tiếp sử dụng lớp ngăn xếp tích hợp do ngôn ngữ lập trình cung cấp. Tuy nhiên, một số ngôn ngữ có thể không cung cấp lớp ngăn xếp chuyên dụng. Trong những trường hợp như vậy, chúng ta có thể sử dụng "mảng" hoặc "danh sách liên kết" của ngôn ngữ làm ngăn xếp và chỉ cần tránh sử dụng các thao tác không liên quan đến hành vi của ngăn xếp.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="stack.py"
     # Initialize stack

@@ -260,7 +260,7 @@ Chúng tôi biết rằng các khóa của bảng băm có thể là số nguyê
 
 Xin lưu ý rằng định nghĩa và phương pháp của các hàm tính toán giá trị băm tích hợp trong các ngôn ngữ lập trình khác nhau sẽ khác nhau.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="built_in_hash.py"
     num = 3

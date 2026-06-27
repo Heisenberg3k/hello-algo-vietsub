@@ -24,7 +24,7 @@ Như thể hiện trong hình bên dưới, với một cây nhị phân không 
 
 Để giải quyết vấn đề này, **chúng ta có thể viết rõ ràng tất cả các giá trị `None` trong trình tự duyệt cấp bậc**. Như được hiển thị trong hình bên dưới, khi chúng ta thực hiện điều này, trình tự duyệt cấp bậc có thể biểu diễn duy nhất một cây nhị phân. Mã ví dụ như sau:
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     # Array representation of a binary tree

@@ -21,7 +21,7 @@ Các hoạt động phổ biến trên deque được hiển thị trong bảng 
 
 Tương tự, chúng ta có thể sử dụng trực tiếp các lớp deque do ngôn ngữ lập trình cung cấp:
 
-=== "Trăn"
+=== "Python"
 
     ```python title="deque.py"
     from collections import deque

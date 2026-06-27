@@ -20,7 +20,7 @@ Các hoạt động phổ biến trên hàng đợi được hiển thị trong 
 
 Chúng ta có thể trực tiếp sử dụng các lớp hàng đợi do ngôn ngữ lập trình cung cấp:
 
-=== "Trăn"
+=== "Python"
 
     ```python title="queue.py"
     from collections import deque

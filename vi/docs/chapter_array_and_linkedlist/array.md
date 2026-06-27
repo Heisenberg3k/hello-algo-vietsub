@@ -10,7 +10,7 @@
 
 Chúng ta có thể chọn giữa hai phương pháp khởi tạo mảng dựa trên nhu cầu của mình: có hoặc không có giá trị ban đầu. Khi không có giá trị ban đầu nào được chỉ định, hầu hết các ngôn ngữ lập trình đều khởi tạo các phần tử mảng thành $0$:
 
-=== "Trăn"
+=== "Python"
 
     ```python title="array.py"
     # Initialize array

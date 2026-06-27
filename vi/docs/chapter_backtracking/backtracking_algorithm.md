@@ -780,7 +780,7 @@ Tiếp theo, chúng tôi cố gắng trích xuất một khung chung tập trung
 
 Trong mã khung sau đây, `state` thể hiện trạng thái hiện tại của vấn đề và `lựa chọn` thể hiện các lựa chọn có sẵn ở trạng thái hiện tại:
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     def backtrack(state: State, choices: list[choice], res: list[state]):

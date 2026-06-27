@@ -20,7 +20,7 @@ Cây AVL vừa là cây tìm kiếm nhị phân vừa là cây nhị phân cân 
 
 Vì các hoạt động liên quan đến cây AVL yêu cầu lấy chiều cao nút, nên chúng ta cần thêm biến `height` vào lớp nút:
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     class TreeNode:

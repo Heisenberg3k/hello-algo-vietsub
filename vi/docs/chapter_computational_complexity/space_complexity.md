@@ -24,7 +24,7 @@ Khi phân tích độ phức tạp về không gian của một chương trình,
 
 Mã liên quan như sau:
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     class Node:
@@ -372,7 +372,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
 1. **Dựa trên dữ liệu đầu vào tệ nhất**: Khi $n < 10$, độ phức tạp của không gian là $O(1)$; nhưng khi $n > 10$, mảng khởi tạo `nums` chiếm không gian $O(n)$, do đó độ phức tạp của không gian trong trường hợp xấu nhất là $O(n)$.
 2. **Dựa trên bộ nhớ tối đa trong quá trình thực hiện thuật toán**: Ví dụ: trước khi thực hiện dòng cuối cùng, chương trình chiếm không gian $O(1)$; khi khởi tạo mảng `nums`, chương trình chiếm không gian $O(n)$, do đó độ phức tạp không gian trong trường hợp xấu nhất là $O(n)$.
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     def algorithm(n: int):
@@ -525,7 +525,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
 
 **Trong các hàm đệ quy, cần phải đếm không gian khung ngăn xếp**. Quan sát đoạn mã sau:
 
-=== "Trăn"
+=== "Python"
 
     ```python title=""
     def function() -> int:

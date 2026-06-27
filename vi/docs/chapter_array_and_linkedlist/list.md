@@ -17,7 +17,7 @@ Trên thực tế, **các loại danh sách do thư viện chuẩn của nhiều
 
 Chúng tôi thường khởi tạo danh sách theo một trong hai cách: trống hoặc với các giá trị được xác định trước:
 
-=== "Trăn"
+=== "Python"
 
     ```python title="list.py"
     # Initialize a list
@@ -155,7 +155,7 @@ https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20
 
 Vì danh sách về cơ bản là một mảng nên chúng ta có thể truy cập và cập nhật các phần tử với độ phức tạp về thời gian $O(1)$, điều này rất hiệu quả.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="list.py"
     # Access an element
@@ -286,7 +286,7 @@ https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20
 
 So với mảng, danh sách có thể tự do thêm và xóa các phần tử. Việc thêm một phần tử vào cuối danh sách có độ phức tạp về thời gian là $O(1)$, nhưng việc chèn và xóa các phần tử vẫn có hiệu quả tương tự như mảng, với độ phức tạp về thời gian là $O(n)$.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="list.py"
     # Clear the list
@@ -540,7 +540,7 @@ https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20
 
 Giống như mảng, danh sách có thể được duyệt theo chỉ mục hoặc bằng cách duyệt trực tiếp qua các phần tử.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="list.py"
     # Traverse the list by index
@@ -741,7 +741,7 @@ https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20
 
 Đưa ra một danh sách mới `nums1`, chúng ta có thể nối nó vào cuối danh sách ban đầu.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="list.py"
     # Concatenate two lists
@@ -852,7 +852,7 @@ https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20
 
 Sau khi sắp xếp danh sách, chúng ta có thể sử dụng thuật toán "tìm kiếm nhị phân" và "hai con trỏ", những thuật toán này thường được kiểm tra trong các bài toán thuật toán mảng.
 
-=== "Trăn"
+=== "Python"
 
     ```python title="list.py"
     # Sort a list
