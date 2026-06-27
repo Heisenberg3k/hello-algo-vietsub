@@ -29,7 +29,7 @@ Bảng sau liệt kê không gian bị chiếm dụng, phạm vi giá trị và 
 | Phao | `phao` | 4 byte | $1,175 \times 10^{-38}$ | $3,403 \times 10^{38}$ | $0,0\text{f}$ |
 |            | `kép` | 8 byte | $2,225 \times 10^{-308}$ | $1,798 \times 10^{308}$ | $0,0$ |
 | Nhân vật | `char` | 2 byte | $0$ | $2^{16} - 1$ | $0$ |
-| Boolean | `bool` | 1 byte | $\{false}$ | $\{true}$ | $\{false}$ |
+| Boolean | `bool` | 1 byte | $\text {false}$ | $\text {true}$ | $\text {false}$ |
 
 Xin lưu ý rằng bảng trên áp dụng cụ thể cho các kiểu dữ liệu cơ bản của Java. Mỗi ngôn ngữ lập trình có định nghĩa kiểu riêng và cách sử dụng không gian, phạm vi giá trị và giá trị mặc định của chúng có thể khác nhau.
 
