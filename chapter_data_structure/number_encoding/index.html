@@ -4325,51 +4325,51 @@
 <p><img alt="Conversions among sign-magnitude, 1's complement, and 2's complement" src="../number_encoding.assets/1s_2s_complement.png" /></p>
 <p><u>Sign-magnitude</u>, although the most intuitive, has some limitations. On one hand, <strong>the sign-magnitude of negative numbers cannot be directly used in operations</strong>. For example, calculating <span class="arithmatex">\(1 + (-2)\)</span> in sign-magnitude yields <span class="arithmatex">\(-3\)</span>, which is clearly incorrect.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 &amp; 1 + (-2) \newline
 &amp; \rightarrow 0000 \; 0001 + 1000\; 0010 \ dòng mới
 &amp; = 1000 \; 0011 \ dòng mới
 &amp; \rightarrow -3
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Để giải quyết vấn đề này, máy tính đã đưa ra <u>phần bù 1</u>. Nếu trước tiên chúng ta chuyển đổi độ lớn dấu thành số bù 1 và tính <span class="arithmatex">\(1 + (-2)\)</span> theo số bù 1, sau đó chuyển đổi kết quả trở lại độ lớn dấu, chúng ta có thể thu được kết quả chính xác là <span class="arithmatex">\(-1\)</span>.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 &amp; 1 + (-2) \newline
 &amp; \rightarrow 0000 \; 0001 \; \text{(Ký hiệu độ lớn)} + 1000 \; 0010 \; \text{(Ký hiệu cường độ)} \newline
 &amp; = 0000 \; 0001 \; \text{(phần bù 1)} + 1111 \; 1101 \; \text{(phần bù 1)} \newline
 &amp; = 1111 \; 1110 \; \text{(phần bù 1)} \newline
 &amp; = 1000 \; 0001 \; \text{(Ký hiệu cường độ)} \newline
 &amp; \rightarrow -1
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Mặt khác, <strong>độ lớn dấu của số 0 có hai cách biểu thị, <span class="arithmatex">\(+0\)</span> và <span class="arithmatex">\(-0\)</span></strong>. Điều này có nghĩa là số 0 tương ứng với hai bảng mã nhị phân khác nhau, điều này có thể gây ra sự mơ hồ. Ví dụ, trong các phán đoán có điều kiện, nếu chúng ta không phân biệt được số 0 dương và số 0 âm thì có thể dẫn đến kết quả phán đoán sai. Nếu chúng ta muốn xử lý sự mơ hồ của số 0 dương và âm, chúng ta cần đưa ra các phép toán phán đoán bổ sung, điều này có thể làm giảm hiệu quả tính toán của máy tính.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 +0 &amp; \rightarrow 0000 \; 0000 \newline
 -0 &amp; \rightarrow 1000 \; 0000
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Giống như độ lớn dấu, phần bù 1 cũng có vấn đề mơ hồ về số 0 dương và âm. Vì vậy, máy tính đã giới thiệu thêm <u>Phần bù 2</u>. Trước tiên chúng ta hãy quan sát quá trình chuyển đổi số 0 âm từ độ lớn dấu sang phần bù 1 thành phần bù 2:</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 -0 \rightarrow \; &amp; 1000 \; 0000 \; \text{(Ký hiệu cường độ)} \newline
 = \; &amp; 1111 \; 1111 \; \text{(phần bù 1)} \newline
 = 1 \; &amp; 0000 \; 0000 \; \text{(phần bù 2)} \newline
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Việc thêm <span class="arithmatex">\(1\)</span> vào phần bù 1 của số 0 âm sẽ tạo ra số mang, nhưng vì loại <code>byte</code> chỉ có độ dài 8 bit nên <span class="arithmatex">\(1\)</span> tràn đến bit thứ 9 sẽ bị loại bỏ. Điều đó có nghĩa là, <strong>phần bù 2 của số 0 âm là <span class="arithmatex">\(0000 \; 0000\)</span>, tương đương với số bù 2 của số 0 dương</strong>. Điều này có nghĩa là trong biểu diễn phần bù của 2, chỉ có một số 0 và do đó sự mơ hồ về số 0 dương và âm được giải quyết.</p>
 <p>Vẫn còn một câu hỏi cuối cùng: phạm vi của loại <code>byte</code> là <span class="arithmatex">\([-128, 127]\)</span>, vậy số âm bổ sung <span class="arithmatex">\(-128\)</span> đến từ đâu? Chúng tôi nhận thấy rằng tất cả các số nguyên trong khoảng <span class="arithmatex">\([-127, +127]\)</span> có độ lớn dấu tương ứng, phần bù 1 và phần bù 2, đồng thời độ lớn dấu và phần bù 2 có thể được chuyển đổi lẫn nhau.</p>
 <p>Tuy nhiên, <strong>số bù 2 <span class="arithmatex">\(1000 \; 0000\)</span> là một ngoại lệ và nó không có cường độ dấu tương ứng</strong>. Theo phương pháp chuyển đổi, chúng ta nhận được rằng độ lớn dấu của phần bù 2 này là <span class="arithmatex">\(0000 \; 0000\)</span>. Điều này rõ ràng là mâu thuẫn vì độ lớn dấu này đại diện cho số <span class="arithmatex">\(0\)</span> và phần bù 2 của nó phải là chính nó. Máy tính xác định rằng số 2 đặc biệt này bù <span class="arithmatex">\(1000 \; 0000\)</span> đại diện cho <span class="arithmatex">\(-128\)</span>. Trên thực tế, kết quả của việc tính <span class="arithmatex">\((-1) + (-127)\)</span> trong phần bù 2 là <span class="arithmatex">\(-128\)</span>.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 &amp; (-127) + (-1) \newline
 &amp; \rightarrow 1111 \; 1111 \; \text{(Ký hiệu độ lớn)} + 1000 \; 0001 \; \text{(Ký hiệu cường độ)} \newline
 &amp; = 1000 \; 0000 \; \text{(phần bù 1)} + 1111 \; 1110 \; \text{(phần bù 1)} \newline
 &amp; = 1000 \; 0001 \; \text{(phần bù 2)} + 1111 \; 1111 \; \text{(phần bù 2)} \newline
 &amp; = 1000 \; 0000 \; \text{(phần bù 2)} \newline
 &amp; \rightarrow -128
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Bạn có thể nhận thấy rằng tất cả các phép tính trên đều là phép tính cộng. Điều này gợi ý một thực tế quan trọng: <strong>các mạch phần cứng bên trong máy tính được thiết kế chủ yếu dựa trên các phép toán cộng</strong>. Điều này là do các phép toán cộng được thực hiện đơn giản hơn trong phần cứng so với các phép toán khác (như nhân, chia và trừ), dễ song song hóa hơn và có tốc độ hoạt động nhanh hơn.</p>
 <p>Xin lưu ý rằng điều này không có nghĩa là máy tính chỉ có thể thực hiện phép cộng. <strong>Bằng cách kết hợp phép cộng với một số phép toán logic cơ bản, máy tính có thể thực hiện nhiều phép toán khác</strong>. Ví dụ: phép trừ <span class="arithmatex">\(a - b\)</span> có thể được chuyển đổi sang phép tính phép cộng <span class="arithmatex">\(a + (-b)\)</span>; phép tính nhân và chia có thể được chuyển đổi thành phép tính cộng hoặc trừ nhiều lần.</p>
@@ -4397,10 +4397,10 @@ b_{31} b_{30} b_{29} \ldots b_2 b_1 b_0
 \]</div>
 <p>Phạm vi của mỗi thành phần là:</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 \mathrm{S} \in &amp; \{ 0, 1\}, \quad \mathrm{E} \in \{ 1, 2, \dots, 254 \} \newline
 (1 + \mathrm{N}) = &amp; (1 + \sum_{i=1}^{23} b_{23-i} 2^{-i}) \subset [1, 2 - 2^{-23}]
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p><img alt="Calculation example of float under IEEE 754 standard" src="../number_encoding.assets/ieee_754_float.png" /></p>
 <p>Quan sát hình trên, cho dữ liệu ví dụ <span class="arithmatex">\(\mathrm{S} = 0\)</span>, <span class="arithmatex">\(\mathrm{E} = 124\)</span>, <span class="arithmatex">\(\mathrm{N} = 2^{-2} + 2^{-3} = 0,375\)</span>, ta có:</p>

@@ -4528,19 +4528,19 @@
 <p>Tóm lại: <strong>sử dụng số nguyên tố lớn làm mô đun giúp tối đa hóa tính đồng nhất của các giá trị băm</strong>. Bởi vì một số nguyên tố không có thừa số chung với các số khác, nên nó có thể giảm các mẫu tuần hoàn do phép toán modulo đưa ra và do đó giảm thiểu xung đột băm.</p>
 <p>Ví dụ: giả sử chúng ta chọn số tổng hợp <span class="arithmatex">\(9\)</span> làm mô đun, có thể chia cho <span class="arithmatex">\(3\)</span>, thì tất cả <code>key</code> chia hết cho <span class="arithmatex">\(3\)</span> sẽ được ánh xạ tới các giá trị băm <span class="arithmatex">\(0\)</span>, <span class="arithmatex">\(3\)</span>, <span class="arithmatex">\(6\)</span>.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 \text{mô-đun} &amp; = 9 \newline
 \text{key} &amp; = \{ 0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, \dots \} \newline
 \text{hash} &amp; = \{ 0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6,\dots \}
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Nếu các giá trị <code>key</code> đầu vào tuân theo kiểu cấp số cộng này, thì các giá trị băm sẽ phân cụm, làm trầm trọng thêm các xung đột băm. Bây giờ giả sử chúng ta thay thế <code>môđun</code> bằng số nguyên tố <span class="arithmatex">\(13\)</span>. Bởi vì <code>khóa</code> và <code>mô-đun</code> không có yếu tố chung nào nên các giá trị băm đầu ra sẽ được phân bổ đồng đều hơn nhiều.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 \text{mô-đun} &amp; = 13 \newline
 \text{key} &amp; = \{ 0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, \dots \} \newline
 \text{hash} &amp; = \{ 0, 3, 6, 9, 12, 2, 5, 8, 11, 1, 4, 7, \dots \}
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Điều đáng chú ý là nếu <code>khóa</code> được đảm bảo phân phối ngẫu nhiên và đồng đều, thì việc chọn số nguyên tố hoặc số tổng hợp làm mô đun đều có thể tạo ra các giá trị băm được phân bố đồng đều. Tuy nhiên, khi việc phân phối <code>khóa</code> có tính tuần hoàn nhất định, modulo một số tổng hợp có nhiều khả năng dẫn đến phân cụm hơn.</p>
 <p>Tóm lại, chúng ta thường chọn một số nguyên tố làm mô đun và số nguyên tố này phải đủ lớn để loại bỏ các mẫu tuần hoàn càng nhiều càng tốt, nâng cao tính mạnh mẽ của thuật toán băm.</p>

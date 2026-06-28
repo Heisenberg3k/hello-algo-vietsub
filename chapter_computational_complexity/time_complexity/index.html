@@ -5485,11 +5485,11 @@ end
 </code></pre></div>
 <p>Công thức sau đây thể hiện kết quả đếm trước và sau khi sử dụng các kỹ thuật trên; cả hai đều có độ phức tạp về thời gian là <span class="arithmatex">\(O(n^2)\)</span>.</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 T(n) &amp; = 2n(n + 1) + (5n + 1) + 2 &amp; \text{Đếm đầy đủ (-.-|||)} \newline
 &amp; = 2n^2 + 7n + 3 \newline
 T(n) &amp; = n^2 + n &amp; \text{Số đơn giản hóa (o.O)}
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <h3 id="buoc-2-xac-inh-gioi-han-tiem-can-tren">Bước 2: Xác định giới hạn tiệm cận trên<a class="headerlink" href="#buoc-2-xac-inh-gioi-han-tiem-can-tren" title="Permanent link">&para;</a></h3>
 <p><strong>Độ phức tạp về thời gian được xác định bởi số hạng có thứ tự cao nhất trong <span class="arithmatex">\(T(n)\)</span></strong>. Điều này là do khi <span class="arithmatex">\(n\)</span> tiến tới vô cùng, số hạng bậc cao nhất sẽ đóng vai trò chủ đạo và ảnh hưởng của các số hạng khác có thể bị bỏ qua.</p>
@@ -5529,10 +5529,10 @@ T(n) &amp; = n^2 + n &amp; \text{Số đơn giản hóa (o.O)}
 <h2 id="cac-loai-pho-bien">Các loại phổ biến<a class="headerlink" href="#cac-loai-pho-bien" title="Permanent link">&para;</a></h2>
 <p>Đặt kích thước dữ liệu đầu vào là <span class="arithmatex">\(n\)</span>. Các loại độ phức tạp thời gian phổ biến được thể hiện trong hình bên dưới (sắp xếp theo thứ tự từ thấp đến cao).</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 &amp; O(1) &lt; O(\log n) &lt; O(n) &lt; O(n \log n) &lt; O(n^2) &lt; O(2^n) &lt; O(n!) \newline
 &amp; \text{Hằng số} &lt; \text{Logarit} &lt; \text{Tuyến tính} &lt; \text{Số tuyến tính} &lt; \text{Quadratic} &lt; \text{Exentials} &lt; \text{Factorial}
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p><img alt="Common time complexity types" src="../time_complexity.assets/time_complexity_common_types.png" /></p>
 <h3 id="lenh-co-inh-o1">Lệnh cố định <span class="arithmatex">\(O(1)\)</span><a class="headerlink" href="#lenh-co-inh-o1" title="Permanent link">&para;</a></h3>

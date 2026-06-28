@@ -4369,10 +4369,10 @@ T(h) = 2^0h + 2^1(h-1) + 2^2(h-2) + \dots + 2^{(h-1)}\times1
 \]</div>
 <p>Đơn giản hóa biểu thức trên đòi hỏi một số đại số cấp ba. Đầu tiên, nhân <span class="arithmatex">\(T(h)\)</span> với <span class="arithmatex">\(2\)</span> để có:</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 T(h) &amp; = 2^0h + 2^1(h-1) + 2^2(h-2) + \dots + 2^{h-1}\times1 \newline
 2 T(h) &amp; = 2^1h + 2^2(h-1) + 2^3(h-2) + \dots + 2^{h}\times1 \newline
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Sử dụng phép trừ các tổng đã dịch chuyển, trừ phương trình thứ nhất <span class="arithmatex">\(T(h)\)</span> khỏi phương trình thứ hai <span class="arithmatex">\(2 T(h)\)</span> để có:</p>
 <div class="arithmatex">\[
@@ -4380,11 +4380,11 @@ T(h) &amp; = 2^0h + 2^1(h-1) + 2^2(h-2) + \dots + 2^{h-1}\times1 \newline
 \]</div>
 <p>Quan sát biểu thức trên, chúng ta thấy rằng <span class="arithmatex">\(T(h)\)</span> là một chuỗi hình học, có thể được tính trực tiếp bằng công thức tính tổng, mang lại độ phức tạp về thời gian là:</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 T(h) &amp; = 2 \frac{1 - 2^h}{1 - 2} - h \newline
 &amp; = 2^{h+1} - h - 2 \newline
 &amp; = O(2^h)
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p>Hơn nữa, một cây nhị phân hoàn hảo có chiều cao <span class="arithmatex">\(h\)</span> có <span class="arithmatex">\(n = 2^{h+1} - 1\)</span> nút, do đó độ phức tạp là <span class="arithmatex">\(O(2^h) = O(n)\)</span>. Đạo hàm này cho thấy rằng <strong>độ phức tạp về thời gian của việc xây dựng vùng nhớ heap từ danh sách đầu vào là <span class="arithmatex">\(O(n)\)</span>, có hiệu quả cao</strong>.</p>
 

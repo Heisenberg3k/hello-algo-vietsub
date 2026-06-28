@@ -4422,11 +4422,11 @@ O(n + (\frac{n}{2})^2 \times 2 + n) = O(\frac{n^2}{2} + 2n)
 <p><img alt="Bubble sort before and after array division" src="../divide_and_conquer.assets/divide_and_conquer_bubble_sort.png" /></p>
 <p>Tiếp theo, chúng ta tính bất đẳng thức sau, trong đó vế trái và vế phải lần lượt biểu thị tổng số phép toán trước và sau phép chia:</p>
 <div class="arithmatex">\[
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 n^2 &amp; &gt; \frac{n^2}{2} + 2n \newline
 n^2 - \frac{n^2}{2} - 2n &amp; &gt; 0 \newline
 n(n - 4) &amp; &gt; 0
-\end{căn chỉnh}
+\end{aligned}
 \]</div>
 <p><strong>Điều này có nghĩa là khi <span class="arithmatex">\(n &gt; 4\)</span>, số phép toán sau khi chia sẽ nhỏ hơn và hiệu quả sắp xếp sẽ cao hơn</strong>. Lưu ý rằng độ phức tạp về thời gian sau khi chia vẫn là bậc hai <span class="arithmatex">\(O(n^2)\)</span>, nhưng số hạng không đổi trong độ phức tạp đã trở nên nhỏ hơn.</p>
 <p>Đi xa hơn, <strong>điều gì sẽ xảy ra nếu chúng ta liên tục chia các mảng con từ điểm giữa của chúng thành hai mảng con</strong> cho đến khi các mảng con chỉ có một phần tử? Cách tiếp cận này thực sự là "sắp xếp hợp nhất", với độ phức tạp về thời gian là <span class="arithmatex">\(O(n \log n)\)</span>.</p>
