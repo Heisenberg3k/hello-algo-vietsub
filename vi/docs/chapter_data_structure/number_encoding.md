@@ -21,44 +21,44 @@ Hình bên dưới hiển thị các phương pháp chuyển đổi giữa độ
 <u>Sign-magnitude</u>, although the most intuitive, has some limitations. On one hand, **the sign-magnitude of negative numbers cannot be directly used in operations**. For example, calculating $1 + (-2)$ in sign-magnitude yields $-3$, which is clearly incorrect.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 & 1 + (-2) \newline
 & \rightarrow 0000 \; 0001 + 1000\; 0010 \ dòng mới
 & = 1000 \; 0011 \ dòng mới
 & \rightarrow -3
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Để giải quyết vấn đề này, máy tính đã đưa ra <u>phần bù 1</u>. Nếu trước tiên chúng ta chuyển đổi độ lớn dấu thành số bù 1 và tính $1 + (-2)$ theo số bù 1, sau đó chuyển đổi kết quả trở lại độ lớn dấu, chúng ta có thể thu được kết quả chính xác là $-1$.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 & 1 + (-2) \newline
 & \rightarrow 0000 \; 0001 \; \text{(Ký hiệu độ lớn)} + 1000 \; 0010 \; \text{(Ký hiệu cường độ)} \newline
 & = 0000 \; 0001 \; \text{(phần bù 1)} + 1111 \; 1101 \; \text{(phần bù 1)} \newline
 & = 1111 \; 1110 \; \text{(phần bù 1)} \newline
 & = 1000 \; 0001 \; \text{(Ký hiệu cường độ)} \newline
 & \rightarrow -1
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Mặt khác, **độ lớn dấu của số 0 có hai cách biểu thị, $+0$ và $-0$**. Điều này có nghĩa là số 0 tương ứng với hai bảng mã nhị phân khác nhau, điều này có thể gây ra sự mơ hồ. Ví dụ, trong các phán đoán có điều kiện, nếu chúng ta không phân biệt được số 0 dương và số 0 âm thì có thể dẫn đến kết quả phán đoán sai. Nếu chúng ta muốn xử lý sự mơ hồ của số 0 dương và âm, chúng ta cần đưa ra các phép toán phán đoán bổ sung, điều này có thể làm giảm hiệu quả tính toán của máy tính.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 +0 & \rightarrow 0000 \; 0000 \newline
 -0 & \rightarrow 1000 \; 0000
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Giống như độ lớn dấu, phần bù 1 cũng có vấn đề mơ hồ về số 0 dương và âm. Vì vậy, máy tính đã giới thiệu thêm <u>Phần bù 2</u>. Trước tiên chúng ta hãy quan sát quá trình chuyển đổi số 0 âm từ độ lớn dấu sang phần bù 1 thành phần bù 2:
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 -0 \rightarrow \; & 1000 \; 0000 \; \text{(Ký hiệu cường độ)} \newline
 = \; & 1111 \; 1111 \; \text{(phần bù 1)} \newline
 = 1 \; & 0000 \; 0000 \; \text{(phần bù 2)} \newline
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Việc thêm $1$ vào phần bù 1 của số 0 âm sẽ tạo ra số mang, nhưng vì loại `byte` chỉ có độ dài 8 bit nên $1$ tràn đến bit thứ 9 sẽ bị loại bỏ. Điều đó có nghĩa là, **phần bù 2 của số 0 âm là $0000 \; 0000$, tương đương với số bù 2 của số 0 dương**. Điều này có nghĩa là trong biểu diễn phần bù của 2, chỉ có một số 0 và do đó sự mơ hồ về số 0 dương và âm được giải quyết.
@@ -68,14 +68,14 @@ Vẫn còn một câu hỏi cuối cùng: phạm vi của loại `byte` là $[-1
 Tuy nhiên, **số bù 2 $1000 \; 0000$ là một ngoại lệ và nó không có cường độ dấu tương ứng**. Theo phương pháp chuyển đổi, chúng ta nhận được rằng độ lớn dấu của phần bù 2 này là $0000 \; 0000$. Điều này rõ ràng là mâu thuẫn vì độ lớn dấu này đại diện cho số $0$ và phần bù 2 của nó phải là chính nó. Máy tính xác định rằng số 2 đặc biệt này bù $1000 \; 0000$ đại diện cho $-128$. Trên thực tế, kết quả của việc tính $(-1) + (-127)$ trong phần bù 2 là $-128$.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 & (-127) + (-1) \newline
 & \rightarrow 1111 \; 1111 \; \text{(Ký hiệu độ lớn)} + 1000 \; 0001 \; \text{(Ký hiệu cường độ)} \newline
 & = 1000 \; 0000 \; \text{(phần bù 1)} + 1111 \; 1110 \; \text{(phần bù 1)} \newline
 & = 1000 \; 0001 \; \text{(phần bù 2)} + 1111 \; 1111 \; \text{(phần bù 2)} \newline
 & = 1000 \; 0000 \; \text{(phần bù 2)} \newline
 & \rightarrow -128
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Bạn có thể nhận thấy rằng tất cả các phép tính trên đều là phép tính cộng. Điều này gợi ý một thực tế quan trọng: **các mạch phần cứng bên trong máy tính được thiết kế chủ yếu dựa trên các phép toán cộng**. Điều này là do các phép toán cộng được thực hiện đơn giản hơn trong phần cứng so với các phép toán khác (như nhân, chia và trừ), dễ song song hóa hơn và có tốc độ hoạt động nhanh hơn.
@@ -117,10 +117,10 @@ $$
 Phạm vi của mỗi thành phần là:
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 \mathrm{S} \in & \{ 0, 1\}, \quad \mathrm{E} \in \{ 1, 2, \dots, 254 \} \newline
 (1 + \mathrm{N}) = & (1 + \sum_{i=1}^{23} b_{23-i} 2^{-i}) \subset [1, 2 - 2^{-23}]
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 ![Calculation example of float under IEEE 754 standard](number_encoding.assets/ieee_754_float.png)

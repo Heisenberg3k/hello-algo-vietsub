@@ -204,21 +204,21 @@ Tóm lại: **sử dụng số nguyên tố lớn làm mô đun giúp tối đa 
 Ví dụ: giả sử chúng ta chọn số tổng hợp $9$ làm mô đun, có thể chia cho $3$, thì tất cả `key` chia hết cho $3$ sẽ được ánh xạ tới các giá trị băm $0$, $3$, $6$.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 \text{mô-đun} & = 9 \newline
 \text{key} & = \{ 0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, \dots \} \newline
 \text{hash} & = \{ 0, 3, 6, 0, 3, 6, 0, 3, 6, 0, 3, 6,\dots \}
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Nếu các giá trị `key` đầu vào tuân theo kiểu cấp số cộng này, thì các giá trị băm sẽ phân cụm, làm trầm trọng thêm các xung đột băm. Bây giờ giả sử chúng ta thay thế `môđun` bằng số nguyên tố $13$. Bởi vì `khóa` và `mô-đun` không có yếu tố chung nào nên các giá trị băm đầu ra sẽ được phân bổ đồng đều hơn nhiều.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 \text{mô-đun} & = 13 \newline
 \text{key} & = \{ 0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, \dots \} \newline
 \text{hash} & = \{ 0, 3, 6, 9, 12, 2, 5, 8, 11, 1, 4, 7, \dots \}
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Điều đáng chú ý là nếu `khóa` được đảm bảo phân phối ngẫu nhiên và đồng đều, thì việc chọn số nguyên tố hoặc số tổng hợp làm mô đun đều có thể tạo ra các giá trị băm được phân bố đồng đều. Tuy nhiên, khi việc phân phối `khóa` có tính tuần hoàn nhất định, modulo một số tổng hợp có nhiều khả năng dẫn đến phân cụm hơn.

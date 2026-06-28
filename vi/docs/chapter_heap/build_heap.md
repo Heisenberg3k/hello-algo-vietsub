@@ -57,10 +57,10 @@ $$
 Đơn giản hóa biểu thức trên đòi hỏi một số đại số cấp ba. Đầu tiên, nhân $T(h)$ với $2$ để có:
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 T(h) & = 2^0h + 2^1(h-1) + 2^2(h-2) + \dots + 2^{h-1}\times1 \newline
 2 T(h) & = 2^1h + 2^2(h-1) + 2^3(h-2) + \dots + 2^{h}\times1 \newline
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Sử dụng phép trừ các tổng đã dịch chuyển, trừ phương trình thứ nhất $T(h)$ khỏi phương trình thứ hai $2 T(h)$ để có:
@@ -72,11 +72,11 @@ $$
 Quan sát biểu thức trên, chúng ta thấy rằng $T(h)$ là một chuỗi hình học, có thể được tính trực tiếp bằng công thức tính tổng, mang lại độ phức tạp về thời gian là:
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 T(h) & = 2 \frac{1 - 2^h}{1 - 2} - h \newline
 & = 2^{h+1} - h - 2 \newline
 & = O(2^h)
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Hơn nữa, một cây nhị phân hoàn hảo có chiều cao $h$ có $n = 2^{h+1} - 1$ nút, do đó độ phức tạp là $O(2^h) = O(n)$. Đạo hàm này cho thấy rằng **độ phức tạp về thời gian của việc xây dựng vùng nhớ heap từ danh sách đầu vào là $O(n)$, có hiệu quả cao**.

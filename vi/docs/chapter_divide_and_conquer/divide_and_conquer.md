@@ -45,11 +45,11 @@ $$
 Tiếp theo, chúng ta tính bất đẳng thức sau, trong đó vế trái và vế phải lần lượt biểu thị tổng số phép toán trước và sau phép chia:
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 n^2 & > \frac{n^2}{2} + 2n \newline
 n^2 - \frac{n^2}{2} - 2n & > 0 \newline
 n(n - 4) & > 0
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 **Điều này có nghĩa là khi $n > 4$, số phép toán sau khi chia sẽ nhỏ hơn và hiệu quả sắp xếp sẽ cao hơn**. Lưu ý rằng độ phức tạp về thời gian sau khi chia vẫn là bậc hai $O(n^2)$, nhưng số hạng không đổi trong độ phức tạp đã trở nên nhỏ hơn.

@@ -3,11 +3,11 @@
 <u>Biểu đồ</u> là cấu trúc dữ liệu phi tuyến bao gồm <u>đỉnh</u> và <u>cạnh</u>. Chúng ta có thể biểu diễn một cách trừu tượng đồ thị $G$ dưới dạng tập các đỉnh $V$ và tập các cạnh $E$. Ví dụ sau đây cho thấy một đồ thị có 5 đỉnh và 7 cạnh.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 V & = \{ 1, 2, 3, 4, 5 \} \newline
 E & = \{ (1,2), (1,3), (1,5), (2,3), (2,4), (2,5), (4,5) \} \newline
 G & = \{ V, E \} \newline
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Nếu chúng ta xem các đỉnh là nút và các cạnh là tham chiếu (con trỏ) kết nối chúng, thì chúng ta có thể coi biểu đồ là phần mở rộng của cấu trúc dữ liệu danh sách liên kết. Như được hiển thị trong hình bên dưới, **so với các mối quan hệ tuyến tính (danh sách liên kết) và mối quan hệ chia để trị (cây), các mối quan hệ mạng (biểu đồ) có mức độ tự do cao hơn và do đó phức tạp hơn**.

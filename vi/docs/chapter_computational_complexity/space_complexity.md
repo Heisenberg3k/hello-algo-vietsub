@@ -805,10 +805,10 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
 Đặt kích thước dữ liệu đầu vào là $n$. Hình dưới đây cho thấy các loại độ phức tạp không gian phổ biến (sắp xếp từ thấp đến cao).
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 & O(1) < O(\log n) < O(n) < O(n^2) < O(2^n) \newline
 & \text{Hằng số} < \text{Logarit} < \text{Tuyến tính} < \text{Quadratic} < \text{Exential}
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 ![Common types of space complexity](space_complexity.assets/space_complexity_common_types.png)

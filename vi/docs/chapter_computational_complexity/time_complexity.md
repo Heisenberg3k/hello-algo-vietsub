@@ -963,11 +963,11 @@ Cho một hàm, chúng ta có thể sử dụng các kỹ thuật trên để đ
 Công thức sau đây thể hiện kết quả đếm trước và sau khi sử dụng các kỹ thuật trên; cả hai đều có độ phức tạp về thời gian là $O(n^2)$.
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 T(n) & = 2n(n + 1) + (5n + 1) + 2 & \text{Đếm đầy đủ (-.-|||)} \newline
 & = 2n^2 + 7n + 3 \newline
 T(n) & = n^2 + n & \text{Số đơn giản hóa (o.O)}
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 ### Bước 2: Xác định giới hạn tiệm cận trên
@@ -991,10 +991,10 @@ Bảng dưới đây trình bày một số ví dụ, trong đó một số giá
 Đặt kích thước dữ liệu đầu vào là $n$. Các loại độ phức tạp thời gian phổ biến được thể hiện trong hình bên dưới (sắp xếp theo thứ tự từ thấp đến cao).
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 & O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(2^n) < O(n!) \newline
 & \text{Hằng số} < \text{Logarit} < \text{Tuyến tính} < \text{Số tuyến tính} < \text{Quadratic} < \text{Exentials} < \text{Factorial}
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 ![Common time complexity types](time_complexity.assets/time_complexity_common_types.png)

@@ -25,11 +25,11 @@ Chúng ta cần xác định nên có bao nhiêu phần $m$ và mỗi phần $n_
 Theo nguyên tắc chung, tích của hai số nguyên thường lớn hơn tổng của chúng. Giả sử chúng ta tách hệ số $2$ khỏi $n$; sản phẩm thu được là $2(n-2)$. Chúng tôi so sánh sản phẩm này với $n$:
 
 $$
-\bắt đầu{căn chỉnh}
+\begin{aligned}
 2(n-2) & \geq n \newline
 2n - n - 4 & \geq 0 \newline
 n & \geq 4
-\end{căn chỉnh}
+\end{aligned}
 $$
 
 Như được hiển thị trong hình bên dưới, khi $n \geq 4$, việc tách $2$ sẽ làm tăng tích, **điều này cho biết rằng các số nguyên lớn hơn hoặc bằng $4$ đều phải được chia**.
