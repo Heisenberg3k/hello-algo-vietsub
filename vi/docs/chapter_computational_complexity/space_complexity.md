@@ -120,7 +120,7 @@ Mã liên quan như sau:
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Structure */
@@ -149,7 +149,7 @@ Mã liên quan như sau:
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Class */
@@ -233,7 +233,7 @@ Mã liên quan như sau:
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Class */
@@ -258,7 +258,7 @@ Mã liên quan như sau:
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     use std::rc::Rc;
@@ -416,7 +416,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     func algorithm(n int) {
@@ -430,7 +430,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     func algorithm(n: Int) {
@@ -466,7 +466,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     void algorithm(int n) {
@@ -478,7 +478,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     fn algorithm(n: i32) {
@@ -604,7 +604,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     func function() int {
@@ -628,7 +628,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     @discardableResult
@@ -693,7 +693,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     int function() {
@@ -713,7 +713,7 @@ Quan sát đoạn mã sau. Ở đây, "trường hợp xấu nhất" trong độ
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     fn function() -> i32 {

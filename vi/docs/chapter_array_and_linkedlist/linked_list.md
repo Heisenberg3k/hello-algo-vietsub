@@ -58,7 +58,7 @@ Như được hiển thị trong đoạn mã sau, nút danh sách được liên
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Linked list node structure */
@@ -76,7 +76,7 @@ Như được hiển thị trong đoạn mã sau, nút danh sách được liên
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Linked list node class */
@@ -116,7 +116,7 @@ Như được hiển thị trong đoạn mã sau, nút danh sách được liên
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Linked list node class */
@@ -127,7 +127,7 @@ Như được hiển thị trong đoạn mã sau, nút danh sách được liên
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     use std::rc::Rc;
@@ -259,7 +259,7 @@ Việc xây dựng danh sách liên kết bao gồm hai bước: đầu tiên, k
     n3.next = n4;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="linked_list.go"
     /* Initialize linked list 1 -> 3 -> 2 -> 5 -> 4 */
@@ -276,7 +276,7 @@ Việc xây dựng danh sách liên kết bao gồm hai bước: đầu tiên, k
     n3.Next = n4
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="linked_list.swift"
     /* Initialize linked list 1 -> 3 -> 2 -> 5 -> 4 */
@@ -327,7 +327,7 @@ Việc xây dựng danh sách liên kết bao gồm hai bước: đầu tiên, k
     n3.next = n4;
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="linked_list.dart"
     /* Initialize linked list 1 -> 3 -> 2 -> 5 -> 4 */\
@@ -344,7 +344,7 @@ Việc xây dựng danh sách liên kết bao gồm hai bước: đầu tiên, k
     n3.next = n4;
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="linked_list.rs"
     /* Initialize linked list 1 -> 3 -> 2 -> 5 -> 4 */
@@ -1112,7 +1112,7 @@ Như thể hiện trong hình bên dưới, có ba loại danh sách liên kết
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Doubly linked list node structure */
@@ -1132,7 +1132,7 @@ Như thể hiện trong hình bên dưới, có ba loại danh sách liên kết
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Doubly linked list node class */
@@ -1176,7 +1176,7 @@ Như thể hiện trong hình bên dưới, có ba loại danh sách liên kết
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Doubly linked list node class */
@@ -1188,7 +1188,7 @@ Như thể hiện trong hình bên dưới, có ba loại danh sách liên kết
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     use std::rc::Rc;

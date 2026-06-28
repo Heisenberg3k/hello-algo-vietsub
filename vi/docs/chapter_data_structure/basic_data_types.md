@@ -87,7 +87,7 @@ Nói cách khác, **kiểu dữ liệu cơ bản cung cấp "loại nội dung" 
     bool[] bools = new bool[5];
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     // Initialize arrays using various basic data types
@@ -97,7 +97,7 @@ Nói cách khác, **kiểu dữ liệu cơ bản cung cấp "loại nội dung" 
     var bools = [5]bool{}
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     // Initialize arrays using various basic data types
@@ -123,7 +123,7 @@ Nói cách khác, **kiểu dữ liệu cơ bản cung cấp "loại nội dung" 
     const bools: boolean[] = [];
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     // Initialize arrays using various basic data types
@@ -133,7 +133,7 @@ Nói cách khác, **kiểu dữ liệu cơ bản cung cấp "loại nội dung" 
     List<bool> bools = List.filled(5, false);
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     // Initialize arrays using various basic data types

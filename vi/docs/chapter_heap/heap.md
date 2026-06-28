@@ -188,7 +188,7 @@ Tương tự như "thứ tự tăng dần" và "thứ tự giảm dần" trong t
     minHeap = new PriorityQueue<int, int>([(1, 1), (3, 3), (2, 2), (5, 5), (4, 4)]);
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="heap.go"
     // In Go, we can construct a max heap of integers by implementing heap.Interface
@@ -267,7 +267,7 @@ Tương tự như "thứ tự tăng dần" và "thứ tự giảm dần" trong t
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="heap.swift"
     /* Initialize a heap */
@@ -313,13 +313,13 @@ Tương tự như "thứ tự tăng dần" và "thứ tự giảm dần" trong t
     // TypeScript does not provide a built-in Heap class
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="heap.dart"
     // Dart does not provide a built-in Heap class
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="heap.rs"
     use std::collections::BinaryHeap;

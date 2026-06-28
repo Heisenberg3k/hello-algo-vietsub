@@ -56,7 +56,7 @@ Như thể hiện trong hình bên dưới, với một cây nhị phân không 
     int?[] tree = [1, 2, 3, 4, null, 6, 7, 8, 9, null, null, 12, null, null, 15];
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Array representation of a binary tree */
@@ -64,7 +64,7 @@ Như thể hiện trong hình bên dưới, với một cây nhị phân không 
     tree := []any{1, 2, 3, 4, nil, 6, 7, 8, 9, nil, nil, 12, nil, nil, 15}
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Array representation of a binary tree */
@@ -88,7 +88,7 @@ Như thể hiện trong hình bên dưới, với một cây nhị phân không 
     let tree: (number | null)[] = [1, 2, 3, 4, null, 6, 7, 8, 9, null, null, 12, null, null, 15];
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Array representation of a binary tree */
@@ -96,7 +96,7 @@ Như thể hiện trong hình bên dưới, với một cây nhị phân không 
     List<int?> tree = [1, 2, 3, 4, null, 6, 7, 8, 9, null, null, 12, null, null, 15];
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     /* Array representation of a binary tree */

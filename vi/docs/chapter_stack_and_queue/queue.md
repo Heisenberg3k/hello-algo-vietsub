@@ -128,7 +128,7 @@ Chúng ta có thể trực tiếp sử dụng các lớp hàng đợi do ngôn n
     bool isEmpty = queue.Count == 0;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="queue_test.go"
     /* Initialize queue */
@@ -156,7 +156,7 @@ Chúng ta có thể trực tiếp sử dụng các lớp hàng đợi do ngôn n
     isEmpty := queue.Len() == 0
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="queue.swift"
     /* Initialize queue */
@@ -240,7 +240,7 @@ Chúng ta có thể trực tiếp sử dụng các lớp hàng đợi do ngôn n
     const empty = queue.length === 0;
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="queue.dart"
     /* Initialize queue */
@@ -267,7 +267,7 @@ Chúng ta có thể trực tiếp sử dụng các lớp hàng đợi do ngôn n
     bool isEmpty = queue.isEmpty;
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="queue.rs"
     /* Initialize deque */

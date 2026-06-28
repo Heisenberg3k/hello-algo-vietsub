@@ -367,13 +367,13 @@ Xin lưu ý rằng định nghĩa và phương pháp của các hàm tính toán
     // Hash value of ListNode object 0 is 39053774;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="built_in_hash.go"
     // Go does not provide built-in hash code functions
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="built_in_hash.swift"
     let num = 3
@@ -413,7 +413,7 @@ Xin lưu ý rằng định nghĩa và phương pháp của các hàm tính toán
     // TypeScript does not provide built-in hash code functions
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="built_in_hash.dart"
     int num = 3;
@@ -441,7 +441,7 @@ Xin lưu ý rằng định nghĩa và phương pháp của các hàm tính toán
     // Hash value of ListNode object Instance of 'ListNode' is 1033450432
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="built_in_hash.rs"
     use std::collections::hash_map::DefaultHasher;

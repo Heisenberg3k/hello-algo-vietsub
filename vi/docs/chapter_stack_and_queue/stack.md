@@ -127,7 +127,7 @@ Thông thường, chúng ta có thể trực tiếp sử dụng lớp ngăn xế
     bool isEmpty = stack.Count == 0;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="stack_test.go"
     /* Initialize stack */
@@ -155,7 +155,7 @@ Thông thường, chúng ta có thể trực tiếp sử dụng lớp ngăn xế
     isEmpty := len(stack) == 0
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="stack.swift"
     /* Initialize stack */
@@ -236,7 +236,7 @@ Thông thường, chúng ta có thể trực tiếp sử dụng lớp ngăn xế
     const is_empty = stack.length === 0;
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="stack.dart"
     /* Initialize stack */
@@ -263,7 +263,7 @@ Thông thường, chúng ta có thể trực tiếp sử dụng lớp ngăn xế
     bool isEmpty = stack.isEmpty;
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="stack.rs"
     /* Initialize stack */

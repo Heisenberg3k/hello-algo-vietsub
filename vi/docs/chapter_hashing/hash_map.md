@@ -118,7 +118,7 @@ Các thao tác phổ biến trên bảng băm bao gồm: khởi tạo, thao tác
     map.Remove(10583);
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="hash_map_test.go"
     /* Initialize hash table */
@@ -141,7 +141,7 @@ Các thao tác phổ biến trên bảng băm bao gồm: khởi tạo, thao tác
     delete(hmap, 10583)
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="hash_map.swift"
     /* Initialize hash table */
@@ -213,7 +213,7 @@ Các thao tác phổ biến trên bảng băm bao gồm: khởi tạo, thao tác
     console.info(map);
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="hash_map.dart"
     /* Initialize hash table */
@@ -236,7 +236,7 @@ Các thao tác phổ biến trên bảng băm bao gồm: khởi tạo, thao tác
     map.remove(10583);
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="hash_map.rs"
     use std::collections::HashMap;
@@ -384,7 +384,7 @@ Có ba cách phổ biến để duyệt bảng băm: duyệt các cặp khóa-gi
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="hash_map_test.go"
     /* Traverse hash table */
@@ -402,7 +402,7 @@ Có ba cách phổ biến để duyệt bảng băm: duyệt các cặp khóa-gi
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="hash_map.swift"
     /* Traverse hash table */
@@ -456,7 +456,7 @@ Có ba cách phổ biến để duyệt bảng băm: duyệt các cặp khóa-gi
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="hash_map.dart"
     /* Traverse hash table */
@@ -476,7 +476,7 @@ Có ba cách phổ biến để duyệt bảng băm: duyệt các cặp khóa-gi
     });
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="hash_map.rs"
     /* Traverse hash table */

@@ -880,7 +880,7 @@ Trong mã khung sau đây, `state` thể hiện trạng thái hiện tại của
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Backtracking algorithm framework */
@@ -906,7 +906,7 @@ Trong mã khung sau đây, `state` thể hiện trạng thái hiện tại của
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Backtracking algorithm framework */
@@ -984,7 +984,7 @@ Trong mã khung sau đây, `state` thể hiện trạng thái hiện tại của
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Backtracking algorithm framework */
@@ -1010,7 +1010,7 @@ Trong mã khung sau đây, `state` thể hiện trạng thái hiện tại của
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     /* Backtracking algorithm framework */

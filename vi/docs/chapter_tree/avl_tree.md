@@ -71,7 +71,7 @@ Vì các hoạt động liên quan đến cây AVL yêu cầu lấy chiều cao 
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* AVL tree node */
@@ -83,7 +83,7 @@ Vì các hoạt động liên quan đến cây AVL yêu cầu lấy chiều cao 
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* AVL tree node */
@@ -136,7 +136,7 @@ Vì các hoạt động liên quan đến cây AVL yêu cầu lấy chiều cao 
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* AVL tree node */
@@ -149,7 +149,7 @@ Vì các hoạt động liên quan đến cây AVL yêu cầu lấy chiều cao 
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     use std::rc::Rc;

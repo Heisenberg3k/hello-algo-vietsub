@@ -136,7 +136,7 @@ Tương tự, chúng ta có thể sử dụng trực tiếp các lớp deque do 
     bool isEmpty = deque.Count == 0;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="deque_test.go"
     /* Initialize deque */
@@ -165,7 +165,7 @@ Tương tự, chúng ta có thể sử dụng trực tiếp các lớp deque do 
     isEmpty := deque.Len() == 0
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="deque.swift"
     /* Initialize deque */
@@ -257,7 +257,7 @@ Tương tự, chúng ta có thể sử dụng trực tiếp các lớp deque do 
     const isEmpty: boolean = size === 0;
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="deque.dart"
     /* Initialize deque */
@@ -286,7 +286,7 @@ Tương tự, chúng ta có thể sử dụng trực tiếp các lớp deque do 
     bool isEmpty = deque.isEmpty;
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="deque.rs"
     /* Initialize deque */

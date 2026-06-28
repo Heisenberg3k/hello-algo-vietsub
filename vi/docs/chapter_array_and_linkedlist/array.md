@@ -46,7 +46,7 @@ Chúng ta có thể chọn giữa hai phương pháp khởi tạo mảng dựa t
     int[] nums = [1, 3, 2, 5, 4];
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="array.go"
     /* Initialize array */
@@ -57,7 +57,7 @@ Chúng ta có thể chọn giữa hai phương pháp khởi tạo mảng dựa t
     nums := []int{1, 3, 2, 5, 4}
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="array.swift"
     /* Initialize array */
@@ -81,7 +81,7 @@ Chúng ta có thể chọn giữa hai phương pháp khởi tạo mảng dựa t
     let nums: number[] = [1, 3, 2, 5, 4];
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="array.dart"
     /* Initialize array */
@@ -89,7 +89,7 @@ Chúng ta có thể chọn giữa hai phương pháp khởi tạo mảng dựa t
     List<int> nums = [1, 3, 2, 5, 4];
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="array.rs"
     /* Initialize array */

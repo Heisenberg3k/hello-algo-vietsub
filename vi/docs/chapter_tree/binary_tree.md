@@ -48,7 +48,7 @@
     }
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title=""
     /* Binary tree node */
@@ -67,7 +67,7 @@
     }
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title=""
     /* Binary tree node */
@@ -115,7 +115,7 @@
     }
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title=""
     /* Binary tree node */
@@ -127,7 +127,7 @@
     }
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title=""
     use std::rc::Rc;
@@ -299,7 +299,7 @@ Tương tự như danh sách liên kết, việc khởi tạo cây nhị phân t
     n2.right = n5;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="binary_tree.go"
     /* Initializing a binary tree */
@@ -316,7 +316,7 @@ Tương tự như danh sách liên kết, việc khởi tạo cây nhị phân t
     n2.Right = n5
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="binary_tree.swift"
     // Initializing nodes
@@ -366,7 +366,7 @@ Tương tự như danh sách liên kết, việc khởi tạo cây nhị phân t
     n2.right = n5;
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="binary_tree.dart"
     /* Initializing a binary tree */
@@ -383,7 +383,7 @@ Tương tự như danh sách liên kết, việc khởi tạo cây nhị phân t
     n2.right = n5;
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="binary_tree.rs"
     // Initializing nodes
@@ -506,7 +506,7 @@ Tương tự như danh sách liên kết, việc chèn và xóa các nút trong 
     n1.left = n2;
     ```
 
-=== "Đi"
+=== "Go"
 
     ```go title="binary_tree.go"
     /* Inserting and removing nodes */
@@ -518,7 +518,7 @@ Tương tự như danh sách liên kết, việc chèn và xóa các nút trong 
     n1.Left = n2
     ```
 
-=== "Nhanh chóng"
+=== "Swift"
 
     ```swift title="binary_tree.swift"
     let P = TreeNode(x: 0)
@@ -553,7 +553,7 @@ Tương tự như danh sách liên kết, việc chèn và xóa các nút trong 
     n1.left = n2;
     ```
 
-=== "Phi tiêu"
+=== "Dart"
 
     ```dart title="binary_tree.dart"
     /* Inserting and removing nodes */
@@ -565,7 +565,7 @@ Tương tự như danh sách liên kết, việc chèn và xóa các nút trong 
     n1.left = n2;
     ```
 
-=== "Rỉ sét"
+=== "Rust"
 
     ```rust title="binary_tree.rs"
     let p = TreeNode::new(0);
